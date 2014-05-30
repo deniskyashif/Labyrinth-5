@@ -13,6 +13,7 @@ bridge, composite, decorator, extensibility, façade, etc…)
 command, interpreter, iterator, mediator, observer, etc…) 
 	- [ ] Creational patterns – implement at least 2 of the creational design patterns (abstract factory,
 builder, factory method, singleton, prototype, etc…)
+
 - [ ] Redesign the project to fulfil the SOLID and DRY principles – each principle should be implemented
 at least once   
 - [ ] Design and implement unit tests(80% code coverage).
