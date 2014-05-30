@@ -1,10 +1,9 @@
-﻿using System;
-using Wintellect.PowerCollections;
-
-namespace LabirynthGame
+﻿namespace Labyrinth.Common
 {
-	// tuka polzvame edna biblioteka - PowerCollections - moze da ya namerite v gugal - ima sortiran re4nik, mnogo udobno za klasaciata
-    class Labirynth
+    using System;
+    using Wintellect.PowerCollections;
+
+    public class Labyrinth
     {
         private const int sz = 7;
         private const int px = 3;
@@ -23,7 +22,7 @@ namespace LabirynthGame
         private OrderedMultiDictionary<int, string> scoreBoard;
        
 
-        public Labirynth()
+        public Labyrinth()
         {
             this.playerPositionX = px;
             this.playerPositionY = py;
@@ -55,6 +54,7 @@ namespace LabirynthGame
                 return;
             }
         }
+
         private bool IsMoveValid(int x, int y)
         {
             if (x < 0 || x > sz - 1 || y < 0 || y > sz - 1)
@@ -64,6 +64,7 @@ namespace LabirynthGame
 
             return true;
         }
+
         private void PrintLabirynth()
         {
             for (int row = 0; row < sz; row++)
@@ -75,6 +76,7 @@ namespace LabirynthGame
                 Console.WriteLine();
             }
         }
+
         private char[,] GenerateMatrix()
         { 
             char[,] generatedMatrix = new char[sz, sz];
@@ -104,6 +106,7 @@ namespace LabirynthGame
             Console.WriteLine("scoreboard, 'restart' to start a new game and 'exit' to quit the game.");
             return generatedMatrix;
         }
+
         private void MakeAtLeastOneExitReachable(char[,] generatedMatrix)
         {
             Random rand = new Random();
@@ -285,6 +288,7 @@ namespace LabirynthGame
                     }
             }
         }
+
         private void UpdateScoreBoard(int currentNumberOfMoves)
         {
             string userName = string.Empty;

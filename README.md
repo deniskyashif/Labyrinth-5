@@ -6,15 +6,15 @@
 
 Overview
 
- - [ ] Implement Design Patterns
-	- [ ]  Structural patterns – implement at least 2 of the structural design patterns (adapter, aggregate, 
+ - [ ] Perform **refactoring** of the entire project(its directory structure, project files, source code, classes, interfaces, methods, properties, fields and other class members and program members and its programming logic) 
+ - [ ] Implement **Design Patterns**
+	- [ ]  **Structural patterns** – implement at least 2 of the structural design patterns (adapter, aggregate, 
 bridge, composite, decorator, extensibility, façade, etc…)
-	- [ ] Behavior patterns – implement at least 2 of the behavioral design patterns (chain of responsibility, 
+	- [ ] **Behavior patterns** – implement at least 2 of the behavioral design patterns (chain of responsibility, 
 command, interpreter, iterator, mediator, observer, etc…) 
-	- [ ] Creational patterns – implement at least 2 of the creational design patterns (abstract factory,
+	- [ ] **Creational patterns** – implement at least 2 of the creational design patterns (abstract factory,
 builder, factory method, singleton, prototype, etc…)
 
-- [ ] Redesign the project to fulfil the SOLID and DRY principles – each principle should be implemented
-at least once   
-- [ ] Design and implement unit tests(80% code coverage).
-- [ ] Document the refactorings 
+- [ ] Redesign the project to fulfil the **SOLID** and **DRY** principles – each principle should be implemented at least once   
+- [ ] Design and implement **unit tests**(80% code coverage).
+- [ ] **Document** the refactorings 
