@@ -1,44 +1,83 @@
 ﻿namespace Labyrinth5.Common
 {
     using System;
+    using System.Collections.Generic;
     
     public class Maze
     {
-        private const char BlockedCellSymbol = 'X';
-        private const char AvailableCellSymbol = '-';
-        private const char PlayerSymbol = '*';
-        private const int LabyrinthSize = 7;
+        private const char BlockedCellSymbol = '\u2593';
+        private const char AvailableCellSymbol = '\u00a0';
+        private const char PlayerSymbol = '\u263a';
+
+        private const int MazeRows = 10;
+        private const int MazeColumns = 10;
         private const int MinimumPercentageOfBlockedCells = 30;
         private const int MaximumPercentageOfBlockedCells = 50;
 
-        public char[,] matrix;
+        private char[,] mazeCells;
         
         public Maze()
         {
-            this.matrix = this.GenerateMatrix();
+            this.mazeCells = this.GenerateMatrix();
         }
 
-        public void PrintLabirynth()
+        public int Rows
         {
-            for (int row = 0; row < LabyrinthSize; row++)
+            get
             {
-                for (int col = 0; col < LabyrinthSize; col++)
+                return this.mazeCells.GetLength(0);
+            } 
+        }
+
+        public int Columns
+        {
+            get
+            {
+                return this.mazeCells.GetLength(1);
+            }
+        }
+
+        public bool IsCellAvailable(int row, int column)
+        {
+            return this.mazeCells[row, column] == AvailableCellSymbol;
+        }
+
+        public void MarkCellAsAvailable(int row, int column)
+        {
+            this.mazeCells[row, column] = AvailableCellSymbol;
+        }
+
+        public void MarkCellAsOccupied(int row, int column) 
+        {
+            this.mazeCells[row, column] = PlayerSymbol;
+        }
+
+        public void PrintMazeOnConsole()
+        {
+            for (int row = 0; row < this.Rows; row++)
+            {
+                for (int col = 0; col < this.Columns; col++)
                 {
-                    Console.Write("{0,2}", this.matrix[row, col]);
+                    Console.Write("{0}", this.mazeCells[row, col]);
                 }
+
                 Console.WriteLine();
             }
         }
 
+        //TODO: Implement proper maze generation algorithm
+        
+        //TODO: following bulk code - remove/refactor
+        
         private char[,] GenerateMatrix()
         { 
-            char[,] generatedMatrix = new char[LabyrinthSize, LabyrinthSize];
+            char[,] generatedMatrix = new char[MazeColumns, MazeColumns];
             Random rand = new Random();
             int percentageOfBlockedCells = rand.Next(MinimumPercentageOfBlockedCells, MaximumPercentageOfBlockedCells);
 
-            for (int row = 0; row < LabyrinthSize; row++)
+            for (int row = 0; row < MazeColumns; row++)
             {
-                for (int col = 0; col < LabyrinthSize; col++)
+                for (int col = 0; col < MazeColumns; col++)
                 {
                     int num = rand.Next(0, 100);
                     if (num < percentageOfBlockedCells)
@@ -55,8 +94,7 @@
             generatedMatrix[3, 3] = PlayerSymbol;
 
             this.MakeAtLeastOneExitReachable(generatedMatrix);
-            Console.WriteLine("Welcome to “Labirinth” game. Please try to escape. Use 'top' to view the top");
-            Console.WriteLine("scoreboard, 'restart' to start a new game and 'exit' to quit the game.");
+            
             return generatedMatrix;
         }
 
@@ -77,14 +115,10 @@
 
                 for (int d = 0; d < times; d++)
                 {
-                    if (pathX + dirX[num] >= 0 && pathX + dirX[num] < LabyrinthSize && pathY + dirY[num] >= 0 &&
-                        pathY + dirY[num] < LabyrinthSize)
+                    if (pathX + dirX[num] >= 0 && pathX + dirX[num] < MazeColumns && pathY + dirY[num] >= 0 &&
+                        pathY + dirY[num] < MazeColumns)
                     {
-
-
                         pathX += dirX[num];
-
-
 
                         pathY += dirY[num];
                         if (generatedMatrix[pathY, pathX] == PlayerSymbol)
@@ -95,6 +129,18 @@
                     }
                 }
             }
+        }
+
+        private bool IsGameOver(int playerPositionX, int playerPositionY)
+        {
+            return true;
+            if ((playerPositionX > 0 && playerPositionX < this.mazeCells.GetLength(0) - 1) &&
+                (playerPositionY > 0 && playerPositionY < this.mazeCells.GetLength(1) - 1))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

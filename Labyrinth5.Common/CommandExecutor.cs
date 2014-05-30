@@ -4,12 +4,21 @@
 
     public class CommandExecutor
     {
+        private Player player;
+        private Maze maze;
+        private Scoreboard scoreboard;
 
-
-        private bool IsGameOver(int playerPositionX, int playerPositionY, Maze labyrinth)
+        public CommandExecutor()
         {
-            if ((playerPositionX > 0 && playerPositionX < labyrinth.matrix.GetLength(0) - 1) &&
-                (playerPositionY > 0 && playerPositionY < labyrinth.matrix.GetLength(1) - 1))
+            player = new Player();
+            maze = new Maze();
+            scoreboard = new Scoreboard();
+        }
+
+        private bool IsGameOver(int playerPositionX, int playerPositionY)
+        {
+            if ((playerPositionX > 0 && playerPositionX < this.maze.Rows - 1) &&
+                (playerPositionY > 0 && playerPositionY < this.maze.Columns - 1))
             {
                 return false;
             }
@@ -17,18 +26,19 @@
             return true;
         }
 
-
-
-        public void PlayGame(Player player, Maze labyrinth, Scoreboard scoreboard)
+        public void PlayGame()
         {
+            Console.WriteLine("Welcome to “Labirinth” game. Please try to escape. Use 'top' to view the top");
+            Console.WriteLine("scoreboard, 'restart' to start a new game and 'exit' to quit the game.");
+
             string command = string.Empty;
             int movesCounter = 0;
             while (command.Equals("EXIT") == false)
             {
-                labyrinth.PrintLabirynth();
+                this.maze.PrintMazeOnConsole();
                 string currentLine = string.Empty;
 
-                if (this.IsGameOver(player.playerPositionX, player.playerPositionY, labyrinth))
+                if (this.IsGameOver(this.player.Row, this.player.Column))
                 {
                     Console.WriteLine("Congratulations! You've exited the labirynth in {0} moves.", movesCounter);
 
@@ -48,51 +58,48 @@
                 }
 
                 command = currentLine.ToUpper();
-                this.ExecuteCommand(command, ref movesCounter, player, labyrinth, scoreboard);
+                this.ExecuteCommand(command, ref movesCounter);
             }
-
-
-
         }
 
-        private void ExecuteCommand(string command, ref int movesCounter, Player player, Maze labyrinth, Scoreboard scoreboard)
+        private void ExecuteCommand(string command, ref int movesCounter)
         {
             switch (command.ToUpper())
             {
                 case "L":
                     {
                         movesCounter++;
-                        player.Move(-1, 0, labyrinth);
+                        player.Move(-1, 0, this.maze);
                         break;
                     }
                 case "R":
                     {
                         movesCounter++;
-                        player.Move(1, 0, labyrinth);
+                        player.Move(1, 0, this.maze);
                         break;
                     }
                 case "U":
                     {
                         movesCounter++;
-                        player.Move(0, -1, labyrinth);
+                        player.Move(0, -1, this.maze);
                         break;
                     }
                 case "D":
                     {
                         movesCounter++;
-                        player.Move(0, 1, labyrinth);
+                        player.Move(0, 1, this.maze);
                         break;
                     }
                 case "RESTART":
                     {
-                        player = new Player();
-                        labyrinth = new Maze();
+                        this.player = new Player();
+                        this.maze = new Maze();
 
                         break;
                     }
                 case "TOP":
                     {
-                        scoreboard.PrintScore();
+                        this.scoreboard.PrintScore();
                         break;
                     }
                 case "EXIT":
