@@ -1,14 +1,18 @@
-﻿namespace Labyrinth.UI
+﻿namespace Labyrinth5.UI
 {
     using System;
-    using Labyrinth.Common;
+    using Labyrinth5.Common;
     
     class GameUI
     {
         static void Main()
         {
-            Labyrinth test = new Labyrinth();
-            test.PlayGame();
+            var test = new CommandExecutor();
+            var p = new Player();
+            var m = new Maze();
+            var sc = new Scoreboard();
+            
+            test.PlayGame(p,m,sc);
         }
     }
 }

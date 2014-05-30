@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth5.Common", "Labyri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth5.UI", "Labyrinth5.UI\Labyrinth5.UI.csproj", "{1C7FD2B7-685D-4FCB-A654-E6F373F40F95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth5.Tests", "Labyrinth5.Tests\Labyrinth5.Tests.csproj", "{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{1C7FD2B7-685D-4FCB-A654-E6F373F40F95}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1C7FD2B7-685D-4FCB-A654-E6F373F40F95}.Release|x86.ActiveCfg = Release|x86
 		{1C7FD2B7-685D-4FCB-A654-E6F373F40F95}.Release|x86.Build.0 = Release|x86
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A85CA41D-743F-41F3-BAFA-45CF8B2C5FE3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
