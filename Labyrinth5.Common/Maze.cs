@@ -2,23 +2,38 @@
 {
     using System;
     using System.Collections.Generic;
-    
-    public class Maze
+
+    internal class Maze
     {
-        private const char BlockedCellSymbol = '\u2593';
-        private const char AvailableCellSymbol = '\u00a0';
+        //TODO: Set maze exit cell. Integrate with Player and CommandExecutor classes.
+        private static readonly Random globalRandomGenerator = new Random();
+
+        private const int MazeDefaultRows = 15;
+        private const int MazeDefaultColumns = 25;
+        private const int PlayerDefaultStartRow = 0;
+        private const int PlayerDefaultStartColumns = 0;
+
+        private const char WallSymbol = '\u2593';
+        private const char PathSymbol = '\u00a0';
+        private const char BorderSymbol = '\u2593';
         private const char PlayerSymbol = '\u263a';
 
-        private const int MazeRows = 10;
-        private const int MazeColumns = 10;
-        private const int MinimumPercentageOfBlockedCells = 30;
-        private const int MaximumPercentageOfBlockedCells = 50;
 
-        private char[,] mazeCells;
-        
+        private MazeCell[,] mazeCells;
+
         public Maze()
+            : this(MazeDefaultRows, MazeDefaultColumns, PlayerDefaultStartRow, PlayerDefaultStartColumns)
         {
-            this.mazeCells = this.GenerateMatrix();
+        }
+
+        public Maze(int maxRows, int maxCols)
+            : this(maxRows, maxCols, PlayerDefaultStartColumns, PlayerDefaultStartRow)
+        {
+        }
+
+        public Maze(int startRow, int startCol, int maxRows, int maxCols)
+        {
+            this.mazeCells = GenerateRandomMaze(startRow, startCol, maxRows, maxCols);
         }
 
         public int Rows
@@ -26,121 +41,162 @@
             get
             {
                 return this.mazeCells.GetLength(0);
-            } 
+            }
         }
 
-        public int Columns
+        public int Columns 
         {
             get
             {
                 return this.mazeCells.GetLength(1);
-            }
+            } 
         }
 
-        public bool IsCellAvailable(int row, int column)
+        public void PrintMazeOnConsole(Player player)
         {
-            return this.mazeCells[row, column] == AvailableCellSymbol;
-        }
+            Console.WriteLine(new string(BorderSymbol, this.Columns + 2));
 
-        public void MarkCellAsAvailable(int row, int column)
-        {
-            this.mazeCells[row, column] = AvailableCellSymbol;
-        }
-
-        public void MarkCellAsOccupied(int row, int column) 
-        {
-            this.mazeCells[row, column] = PlayerSymbol;
-        }
-
-        public void PrintMazeOnConsole()
-        {
-            for (int row = 0; row < this.Rows; row++)
+            for (int r = 0; r < this.Rows; r++)
             {
-                for (int col = 0; col < this.Columns; col++)
+                Console.Write(BorderSymbol);
+
+                for (int c = 0; c < this.Columns; c++)
                 {
-                    Console.Write("{0}", this.mazeCells[row, col]);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        //TODO: Implement proper maze generation algorithm
-        
-        //TODO: following bulk code - remove/refactor
-        
-        private char[,] GenerateMatrix()
-        { 
-            char[,] generatedMatrix = new char[MazeColumns, MazeColumns];
-            Random rand = new Random();
-            int percentageOfBlockedCells = rand.Next(MinimumPercentageOfBlockedCells, MaximumPercentageOfBlockedCells);
-
-            for (int row = 0; row < MazeColumns; row++)
-            {
-                for (int col = 0; col < MazeColumns; col++)
-                {
-                    int num = rand.Next(0, 100);
-                    if (num < percentageOfBlockedCells)
+                    if (r == player.Row && c == player.Column)
                     {
-                        generatedMatrix[row, col] = BlockedCellSymbol;
+                        Console.Write(PlayerSymbol);
+                    }
+                    else if (this.mazeCells[r, c].IsWall)
+                    {
+                        Console.Write(WallSymbol);
                     }
                     else
                     {
-                        generatedMatrix[row, col] = AvailableCellSymbol;
+                        Console.Write(PathSymbol);
                     }
-
                 }
-            }
-            generatedMatrix[3, 3] = PlayerSymbol;
 
-            this.MakeAtLeastOneExitReachable(generatedMatrix);
-            
-            return generatedMatrix;
+                Console.Write(BorderSymbol);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine(new string(BorderSymbol, this.Columns + 2));
         }
 
-        private void MakeAtLeastOneExitReachable(char[,] generatedMatrix)
+        /// <summary>
+        /// Generates random maze using interative Depth First Search algorithm. From a specified entry point
+        /// in the matrix of MazeCell objects(initially all cells marked as walls), 
+        /// an unvisited neigbour cell is randomly chosen, then it is marked as visited.
+        /// If it has less than two neighbours that are path cells - that cell is made a path.
+        /// The process goes on until there is no unvisited cell. 
+        /// When so, the algorithms "tracks back" until it finds an unvisited cell. If there is no such cell, 
+        /// it assumes that the maze is complete.
+        /// </summary>
+        /// <param name="startRow">Enrty cell row.</param>
+        /// <param name="startCol">Entry cell column.</param>
+        /// <param name="maxRows">Maze width, as number of rows.</param>
+        /// <param name="maxCols">Maze height as number of columns.</param>
+        /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
+        private MazeCell[,] GenerateRandomMaze(int maxRows, int maxCols, int startRow, int startCol)
         {
-            Random rand = new Random();
-            int pathX = 3;
-            int pathY = 3;
-            int[] dirX = { 0, 0, 1, -1 };
-            int[] dirY = { 1, -1, 0, 0 };
-            int numberOfDirections = 4;
-            int maximumTimesToChangeAfter = 2;
+            var generatedMaze = new MazeCell[maxRows, maxCols];
 
-            while (this.IsGameOver(pathX , pathY) == false)
+            for (int row = 0; row < maxRows; row++)
             {
-                int num = rand.Next(0, numberOfDirections);
-                int times = rand.Next(0, maximumTimesToChangeAfter);
-
-                for (int d = 0; d < times; d++)
+                for (int col = 0; col < maxCols; col++)
                 {
-                    if (pathX + dirX[num] >= 0 && pathX + dirX[num] < MazeColumns && pathY + dirY[num] >= 0 &&
-                        pathY + dirY[num] < MazeColumns)
-                    {
-                        pathX += dirX[num];
-
-                        pathY += dirY[num];
-                        if (generatedMatrix[pathY, pathX] == PlayerSymbol)
-                        {
-                            continue;
-                        }
-                        generatedMatrix[pathY, pathX] = AvailableCellSymbol;
-                    }
+                    generatedMaze[row, col] = new MazeCell(row, col);
                 }
             }
+
+            var pathSoFar = new Stack<MazeCell>();
+            var currCell = generatedMaze[startRow, startCol];
+            currCell.IsVisited = true;
+            currCell.IsWall = false;
+
+            do
+            {
+                generatedMaze[currCell.Row, currCell.Col].IsVisited = true;
+                generatedMaze[currCell.Row, currCell.Col].IsWall = false;
+
+                var unvisitedNeighbours = GetUnvisitedNeighbours(generatedMaze, currCell.Row, currCell.Col);
+
+                if (unvisitedNeighbours.Count > 0)
+                {
+                    var nextCellIndex = globalRandomGenerator.Next(0, unvisitedNeighbours.Count);
+                    var nextCell = unvisitedNeighbours[nextCellIndex];
+
+                    if (HasLessThanTwoNeighbouringPathCells(generatedMaze, nextCell))
+                    {
+                        pathSoFar.Push(currCell);
+                        currCell = nextCell;
+                    }
+                    else
+                    {
+                        generatedMaze[nextCell.Row, nextCell.Col].IsVisited = true;
+                    }
+                }
+                else
+                {
+                    currCell = pathSoFar.Pop();
+                }
+            } while (pathSoFar.Count > 0);
+
+            return generatedMaze;
         }
 
-        private bool IsGameOver(int playerPositionX, int playerPositionY)
+        private IList<MazeCell> GetUnvisitedNeighbours(MazeCell[,] maze, int row, int col)
         {
-            return true;
-            if ((playerPositionX > 0 && playerPositionX < this.mazeCells.GetLength(0) - 1) &&
-                (playerPositionY > 0 && playerPositionY < this.mazeCells.GetLength(1) - 1))
+            var unvisitedNeighbours = new List<MazeCell>();
+
+            if (row - 1 >= 0 && !maze[row - 1, col].IsVisited)
             {
-                return false;
+                unvisitedNeighbours.Add(maze[row - 1, col]);
             }
 
-            return true;
+            if (row + 1 < maze.GetLength(0) && !maze[row + 1, col].IsVisited)
+            {
+                unvisitedNeighbours.Add(maze[row + 1, col]);
+            }
+
+            if (col - 1 >= 0 && !maze[row, col - 1].IsVisited)
+            {
+                unvisitedNeighbours.Add(maze[row, col - 1]);
+            }
+
+            if (col + 1 < maze.GetLength(1) && !maze[row, col + 1].IsVisited)
+            {
+                unvisitedNeighbours.Add(maze[row, col + 1]);
+            }
+
+            return unvisitedNeighbours;
+        }
+
+        private bool HasLessThanTwoNeighbouringPathCells(MazeCell[,] maze, MazeCell nextCell)
+        {
+            int neighbouringPaths = 0;
+
+            if (nextCell.Row - 1 >= 0 && !maze[nextCell.Row - 1, nextCell.Col].IsWall)
+            {
+                neighbouringPaths++;
+            }
+
+            if (nextCell.Row + 1 < maze.GetLength(0) && !maze[nextCell.Row + 1, nextCell.Col].IsWall)
+            {
+                neighbouringPaths++;
+            }
+
+            if (nextCell.Col - 1 >= 0 && !maze[nextCell.Row, nextCell.Col - 1].IsWall)
+            {
+                neighbouringPaths++;
+            }
+
+            if (nextCell.Col + 1 < maze.GetLength(1) && !maze[nextCell.Row, nextCell.Col + 1].IsWall)
+            {
+                neighbouringPaths++;
+            }
+
+            return neighbouringPaths <= 1;
         }
     }
 }

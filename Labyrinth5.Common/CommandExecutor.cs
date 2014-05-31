@@ -4,6 +4,7 @@
 
     public class CommandExecutor
     {
+        //TODO: Reimplement when Maze, Player and Scoreboard classes are completed.
         private Player player;
         private Maze maze;
         private Scoreboard scoreboard;
@@ -35,7 +36,7 @@
             int movesCounter = 0;
             while (command.Equals("EXIT") == false)
             {
-                this.maze.PrintMazeOnConsole();
+                maze.PrintMazeOnConsole(player);
                 string currentLine = string.Empty;
 
                 if (this.IsGameOver(this.player.Row, this.player.Column))
@@ -69,31 +70,31 @@
                 case "L":
                     {
                         movesCounter++;
-                        player.Move(-1, 0, this.maze);
+                        //player.Move(-1, 0, this.maze);
                         break;
                     }
                 case "R":
                     {
                         movesCounter++;
-                        player.Move(1, 0, this.maze);
+                        //player.Move(1, 0, this.maze);
                         break;
                     }
                 case "U":
                     {
                         movesCounter++;
-                        player.Move(0, -1, this.maze);
+                        //player.Move(0, -1, this.maze);
                         break;
                     }
                 case "D":
                     {
                         movesCounter++;
-                        player.Move(0, 1, this.maze);
+                        //player.Move(0, 1, this.maze);
                         break;
                     }
                 case "RESTART":
                     {
                         this.player = new Player();
-                        this.maze = new Maze();
+                        //this.maze = new MazeGenerator();
 
                         break;
                     }

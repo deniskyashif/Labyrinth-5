@@ -4,16 +4,22 @@
 
     public class Player
     {
-        private const int PlayerStartRow = 3;
-        private const int PlayerStartCol = 3;
+        //TODO: Code repetition! remove/refactor
+        private const int PlayerStartRow = 0;
+        private const int PlayerStartCol = 0;
 
         private int row;
         private int column;
 
         public Player()
+            : this(PlayerStartRow, PlayerStartCol)
         {
-            this.row = PlayerStartRow;
-            this.column = PlayerStartCol;
+        }
+
+        public Player(int startRow, int startCol)
+        {
+            this.row = startRow;
+            this.column = startCol;
         }
 
         public int Row 
@@ -25,7 +31,7 @@
  
             private set 
             { 
-                this.column = value; 
+                this.row = value; 
             } 
         }
 
@@ -42,41 +48,31 @@
             } 
         }
 
-        //TODO: following bulk code - remove/refactor
+        //TODO: following smelly code - remove/refactor
 
-        public void Move(int dirX, int dirY, Maze labyrinth)
+        public void Move(int dirX, int dirY)
         {
 
-            if (this.IsMoveValid(this.row + dirX, this.column + dirY, labyrinth) == false)
-            {
-                return;
-            }
+            //if (!labyrinth.IsCellAvailable(this.row + dirX, this.column + dirY))
+            //{
+            //    return;
+            //}
 
-            if (!labyrinth.IsCellAvailable(column + dirY, row + dirX))
-            {
-                Console.WriteLine("Invalid Move!");
-                Console.WriteLine("**Press a key to continue**");
-                Console.ReadKey();
-                return;
-            }
-            else
-            {
-                labyrinth.MarkCellAsAvailable(this.column, this.row);
-                labyrinth.MarkCellAsOccupied(this.column + dirY, this.row + dirX);
-                this.column += dirY;
-                this.row += dirX;
-                return;
-            }
-        }
-
-        private bool IsMoveValid(int x, int y, Maze labyrinth)
-        {
-            if (x < 0 || x > labyrinth.Rows - 1 || y < 0 || y > labyrinth.Columns - 1)
-            {
-                return false;
-            }
-
-            return true;
+            //if (!labyrinth.IsCellAvailable(column + dirY, row + dirX))
+            //{
+            //    Console.WriteLine("Invalid Move!");
+            //    Console.WriteLine("**Press a key to continue**");
+            //    Console.ReadKey();
+            //    return;
+            //}
+            //else
+            //{
+            //    labyrinth.MarkCellAsAvailable(this.column, this.row);
+            //    labyrinth.MarkCellAsOccupied(this.column + dirY, this.row + dirX);
+            //    this.column += dirY;
+            //    this.row += dirX;
+            //    return;
+            //}
         }
     }
 }
