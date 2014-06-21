@@ -6,20 +6,20 @@
     {
         //TODO: Reimplement when Maze, Player and Scoreboard classes are completed.
         private Player player;
-        private Maze maze;
+        private MazeCell[,] maze;
         private Scoreboard scoreboard;
 
         public CommandExecutor()
         {
             player = new Player();
-            maze = new Maze();
+            maze = MazeGenerator.GenerateRandomMaze();
             scoreboard = new Scoreboard();
         }
 
         private bool IsGameOver(int playerPositionX, int playerPositionY)
         {
-            if ((playerPositionX > 0 && playerPositionX < this.maze.Rows - 1) &&
-                (playerPositionY > 0 && playerPositionY < this.maze.Columns - 1))
+            if ((playerPositionX > 0 && playerPositionX < this.maze.GetLength(0) - 1) &&
+                (playerPositionY > 0 && playerPositionY < this.maze.GetLength(1) - 1))
             {
                 return false;
             }
@@ -36,7 +36,7 @@
             int movesCounter = 0;
             while (command.Equals("EXIT") == false)
             {
-                maze.PrintMazeOnConsole();
+                MazeGenerator.PrintMazeOnConsole(maze);
                 string currentLine = string.Empty;
 
                 if (this.IsGameOver(this.player.Row, this.player.Column))

@@ -3,72 +3,55 @@
     using System;
     using System.Collections.Generic;
 
-    internal class Maze
+    internal static class MazeGenerator
     {
         private const int DefaultRows = 15;
         private const int DefaultColumns = 25;
-        private const int DefaultEntranceRow = 0;
-        private const int DefaultEntranceColumn = 0;
+        private const int DefaultEntryRow = 0;
+        private const int DefaultEntryColumn = 0;
        
         private const char BorderSymbol = '\u2593';
 
         private static readonly Random GlobalRandomGenerator = new Random();
+
+        internal static MazeCell[,] GenerateRandomMaze()
+        {
+            return GenerateRandomMaze(DefaultRows, DefaultColumns, DefaultEntryRow, DefaultEntryColumn);
+        }
+
+        internal static MazeCell[,] GenerateRandomMazeByGivenSize(int rows, int columns)
+        {
+            return GenerateRandomMaze(rows, columns, DefaultEntryRow, DefaultEntryColumn);
+        }
+
+        internal static MazeCell[,] GenerateRandomMazeByGivenSizeAndEntryCell(int rows, int columns, int entryRow, int entryCol)
+        {
+            return GenerateRandomMaze(rows, columns, entryRow, entryCol);
+        }
         
-        private MazeCell[,] mazeCells;
-
-        internal Maze()
-            : this(DefaultRows, DefaultColumns, DefaultEntranceRow, DefaultEntranceColumn)
+        //TODO (Note): might be shifted on the Command Executor
+        internal static void PrintMazeOnConsole(MazeCell[,] maze)
         {
-        }
+            Console.WriteLine(new string(BorderSymbol, maze.GetLength(1) + 2));
 
-        internal Maze(int entranceRow, int entranceCol)
-            : this(DefaultRows, DefaultColumns, entranceRow, entranceCol) 
-        {
-        }
-
-        internal Maze(int rows, int columns, int entranceRow, int entranceCol)
-        {
-            this.mazeCells = this.GenerateRandomMaze(rows, columns, entranceRow, entranceCol);
-        }
-
-        internal int Rows
-        {
-            get
-            {
-                return this.mazeCells.GetLength(0);
-            }
-        }
-
-        internal int Columns 
-        {
-            get
-            {
-                return this.mazeCells.GetLength(1);
-            } 
-        }
-
-        internal void PrintMazeOnConsole()
-        {
-            Console.WriteLine(new string(BorderSymbol, this.Columns + 2));
-
-            for (int row = 0; row < this.Rows; row++)
+            for (int row = 0; row < maze.GetLength(0); row++)
             {
                 Console.Write(BorderSymbol);
 
-                for (int col = 0; col < this.Columns; col++)
+                for (int col = 0; col < maze.GetLength(1); col++)
                 { 
-                    Console.Write(this.mazeCells[row, col]);
+                    Console.Write(maze[row, col]);
                 }
 
                 Console.Write(BorderSymbol);
                 Console.WriteLine();
             }
 
-            Console.WriteLine(new string(BorderSymbol, this.Columns + 2));
+            Console.WriteLine(new string(BorderSymbol, maze.GetLength(1) + 2));
         }
 
         /// <summary>
-        /// Generates random maze using interative Depth First Search algorithm. From a specified entry point
+        /// Generates random maze using iterative Depth First Search algorithm. From a specified entry point
         /// in the matrix of MazeCell objects(initially all cells marked as walls), 
         /// an unvisited neigbour cell is randomly chosen, then it is marked as visited.
         /// If it has less than two neighbours that are path cells - that cell is made a path.
@@ -76,30 +59,30 @@
         /// When so, the algorithms "tracks back" until it finds an unvisited cell. If there is no such cell, 
         /// it assumes that the maze is complete.
         /// </summary>
-        /// <param name="entranceRow">Enrty cell row.</param>
-        /// <param name="entranceCol">Entry cell column.</param>
+        /// <param name="entryRow">Enrty cell row.</param>
+        /// <param name="entryCol">Entry cell column.</param>
         /// <param name="rows">Maze width, as number of rows.</param>
         /// <param name="columns">Maze height as number of columns.</param>
         /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
-        private MazeCell[,] GenerateRandomMaze(int rows, int columns, int entranceRow, int entranceCol)
+        private static MazeCell[,] GenerateRandomMaze(int rows, int columns, int entryRow, int entryCol)
         {
-            var generatedMaze = this.InitializeEmptyMaze(rows, columns);
+            var generatedMaze = InitializeEmptyMaze(rows, columns);
             var pathSoFar = new Stack<MazeCell>();
-            var currCell = generatedMaze[entranceRow, entranceCol];
+            var currCell = generatedMaze[entryRow, entryCol];
 
             do
             {
                 generatedMaze[currCell.Row, currCell.Col].IsVisited = true;
                 generatedMaze[currCell.Row, currCell.Col].Type = CellType.Path;
 
-                var unvisitedNeighbours = this.GetUnvisitedNeighbours(generatedMaze, currCell.Row, currCell.Col);
+                var unvisitedNeighbours = GetUnvisitedNeighbours(generatedMaze, currCell.Row, currCell.Col);
 
                 if (unvisitedNeighbours.Count > 0)
                 {
                     var nextCellIndex = GlobalRandomGenerator.Next(0, unvisitedNeighbours.Count);
                     var nextCell = unvisitedNeighbours[nextCellIndex];
 
-                    if (this.HasLessThanTwoNeighbouringPathCells(generatedMaze, nextCell))
+                    if (HasLessThanTwoNeighbouringPathCells(generatedMaze, nextCell))
                     {
                         pathSoFar.Push(currCell);
                         currCell = nextCell;
@@ -115,15 +98,15 @@
                 }
             } while (pathSoFar.Count > 0);
 
-            generatedMaze[entranceRow, entranceCol].Type = CellType.Entrance;
-            int exitRow = rows - 1 - entranceRow;
-            int exitCol = columns - 1 - entranceCol;
+            generatedMaze[entryRow, entryCol].Type = CellType.Entrance;
+            int exitRow = rows - 1 - entryRow;
+            int exitCol = columns - 1 - entryCol;
             generatedMaze[exitRow, exitCol].Type = CellType.Exit;
 
             return generatedMaze;
         }
 
-        private MazeCell[,] InitializeEmptyMaze(int rows, int columns)
+        private static MazeCell[,] InitializeEmptyMaze(int rows, int columns)
         {
             var maze = new MazeCell[rows, columns];
 
@@ -138,7 +121,7 @@
             return maze;
         }
 
-        private IList<MazeCell> GetUnvisitedNeighbours(MazeCell[,] maze, int row, int col)
+        private static IList<MazeCell> GetUnvisitedNeighbours(MazeCell[,] maze, int row, int col)
         {
             var unvisitedNeighbours = new List<MazeCell>();
 
@@ -165,7 +148,7 @@
             return unvisitedNeighbours;
         }
 
-        private bool HasLessThanTwoNeighbouringPathCells(MazeCell[,] maze, MazeCell nextCell)
+        private static bool HasLessThanTwoNeighbouringPathCells(MazeCell[,] maze, MazeCell nextCell)
         {
             int neighbouringPaths = 0;
 
