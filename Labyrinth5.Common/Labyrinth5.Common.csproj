@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellType.cs" />
     <Compile Include="CommandExecutor.cs" />
     <Compile Include="Maze.cs" />
     <Compile Include="MazeCell.cs" />

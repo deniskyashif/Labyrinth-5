@@ -5,38 +5,33 @@
 
     internal class Maze
     {
-        //TODO: Set maze exit cell. Integrate with Player and CommandExecutor classes.
-        private static readonly Random globalRandomGenerator = new Random();
-
-        private const int MazeDefaultRows = 15;
-        private const int MazeDefaultColumns = 25;
-        private const int PlayerDefaultStartRow = 0;
-        private const int PlayerDefaultStartColumns = 0;
-
-        private const char WallSymbol = '\u2593';
-        private const char PathSymbol = '\u00a0';
+        private const int DefaultRows = 15;
+        private const int DefaultColumns = 25;
+        private const int DefaultEntranceRow = 0;
+        private const int DefaultEntranceColumn = 0;
+       
         private const char BorderSymbol = '\u2593';
-        private const char PlayerSymbol = '\u263a';
 
-
+        private static readonly Random GlobalRandomGenerator = new Random();
+        
         private MazeCell[,] mazeCells;
 
-        public Maze()
-            : this(MazeDefaultRows, MazeDefaultColumns, PlayerDefaultStartRow, PlayerDefaultStartColumns)
+        internal Maze()
+            : this(DefaultRows, DefaultColumns, DefaultEntranceRow, DefaultEntranceColumn)
         {
         }
 
-        public Maze(int maxRows, int maxCols)
-            : this(maxRows, maxCols, PlayerDefaultStartColumns, PlayerDefaultStartRow)
+        internal Maze(int entranceRow, int entranceCol)
+            : this(DefaultRows, DefaultColumns, entranceRow, entranceCol) 
         {
         }
 
-        public Maze(int startRow, int startCol, int maxRows, int maxCols)
+        internal Maze(int rows, int columns, int entranceRow, int entranceCol)
         {
-            this.mazeCells = GenerateRandomMaze(startRow, startCol, maxRows, maxCols);
+            this.mazeCells = this.GenerateRandomMaze(rows, columns, entranceRow, entranceCol);
         }
 
-        public int Rows
+        internal int Rows
         {
             get
             {
@@ -44,7 +39,7 @@
             }
         }
 
-        public int Columns 
+        internal int Columns 
         {
             get
             {
@@ -52,28 +47,17 @@
             } 
         }
 
-        public void PrintMazeOnConsole(Player player)
+        internal void PrintMazeOnConsole()
         {
             Console.WriteLine(new string(BorderSymbol, this.Columns + 2));
 
-            for (int r = 0; r < this.Rows; r++)
+            for (int row = 0; row < this.Rows; row++)
             {
                 Console.Write(BorderSymbol);
 
-                for (int c = 0; c < this.Columns; c++)
-                {
-                    if (r == player.Row && c == player.Column)
-                    {
-                        Console.Write(PlayerSymbol);
-                    }
-                    else if (this.mazeCells[r, c].IsWall)
-                    {
-                        Console.Write(WallSymbol);
-                    }
-                    else
-                    {
-                        Console.Write(PathSymbol);
-                    }
+                for (int col = 0; col < this.Columns; col++)
+                { 
+                    Console.Write(this.mazeCells[row, col]);
                 }
 
                 Console.Write(BorderSymbol);
@@ -92,41 +76,30 @@
         /// When so, the algorithms "tracks back" until it finds an unvisited cell. If there is no such cell, 
         /// it assumes that the maze is complete.
         /// </summary>
-        /// <param name="startRow">Enrty cell row.</param>
-        /// <param name="startCol">Entry cell column.</param>
-        /// <param name="maxRows">Maze width, as number of rows.</param>
-        /// <param name="maxCols">Maze height as number of columns.</param>
+        /// <param name="entranceRow">Enrty cell row.</param>
+        /// <param name="entranceCol">Entry cell column.</param>
+        /// <param name="rows">Maze width, as number of rows.</param>
+        /// <param name="columns">Maze height as number of columns.</param>
         /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
-        private MazeCell[,] GenerateRandomMaze(int maxRows, int maxCols, int startRow, int startCol)
+        private MazeCell[,] GenerateRandomMaze(int rows, int columns, int entranceRow, int entranceCol)
         {
-            var generatedMaze = new MazeCell[maxRows, maxCols];
-
-            for (int row = 0; row < maxRows; row++)
-            {
-                for (int col = 0; col < maxCols; col++)
-                {
-                    generatedMaze[row, col] = new MazeCell(row, col);
-                }
-            }
-
+            var generatedMaze = this.InitializeEmptyMaze(rows, columns);
             var pathSoFar = new Stack<MazeCell>();
-            var currCell = generatedMaze[startRow, startCol];
-            currCell.IsVisited = true;
-            currCell.IsWall = false;
+            var currCell = generatedMaze[entranceRow, entranceCol];
 
             do
             {
                 generatedMaze[currCell.Row, currCell.Col].IsVisited = true;
-                generatedMaze[currCell.Row, currCell.Col].IsWall = false;
+                generatedMaze[currCell.Row, currCell.Col].Type = CellType.Path;
 
-                var unvisitedNeighbours = GetUnvisitedNeighbours(generatedMaze, currCell.Row, currCell.Col);
+                var unvisitedNeighbours = this.GetUnvisitedNeighbours(generatedMaze, currCell.Row, currCell.Col);
 
                 if (unvisitedNeighbours.Count > 0)
                 {
-                    var nextCellIndex = globalRandomGenerator.Next(0, unvisitedNeighbours.Count);
+                    var nextCellIndex = GlobalRandomGenerator.Next(0, unvisitedNeighbours.Count);
                     var nextCell = unvisitedNeighbours[nextCellIndex];
 
-                    if (HasLessThanTwoNeighbouringPathCells(generatedMaze, nextCell))
+                    if (this.HasLessThanTwoNeighbouringPathCells(generatedMaze, nextCell))
                     {
                         pathSoFar.Push(currCell);
                         currCell = nextCell;
@@ -142,7 +115,27 @@
                 }
             } while (pathSoFar.Count > 0);
 
+            generatedMaze[entranceRow, entranceCol].Type = CellType.Entrance;
+            int exitRow = rows - 1 - entranceRow;
+            int exitCol = columns - 1 - entranceCol;
+            generatedMaze[exitRow, exitCol].Type = CellType.Exit;
+
             return generatedMaze;
+        }
+
+        private MazeCell[,] InitializeEmptyMaze(int rows, int columns)
+        {
+            var maze = new MazeCell[rows, columns];
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < columns; col++)
+                {
+                    maze[row, col] = new MazeCell(row, col);
+                }
+            }
+
+            return maze;
         }
 
         private IList<MazeCell> GetUnvisitedNeighbours(MazeCell[,] maze, int row, int col)
@@ -176,22 +169,22 @@
         {
             int neighbouringPaths = 0;
 
-            if (nextCell.Row - 1 >= 0 && !maze[nextCell.Row - 1, nextCell.Col].IsWall)
+            if (nextCell.Row - 1 >= 0 && maze[nextCell.Row - 1, nextCell.Col].Type != CellType.Wall)
             {
                 neighbouringPaths++;
             }
 
-            if (nextCell.Row + 1 < maze.GetLength(0) && !maze[nextCell.Row + 1, nextCell.Col].IsWall)
+            if (nextCell.Row + 1 < maze.GetLength(0) && maze[nextCell.Row + 1, nextCell.Col].Type != CellType.Wall)
             {
                 neighbouringPaths++;
             }
 
-            if (nextCell.Col - 1 >= 0 && !maze[nextCell.Row, nextCell.Col - 1].IsWall)
+            if (nextCell.Col - 1 >= 0 && maze[nextCell.Row, nextCell.Col - 1].Type != CellType.Wall)
             {
                 neighbouringPaths++;
             }
 
-            if (nextCell.Col + 1 < maze.GetLength(1) && !maze[nextCell.Row, nextCell.Col + 1].IsWall)
+            if (nextCell.Col + 1 < maze.GetLength(1) && maze[nextCell.Row, nextCell.Col + 1].Type != CellType.Wall)
             {
                 neighbouringPaths++;
             }

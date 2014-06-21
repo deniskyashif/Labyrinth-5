@@ -36,7 +36,7 @@
             int movesCounter = 0;
             while (command.Equals("EXIT") == false)
             {
-                maze.PrintMazeOnConsole(player);
+                maze.PrintMazeOnConsole();
                 string currentLine = string.Empty;
 
                 if (this.IsGameOver(this.player.Row, this.player.Column))
