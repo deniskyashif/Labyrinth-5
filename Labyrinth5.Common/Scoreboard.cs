@@ -2,10 +2,14 @@
 {
     using System;
     using Wintellect.PowerCollections;
+    using System.IO;
 
     public class Scoreboard
     {
+        //TODO: consider renaming scoreboard
         private OrderedMultiDictionary<int, string> scoreboard;
+        private StreamReader reader = new StreamReader("Save/SavedScores.txt");
+        private StreamWriter writer = new StreamWriter("Save/SavedScores.txt");
 
         public Scoreboard()
         {
@@ -50,36 +54,29 @@
             Console.WriteLine();
         }
 
-        public void UpdateScoreBoard(int currentNumberOfMoves)
+        //TODO: writing in the file should be done in the format: score/name
+        public void ReadSavedScores()
         {
-            string userName = string.Empty;
+            using (this.reader)
+            {
+                while (reader.Peek() >= 0)
+                {
+                    string line = reader.ReadLine();
+                    string[] splitData = line.Split('/');
+                    int score;
+                    bool result = Int32.TryParse(splitData[0], out score);
+                    string userName = splitData[1];
+                    UpdateScoreBoard(score, userName);
+                }
+            }
+        }
 
-            if (this.scoreboard.Count < 5)
-            {
-                while (userName == string.Empty)
-                {
-                    Console.WriteLine("**Please put down your name:**");
-                    userName = Console.ReadLine();
-                }
-                this.scoreboard.Add(currentNumberOfMoves, userName);
-            }
-            else
-            {
-                int worstScore = this.GetWorstScore();
-                if (currentNumberOfMoves <= worstScore)
-                {
-                    if (this.scoreboard.ContainsKey(currentNumberOfMoves) == false)
-                    {
-                        this.scoreboard.Remove(worstScore);
-                    }
-                    while (userName == string.Empty)
-                    {
-                        Console.WriteLine("**Please put down your name:**");
-                        userName = Console.ReadLine();
-                    }
-                    this.scoreboard.Add(currentNumberOfMoves, userName);
-                }
-            }
+        //TODO: Name should be requested from the command executor.
+        //TODO: Implement saving to the file
+
+        public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
+        {
+            this.scoreboard.Add(currentNumberOfMoves, userName);
         }
     }
 }

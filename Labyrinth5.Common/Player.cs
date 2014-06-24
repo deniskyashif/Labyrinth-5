@@ -4,7 +4,6 @@
 
     public class Player
     {
-        //TODO: Code repetition! remove/refactor
         private const int PlayerStartRow = 0;
         private const int PlayerStartCol = 0;
 
@@ -18,8 +17,8 @@
 
         public Player(int startRow, int startCol)
         {
-            this.row = startRow;
-            this.column = startCol;
+            this.Row = startRow;
+            this.Column = startCol;
         }
 
         public int Row 
@@ -48,31 +47,10 @@
             } 
         }
 
-        //TODO: following smelly code - remove/refactor
-
         public void Move(int dirX, int dirY)
         {
-
-            //if (!labyrinth.IsCellAvailable(this.row + dirX, this.column + dirY))
-            //{
-            //    return;
-            //}
-
-            //if (!labyrinth.IsCellAvailable(column + dirY, row + dirX))
-            //{
-            //    Console.WriteLine("Invalid Move!");
-            //    Console.WriteLine("**Press a key to continue**");
-            //    Console.ReadKey();
-            //    return;
-            //}
-            //else
-            //{
-            //    labyrinth.MarkCellAsAvailable(this.column, this.row);
-            //    labyrinth.MarkCellAsOccupied(this.column + dirY, this.row + dirX);
-            //    this.column += dirY;
-            //    this.row += dirX;
-            //    return;
-            //}
+            this.Row += dirX;
+            this.Column += dirY;
         }
     }
 }
