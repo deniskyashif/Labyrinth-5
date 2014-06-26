@@ -1,6 +1,6 @@
-﻿namespace Labyrinth5.Common
+﻿namespace Labyrinth5.Common.Mazes
 {
-    internal enum CellType
+    public enum CellType
     {
         Wall = 1,
         Path = 2,

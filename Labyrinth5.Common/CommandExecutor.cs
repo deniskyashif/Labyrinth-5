@@ -1,18 +1,21 @@
 ﻿namespace Labyrinth5.Common
 {
     using System;
+    using Labyrinth5.Common.Mazes;
 
     public class CommandExecutor
     {
         //TODO: Reimplement when Maze, Player and Scoreboard classes are completed.
         private Player player;
+        private MazeContext mazeContext;
         private MazeCell[,] maze;
         private Scoreboard scoreboard;
 
         public CommandExecutor()
         {
             player = new Player();
-            maze = MazeGenerator.GenerateRandomMaze();
+            mazeContext = new MazeContext(new PrimMazeGenerator());
+            maze = mazeContext.Generate(15,25);
             scoreboard = new Scoreboard();
         }
 
@@ -36,8 +39,8 @@
             int movesCounter = 0;
             while (command.Equals("EXIT") == false)
             {
-                MazeGenerator.PrintMazeOnConsole(maze);
                 string currentLine = string.Empty;
+                PrintMazeOnConsole();
 
                 if (this.IsGameOver(this.player.Row, this.player.Column))
                 {
@@ -94,7 +97,7 @@
                 case "RESTART":
                     {
                         this.player = new Player();
-                        //this.maze = new MazeGenerator();
+                        
 
                         break;
                     }
@@ -114,6 +117,18 @@
                         Console.ReadKey();
                         break;
                     }
+            }
+        }
+
+        private void PrintMazeOnConsole()
+        {
+            for (int r = 0; r < this.maze.GetLength(0); r++)
+            {
+                for (int c = 0; c < this.maze.GetLength(1); c++)
+                {
+                    Console.Write(maze[r,c].GetSymbol());
+                }
+                Console.WriteLine();
             }
         }
     }

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Labyrinth5.Common.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellType.cs" />
+    <Compile Include="Mazes\CellType.cs" />
     <Compile Include="CommandExecutor.cs" />
-    <Compile Include="MazeGenerator.cs" />
-    <Compile Include="MazeCell.cs" />
+    <Compile Include="Mazes\DFSMazeGenerator.cs" />
+    <Compile Include="Mazes\MazeCell.cs" />
+    <Compile Include="Mazes\MazeContext.cs" />
+    <Compile Include="Mazes\IMazeGenerator.cs" />
+    <Compile Include="Mazes\PrimMazeGenerator.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoreboard.cs" />
