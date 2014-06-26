@@ -14,6 +14,7 @@
         public Scoreboard()
         {
             this.scoreboard = new OrderedMultiDictionary<int, string>(false);
+            ReadSavedScores();
         }
 
         public int GetWorstScore()
@@ -73,10 +74,18 @@
 
         //TODO: Name should be requested from the command executor.
         //TODO: Implement saving to the file
+        public void UptadeSavedScore(int currentNumberOfMoves, string userName) 
+        {
+            using (this.writer)
+            {
+                writer.WriteLine(currentNumberOfMoves+'/'+userName);
+            }
+        }
 
         public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
         {
             this.scoreboard.Add(currentNumberOfMoves, userName);
+            UptadeSavedScore(currentNumberOfMoves, userName);
         }
     }
 }
