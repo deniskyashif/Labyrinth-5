@@ -45,6 +45,10 @@
                 if (this.IsGameOver(this.player.Row, this.player.Column))
                 {
                     Console.WriteLine("Congratulations! You've exited the labirynth in {0} moves.", movesCounter);
+                    
+                    //TODO: the  player name request is excluded from the scorebourd method,
+                    //it should be requested in the command executor at the end of each game and 
+                    // given as a parameter to the UpdateScoreBorad method
 
                     scoreboard.UpdateScoreBoard(movesCounter);
                     scoreboard.PrintScore();
