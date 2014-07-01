@@ -1,27 +1,29 @@
-﻿namespace Labyrinth5.Common.Mazes
+﻿namespace Labyrinth5.Common.MazeComponents.Generators
 {
+    using Labyrinth5.Common.Contracts;
+    using Labyrinth5.Common.MazeComponents.Cells;
     using System;
     using System.Collections.Generic;
     
-    internal class PrimMazeGenerator : IMazeGenerator
+    public class PrimMazeGenerator : IMazeGenerator
     {
         private static Random GlobalRandomGenerator = new Random();
 
-        public MazeCell[,] Generate(int rows, int columns)
+        public IMazeCell[,] Generate(int rows, int columns)
         {
             return this.CreateMaze(rows, columns);
         }
 
-        private MazeCell[,] CreateMaze(int rows, int columns)
+        private IMazeCell[,] CreateMaze(int rows, int columns)
         {
-            var maze = this.InitializeEmptyMaze(rows, columns);
+            var maze = this.InitializePrimMaze(rows, columns);
 
             var currentCell = maze[rows / 2, columns / 2];
-            currentCell.Type = CellType.Path;
+            currentCell.IsWall = false;
 
             var frontiers = GetAdjacentWallCells(maze, currentCell);
 
-            IList<MazeCell> adjacentWallCells;
+            IList<IMazeCell> adjacentWallCells;
             int currentCellIndex;
 
             while (frontiers.Count > 0)
@@ -30,9 +32,9 @@
                 currentCell = frontiers[currentCellIndex];
                 adjacentWallCells = GetAdjacentWallCells(maze, currentCell);
 
-                if (currentCell.Type == CellType.Wall && adjacentWallCells.Count == 3)
+                if (currentCell.IsWall && adjacentWallCells.Count == 3)
                 {
-                    maze[currentCell.Row, currentCell.Col].Type = CellType.Path;
+                    maze[currentCell.Row, currentCell.Col].IsWall = false;
                     frontiers.AddRange(adjacentWallCells);
                 }
                 else
@@ -44,23 +46,23 @@
             return maze;
         }
 
-        private List<MazeCell> GetAdjacentWallCells(MazeCell[,] maze, MazeCell cell) 
+        private List<IMazeCell> GetAdjacentWallCells(IMazeCell[,] maze, IMazeCell cell) 
         {
-            var neighbours = new List<MazeCell>();
+            var neighbours = new List<IMazeCell>();
 
-            if (cell.Row - 1 >= 0 && maze[cell.Row - 1, cell.Col].Type == CellType.Wall)
+            if (cell.Row - 1 >= 0 && maze[cell.Row - 1, cell.Col].IsWall)
             {
                 neighbours.Add(maze[cell.Row - 1, cell.Col]);
             }
-            if (cell.Row + 1 < maze.GetLength(0) && maze[cell.Row + 1, cell.Col].Type == CellType.Wall)
+            if (cell.Row + 1 < maze.GetLength(0) && maze[cell.Row + 1, cell.Col].IsWall)
             {
                 neighbours.Add(maze[cell.Row + 1, cell.Col]);
             }
-            if (cell.Col - 1 >= 0 && maze[cell.Row, cell.Col - 1].Type == CellType.Wall)
+            if (cell.Col - 1 >= 0 && maze[cell.Row, cell.Col - 1].IsWall)
             {
                 neighbours.Add(maze[cell.Row, cell.Col - 1]);
             }
-            if (cell.Col + 1 < maze.GetLength(1) && maze[cell.Row, cell.Col + 1].Type == CellType.Wall)
+            if (cell.Col + 1 < maze.GetLength(1) && maze[cell.Row, cell.Col + 1].IsWall)
             {
                 neighbours.Add(maze[cell.Row, cell.Col + 1]);
             }
@@ -68,15 +70,15 @@
             return neighbours;
         }
 
-        private MazeCell[,] InitializeEmptyMaze(int rows, int columns)
+        private IMazeCell[,] InitializePrimMaze(int rows, int columns)
         {
-            var maze = new MazeCell[rows, columns];
+            var maze = new PrimCell[rows, columns];
 
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < columns; col++)
                 {
-                    maze[row, col] = new MazeCell(row, col);
+                    maze[row, col] = new PrimCell(row, col);
                 }
             }
 

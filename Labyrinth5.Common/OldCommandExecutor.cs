@@ -3,18 +3,18 @@
     using System;
     using Labyrinth5.Common.Mazes;
 
-    public class CommandExecutor
+    public class OldCommandExecutor
     {
         //TODO: Reimplement when Maze, Player and Scoreboard classes are completed.
         private Player player;
-        private MazeContext mazeContext;
+        private Maze maze;
         private MazeCell[,] maze;
         private Scoreboard scoreboard;
 
-        public CommandExecutor()
+        public OldCommandExecutor()
         {
             player = new Player();
-            mazeContext = new MazeContext(new PrimMazeGenerator());
+            mazeContext = new Maze(new PrimMazeGenerator());
             maze = mazeContext.Generate(15,25);
             scoreboard = new Scoreboard();
         }
@@ -50,7 +50,7 @@
                     //it should be requested in the command executor at the end of each game and 
                     // given as a parameter to the UpdateScoreBorad method
 
-                    scoreboard.UpdateScoreBoard(movesCounter);
+                    //scoreboard.UpdateScoreBoard(movesCounter);
                     scoreboard.PrintScore();
                     movesCounter = 0;
                     currentLine = "RESTART";

@@ -1,13 +1,15 @@
-﻿namespace Labyrinth5.Common.Mazes
+﻿namespace Labyrinth5.Common.MazeComponents.Generators
 {
+    using Labyrinth5.Common.Contracts;
+    using Labyrinth5.Common.MazeComponents.Cells;
     using System;
     using System.Collections.Generic;
 
-    internal class DFSMazeGenerator : IMazeGenerator
+    internal class BacktrackerMazeGenerator : IMazeGenerator
     {
         private static readonly Random GlobalRandomGenerator = new Random();
 
-        public MazeCell[,] Generate(int rows, int columns)
+        public IMazeCell[,] Generate(int rows, int columns)
         {
             return this.CreateMaze(rows, columns);
         }
@@ -25,16 +27,16 @@
         /// <param name="rows">Maze width, as number of rows.</param>
         /// <param name="columns">Maze height as number of columns.</param>
         /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
-        private MazeCell[,] CreateMaze(int rows, int columns)
+        private IMazeCell[,] CreateMaze(int rows, int columns)
         {
-            var maze = this.InitializeEmptyMaze(rows, columns);
-            var pathSoFar = new Stack<MazeCell>();
+            var maze = this.InitializeBacktrackerMaze(rows, columns);
+            var pathSoFar = new Stack<BacktrackerCell>();
             var currentCell = maze[rows / 2, columns / 2];
 
             do
             {
                 maze[currentCell.Row, currentCell.Col].IsBacktracked = true;
-                maze[currentCell.Row, currentCell.Col].Type = CellType.Path;
+                maze[currentCell.Row, currentCell.Col].IsWall = false;
 
                 var unvisitedNeighbours = this.GetUnvisitedNeighbours(maze, currentCell.Row, currentCell.Col);
 
@@ -62,9 +64,9 @@
             return maze;
         }
 
-        private IList<MazeCell> GetUnvisitedNeighbours(MazeCell[,] maze, int row, int col)
+        private IList<BacktrackerCell> GetUnvisitedNeighbours(BacktrackerCell[,] maze, int row, int col)
         {
-            var unvisitedNeighbours = new List<MazeCell>();
+            var unvisitedNeighbours = new List<BacktrackerCell>();
 
             if (row - 1 >= 1 && !maze[row - 1, col].IsBacktracked)
             {
@@ -89,26 +91,26 @@
             return unvisitedNeighbours;
         }
 
-        private bool HasOnlyOneAdjacentPathCell(MazeCell[,] maze, MazeCell cell)
+        private bool HasOnlyOneAdjacentPathCell(IMazeCell[,] maze, IMazeCell cell)
         {
             int adjacentPathCells = 0;
 
-            if (cell.Row - 1 >= 0 && maze[cell.Row - 1, cell.Col].Type != CellType.Wall)
+            if (cell.Row - 1 >= 0 && !maze[cell.Row - 1, cell.Col].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Row + 1 < maze.GetLength(0) && maze[cell.Row + 1, cell.Col].Type != CellType.Wall)
+            if (cell.Row + 1 < maze.GetLength(0) && !maze[cell.Row + 1, cell.Col].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Col - 1 >= 0 && maze[cell.Row, cell.Col - 1].Type != CellType.Wall)
+            if (cell.Col - 1 >= 0 && !maze[cell.Row, cell.Col - 1].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Col + 1 < maze.GetLength(1) && maze[cell.Row, cell.Col + 1].Type != CellType.Wall)
+            if (cell.Col + 1 < maze.GetLength(1) && !maze[cell.Row, cell.Col + 1].IsWall)
             {
                 adjacentPathCells++;
             }
@@ -116,15 +118,15 @@
             return adjacentPathCells == 1;
         }
 
-        private MazeCell[,] InitializeEmptyMaze(int rows, int columns)
+        private BacktrackerCell[,] InitializeBacktrackerMaze(int rows, int columns)
         {
-            var maze = new MazeCell[rows, columns];
+            var maze = new BacktrackerCell[rows, columns];
 
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < columns; col++)
                 {
-                    maze[row, col] = new MazeCell(row, col);
+                    maze[row, col] = new BacktrackerCell(row, col);
                 }
             }
 

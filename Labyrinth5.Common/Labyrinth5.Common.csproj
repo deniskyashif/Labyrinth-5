@@ -44,17 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mazes\CellType.cs" />
-    <Compile Include="CommandExecutor.cs" />
-    <Compile Include="Mazes\DFSMazeGenerator.cs" />
-    <Compile Include="Mazes\MazeCell.cs" />
-    <Compile Include="Mazes\MazeContext.cs" />
-    <Compile Include="Mazes\IMazeGenerator.cs" />
-    <Compile Include="Mazes\PrimMazeGenerator.cs" />
+    <Compile Include="Engine\ConsoleRenderer.cs" />
+    <Compile Include="Contracts\IDrawable.cs" />
+    <Compile Include="Contracts\IEngine.cs" />
+    <Compile Include="Contracts\IRenderer.cs" />
+    <Compile Include="Engine\CommandInterpreter.cs" />
+    <Compile Include="Engine\ConsoleEngine.cs" />
+    <Compile Include="MatrixCoordinates.cs" />
+    <Compile Include="MazeComponents\Cells\BacktrackerCell.cs" />
+    <Compile Include="MazeComponents\Cells\KruskalCell.cs" />
+    <Compile Include="MazeComponents\Cells\PrimCell.cs" />
+    <Compile Include="MazeComponents\Generators\BacktrackerMazeGenerator.cs" />
+    <Compile Include="Contracts\IMazeCell.cs" />
+    <Compile Include="MazeComponents\Cells\MazeCell.cs" />
+    <Compile Include="MazeComponents\Generators\KruskalMazeGenerator.cs" />
+    <Compile Include="MazeComponents\Maze.cs" />
+    <Compile Include="Contracts\IMazeGenerator.cs" />
+    <Compile Include="MazeComponents\Generators\PrimMazeGenerator.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoreboard.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
