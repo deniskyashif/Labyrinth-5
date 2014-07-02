@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\ConsoleRenderer.cs" />
-    <Compile Include="Contracts\IDrawable.cs" />
+    <Compile Include="Contracts\IRenderable.cs" />
     <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Contracts\IRenderer.cs" />
     <Compile Include="Engine\CommandInterpreter.cs" />

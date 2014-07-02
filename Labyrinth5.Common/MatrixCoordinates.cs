@@ -2,15 +2,15 @@
 {
     internal struct MatrixCoordinates
     {
-        public MatrixCoordinates(int row, int col)
+        internal MatrixCoordinates(int row, int col)
             : this()
         {
             this.Row = row;
             this.Col = col;
         }
 
-        public int Row { get; set; }
-        public int Col { get; set; }
+        internal int Row { get; set; }
+        internal int Col { get; set; }
 
         public static MatrixCoordinates operator +(MatrixCoordinates a, MatrixCoordinates b)
         {

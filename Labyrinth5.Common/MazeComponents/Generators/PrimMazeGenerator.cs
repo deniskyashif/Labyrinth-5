@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
     
-    public class PrimMazeGenerator : IMazeGenerator
+    internal class PrimMazeGenerator : IMazeGenerator
     {
         private static Random GlobalRandomGenerator = new Random();
 
@@ -34,7 +34,7 @@
 
                 if (currentCell.IsWall && adjacentWallCells.Count == 3)
                 {
-                    maze[currentCell.Row, currentCell.Col].IsWall = false;
+                    maze[currentCell.Position.Row, currentCell.Position.Col].IsWall = false;
                     frontiers.AddRange(adjacentWallCells);
                 }
                 else
@@ -50,21 +50,21 @@
         {
             var neighbours = new List<IMazeCell>();
 
-            if (cell.Row - 1 >= 0 && maze[cell.Row - 1, cell.Col].IsWall)
+            if (cell.Position.Row - 1 >= 0 && maze[cell.Position.Row - 1, cell.Position.Col].IsWall)
             {
-                neighbours.Add(maze[cell.Row - 1, cell.Col]);
+                neighbours.Add(maze[cell.Position.Row - 1, cell.Position.Col]);
             }
-            if (cell.Row + 1 < maze.GetLength(0) && maze[cell.Row + 1, cell.Col].IsWall)
+            if (cell.Position.Row + 1 < maze.GetLength(0) && maze[cell.Position.Row + 1, cell.Position.Col].IsWall)
             {
-                neighbours.Add(maze[cell.Row + 1, cell.Col]);
+                neighbours.Add(maze[cell.Position.Row + 1, cell.Position.Col]);
             }
-            if (cell.Col - 1 >= 0 && maze[cell.Row, cell.Col - 1].IsWall)
+            if (cell.Position.Col - 1 >= 0 && maze[cell.Position.Row, cell.Position.Col - 1].IsWall)
             {
-                neighbours.Add(maze[cell.Row, cell.Col - 1]);
+                neighbours.Add(maze[cell.Position.Row, cell.Position.Col - 1]);
             }
-            if (cell.Col + 1 < maze.GetLength(1) && maze[cell.Row, cell.Col + 1].IsWall)
+            if (cell.Position.Col + 1 < maze.GetLength(1) && maze[cell.Position.Row, cell.Position.Col + 1].IsWall)
             {
-                neighbours.Add(maze[cell.Row, cell.Col + 1]);
+                neighbours.Add(maze[cell.Position.Row, cell.Position.Col + 1]);
             }
 
             return neighbours;

@@ -1,6 +1,14 @@
 ﻿namespace Labyrinth5.Common.MazeComponents.Cells
 {
-    internal class KruskalCell
+    using System;
+    
+    internal class KruskalCell : MazeCell
     {
+        internal KruskalCell(int row, int col)
+            : base(row, col)
+        {
+            //TODO: Implement
+            throw new NotImplementedException();
+        }
     }
 }

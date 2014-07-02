@@ -3,7 +3,7 @@
     using Labyrinth5.Common.Contracts;
     using System;
 
-    class KruskalMazeGenerator : IMazeGenerator
+    internal class KruskalMazeGenerator : IMazeGenerator
     {
         public IMazeCell[,] Generate(int rows, int columns)
         {

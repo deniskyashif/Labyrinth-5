@@ -1,10 +1,8 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    public interface IMazeCell
+    internal interface IMazeCell
     {
-        int Row { get; }
-
-        int Col { get; }
+        MatrixCoordinates Position { get; }
 
         bool IsWall { get; set; }
     }

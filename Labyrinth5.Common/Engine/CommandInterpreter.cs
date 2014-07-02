@@ -2,7 +2,18 @@
 {
     using System;
 
-    public class CommandInterpreter
+    internal class CommandInterpreter
     {
+        /*
+         * Command handlers to be implemented(obligatory):
+         * - move (r,l,u,d)
+         * - top (show ranking)
+         * - (re)start
+         * - exit
+         * 
+         * (non-obligatory extensions)
+         * - solve maze
+         * ...
+         * */
     }
 }

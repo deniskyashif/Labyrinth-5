@@ -35,10 +35,10 @@
 
             do
             {
-                maze[currentCell.Row, currentCell.Col].IsBacktracked = true;
-                maze[currentCell.Row, currentCell.Col].IsWall = false;
+                maze[currentCell.Position.Row, currentCell.Position.Col].IsBacktracked = true;
+                maze[currentCell.Position.Row, currentCell.Position.Col].IsWall = false;
 
-                var unvisitedNeighbours = this.GetUnvisitedNeighbours(maze, currentCell.Row, currentCell.Col);
+                var unvisitedNeighbours = this.GetUnvisitedNeighbours(maze, currentCell.Position.Row, currentCell.Position.Col);
 
                 if (unvisitedNeighbours.Count > 0)
                 {
@@ -52,7 +52,7 @@
                     }
                     else
                     {
-                        maze[nextCell.Row, nextCell.Col].IsBacktracked = true;
+                        maze[nextCell.Position.Row, nextCell.Position.Col].IsBacktracked = true;
                     }
                 }
                 else
@@ -95,22 +95,22 @@
         {
             int adjacentPathCells = 0;
 
-            if (cell.Row - 1 >= 0 && !maze[cell.Row - 1, cell.Col].IsWall)
+            if (cell.Position.Row - 1 >= 0 && !maze[cell.Position.Row - 1, cell.Position.Col].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Row + 1 < maze.GetLength(0) && !maze[cell.Row + 1, cell.Col].IsWall)
+            if (cell.Position.Row + 1 < maze.GetLength(0) && !maze[cell.Position.Row + 1, cell.Position.Col].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Col - 1 >= 0 && !maze[cell.Row, cell.Col - 1].IsWall)
+            if (cell.Position.Col - 1 >= 0 && !maze[cell.Position.Row, cell.Position.Col - 1].IsWall)
             {
                 adjacentPathCells++;
             }
 
-            if (cell.Col + 1 < maze.GetLength(1) && !maze[cell.Row, cell.Col + 1].IsWall)
+            if (cell.Position.Col + 1 < maze.GetLength(1) && !maze[cell.Position.Row, cell.Position.Col + 1].IsWall)
             {
                 adjacentPathCells++;
             }
