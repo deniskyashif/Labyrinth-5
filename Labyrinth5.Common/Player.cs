@@ -1,8 +1,9 @@
 ﻿namespace Labyrinth5.Common
 {
     using System;
+    using Labyrinth5.Common.Contracts;
 
-    public class Player
+    public class Player:IRenderable 
     {
         private const int PlayerStartRow = 0;
         private const int PlayerStartCol = 0;
@@ -51,6 +52,17 @@
         {
             this.Row += dirX;
             this.Column += dirY;
+        }
+
+        //TODO
+        public MatrixCoordinates TopLeftPosition
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public char[,] GetImage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

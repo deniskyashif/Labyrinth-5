@@ -7,20 +7,21 @@
     public class Scoreboard
     {
         //TODO: consider renaming scoreboard
-        private OrderedMultiDictionary<int, string> scoreboard;
-        private StreamReader reader = new StreamReader("Save/SavedScores.txt");
-        private StreamWriter writer = new StreamWriter("Save/SavedScores.txt");
+        private OrderedMultiDictionary<int, string> data;
+        private static string path = "Save/SavedScores.txt";
+        private const int SCOREBOARD_MAX_LENGHT = 10;
+        private const string EMPTY_MESSAGE = "The scoreboard is empty.";
 
         public Scoreboard()
         {
-            this.scoreboard = new OrderedMultiDictionary<int, string>(false);
+            this.data = new OrderedMultiDictionary<int, string>(false);
             ReadSavedScores();
         }
 
         public int GetWorstScore()
         {
             int worstScore = 0;
-            foreach (var score in this.scoreboard.Keys)
+            foreach (var score in this.data.Keys)
             {
                 worstScore = score;
             }
@@ -28,20 +29,57 @@
             return worstScore;
         }
 
-        public void PrintScore()
+        public override string ToString()
         {
             int counter = 1;
-
-            if (this.scoreboard.Count == 0)
+            string scoreboard = "";
+            if (this.data.Count == 0)
             {
-                Console.WriteLine("The scoreboard is empty.");
+                scoreboard = EMPTY_MESSAGE;
 
             }
             else
             {
-                foreach (var score in this.scoreboard)
+                foreach (var score in this.data)
                 {
-                    var foundScore = this.scoreboard[score.Key];
+                    if (counter > SCOREBOARD_MAX_LENGHT)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        var foundScore = this.data[score.Key];
+                        foreach (var equalScore in foundScore)
+                        {
+                            scoreboard += ("/" + counter + ". " + equalScore + "-->" + score.Key);
+                        }
+                    }
+                    counter++;
+                }
+            }
+            return scoreboard;
+        }
+
+        public void PrintScore()
+        {
+                string scoreboard = this.ToString();
+                if (scoreboard == EMPTY_MESSAGE)
+                {
+                    Console.WriteLine(scoreboard);
+                }
+                else
+                {
+                    string[] scroboardSplit = scoreboard.Split('/');
+
+                    for (int i = 0; i < scroboardSplit.Length; i++)
+                    {
+                        Console.WriteLine(scroboardSplit[i]);
+                    }
+                }
+
+                /*foreach (var score in this.data)
+                {
+                    var foundScore = this.data[score.Key];
 
                     foreach (var equalScore in foundScore)
                     {
@@ -49,43 +87,64 @@
 
                     }
                     counter++;
-                }
-            }
-
+                }*/
             Console.WriteLine();
         }
 
         //TODO: writing in the file should be done in the format: score/name
         public void ReadSavedScores()
         {
-            using (this.reader)
+            try
             {
-                while (reader.Peek() >= 0)
+                StreamReader reader = new StreamReader(path);
+                using (reader)
                 {
-                    string line = reader.ReadLine();
-                    string[] splitData = line.Split('/');
-                    int score;
-                    bool result = Int32.TryParse(splitData[0], out score);
-                    string userName = splitData[1];
-                    UpdateScoreBoard(score, userName);
+                    while (reader.Peek() >= 0)
+                    {
+                        string line = reader.ReadLine();
+                        string[] splitData = line.Split('/');
+                        int score;
+                        bool result = Int32.TryParse(splitData[0], out score);
+                        string userName = splitData[1];
+                        UpdateScoreBoard(score, userName);
+                    }
                 }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.Error.WriteLine(
+                  "Can not find 'Save/SavedScores.txt'.");
             }
         }
 
         //TODO: Name should be requested from the command executor.
         //TODO: implement high score
-        public void UptadeSavedScore(int currentNumberOfMoves, string userName) 
+        public void UptadeSavedScore() 
         {
-            using (this.writer)
+            StreamWriter writer = new StreamWriter(path);
+            string scoreboard = this.ToString();
+            if (scoreboard == EMPTY_MESSAGE)
             {
-                writer.WriteLine(currentNumberOfMoves+'/'+userName);
+                Console.WriteLine(scoreboard);
+            }
+            else
+            {
+                using (writer)
+                {
+                    string[] scroboardSplit = scoreboard.Split('/');
+                    for (int i = 0; i < scroboardSplit.Length; i++)
+                    {
+                        writer.WriteLine(scroboardSplit[i]);
+                    }
+                }
             }
         }
 
+
         public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
         {
-            this.scoreboard.Add(currentNumberOfMoves, userName);
-            UptadeSavedScore(currentNumberOfMoves, userName);
+            this.data.Add(currentNumberOfMoves, userName);
+            UptadeSavedScore();
         }
     }
 }
