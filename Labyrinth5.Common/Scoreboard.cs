@@ -73,7 +73,7 @@
         }
 
         //TODO: Name should be requested from the command executor.
-        //TODO: Implement saving to the file
+        //TODO: implement high score
         public void UptadeSavedScore(int currentNumberOfMoves, string userName) 
         {
             using (this.writer)
