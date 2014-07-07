@@ -5,19 +5,39 @@
 
     internal class Maze : IRenderable
     {
+        private const int DefaultMazeRows = 15;
+        private const int DefaultMazeColumns = 25;
+        private const int DefaultLeftOffset = 0;
+        private const int DefaultTopOffset = 0;
+
         private const char WallSymbol = '\u2593';
         private const char PathSymbol = '\u00a0';
 
         private IMazeGenerator strategy;
         private IMazeCell[,] maze;
+        private MatrixCoordinates topLeftPosition;
 
         public Maze(IMazeGenerator generator)
-        {
-            this.strategy = generator;
-            this.TopLeftPosition = new MatrixCoordinates(0, 0);
+            : this(generator, DefaultMazeRows, DefaultMazeColumns) 
+        { 
         }
 
-        public MatrixCoordinates TopLeftPosition { get; set; }
+        public Maze(IMazeGenerator generator, int rows, int columns)
+            : this(generator, rows, columns, DefaultLeftOffset, DefaultTopOffset)
+        {
+        }
+
+        public Maze(IMazeGenerator generator, int rows, int columns, int leftOffset, int topOffset)
+        {
+            this.strategy = generator;
+            this.topLeftPosition = new MatrixCoordinates(leftOffset, topOffset);
+            this.Generate(rows, columns);
+        }
+
+        public MatrixCoordinates TopLeftPosition 
+        {
+            get { return this.topLeftPosition; } 
+        }
 
         internal int Rows 
         { 

@@ -1,12 +1,12 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
+    using System.Collections.Generic;
+
     internal interface IRenderer
     {
-        void EnqueueForRendering(IRenderable obj);
-
         void Render(IRenderable obj);
 
-        void RenderAll();
+        void RenderMany(IEnumerable<IRenderable> collection);
 
         void Clear(IRenderable obj);
 

@@ -14,6 +14,13 @@
             return this.CreateMaze(rows, columns);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <seealso cref="http://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim.27s_algorithm"/>
+        /// <param name="rows">Maze width, as number of rows.</param>
+        /// <param name="columns">Maze height as number of columns.</param>
+        /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
         private IMazeCell[,] CreateMaze(int rows, int columns)
         {
             var maze = this.InitializePrimMaze(rows, columns);
@@ -21,7 +28,7 @@
             var currentCell = maze[rows / 2, columns / 2];
             currentCell.IsWall = false;
 
-            var frontiers = GetAdjacentWallCells(maze, currentCell);
+            var frontiers = this.GetAdjacentWallCells(maze, currentCell);
 
             IList<IMazeCell> adjacentWallCells;
             int currentCellIndex;
@@ -30,7 +37,7 @@
             {
                 currentCellIndex = GlobalRandomGenerator.Next(0, frontiers.Count);
                 currentCell = frontiers[currentCellIndex];
-                adjacentWallCells = GetAdjacentWallCells(maze, currentCell);
+                adjacentWallCells = this.GetAdjacentWallCells(maze, currentCell);
 
                 if (currentCell.IsWall && adjacentWallCells.Count == 3)
                 {

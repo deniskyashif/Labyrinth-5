@@ -22,8 +22,7 @@
         /// cells out of the stack until it reaches one that satisfies the condition.
         /// The process goes on until there are no cells left in the stack.
         /// </summary>
-        /// <param name="entryRow">Enrty cell row.</param>
-        /// <param name="entryCol">Entry cell column.</param>
+        /// <seealso cref="http://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search"/>
         /// <param name="rows">Maze width, as number of rows.</param>
         /// <param name="columns">Maze height as number of columns.</param>
         /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
