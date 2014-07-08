@@ -14,5 +14,7 @@
         public MatrixCoordinates Position { get; set; }
 
         public bool IsWall { get; set; }
+
+        public bool IsExit { get; set; }
     }
 }

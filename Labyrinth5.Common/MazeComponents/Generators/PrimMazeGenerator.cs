@@ -25,8 +25,9 @@
         {
             var maze = this.InitializePrimMaze(rows, columns);
 
-            var currentCell = maze[rows / 2, columns / 2];
+            var currentCell = maze[rows - 2, columns - 2];
             currentCell.IsWall = false;
+            currentCell.IsExit = true;
 
             var frontiers = this.GetAdjacentWallCells(maze, currentCell);
 

@@ -5,5 +5,7 @@
         MatrixCoordinates Position { get; }
 
         bool IsWall { get; set; }
+
+        bool IsExit { get; set; }
     }
 }

@@ -30,7 +30,8 @@
         {
             var maze = this.InitializeBacktrackerMaze(rows, columns);
             var pathSoFar = new Stack<BacktrackerCell>();
-            var currentCell = maze[rows / 2, columns / 2];
+            var currentCell = maze[rows - 2, columns - 2];
+            currentCell.IsExit = true;
 
             do
             {

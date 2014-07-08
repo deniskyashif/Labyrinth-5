@@ -12,11 +12,13 @@
 
         private const char WallSymbol = '\u2593';
         private const char PathSymbol = '\u00a0';
+        private const char ExitSymbol = 'E';
+
+        private readonly MatrixCoordinates topLeftPosition;
 
         private IMazeGenerator strategy;
         private IMazeCell[,] maze;
-        private MatrixCoordinates topLeftPosition;
-
+        
         public Maze(IMazeGenerator generator)
             : this(generator, DefaultMazeRows, DefaultMazeColumns) 
         { 
@@ -72,7 +74,14 @@
             {
                 for (int col = 0; col < this.Columns; col++)
                 {
-                    mazeImage[row, col] = this.maze[row, col].IsWall ? WallSymbol: PathSymbol;
+                    if (this.maze[row, col].IsExit)
+                    {
+                        mazeImage[row, col] = ExitSymbol;
+                    }
+                    else
+                    {
+                        mazeImage[row, col] = this.maze[row, col].IsWall ? WallSymbol : PathSymbol;
+                    }
                 }
             }
 
