@@ -3,7 +3,7 @@
     using System;
     using Labyrinth5.Common.Contracts;
 
-    public class Player:IRenderable 
+    public class Player:IPlayer, IRenderable 
     {
         private const int PlayerStartRow = 0;
         private const int PlayerStartCol = 0;

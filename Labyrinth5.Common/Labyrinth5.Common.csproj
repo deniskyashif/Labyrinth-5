@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\ICommand.cs" />
+    <Compile Include="Contracts\IPlayer.cs" />
     <Compile Include="Engine\ConsoleRenderer.cs" />
     <Compile Include="Contracts\IRenderable.cs" />
     <Compile Include="Contracts\IEngine.cs" />

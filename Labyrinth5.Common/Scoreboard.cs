@@ -4,18 +4,27 @@
     using Wintellect.PowerCollections;
     using System.IO;
 
-    public class Scoreboard
+    public sealed class Scoreboard 
     {
         //TODO: consider renaming scoreboard
         private OrderedMultiDictionary<int, string> data;
         private static string path = "Save/SavedScores.txt";
         private const int SCOREBOARD_MAX_LENGHT = 10;
         private const string EMPTY_MESSAGE = "The scoreboard is empty.";
+        private static readonly Scoreboard instance = new Scoreboard();
 
-        public Scoreboard()
+        private Scoreboard()
         {
             this.data = new OrderedMultiDictionary<int, string>(false);
             ReadSavedScores();
+        }
+
+        public static Scoreboard Instance
+        {
+            get
+            {
+                return instance;
+            }
         }
 
         public int GetWorstScore()
@@ -77,17 +86,6 @@
                     }
                 }
 
-                /*foreach (var score in this.data)
-                {
-                    var foundScore = this.data[score.Key];
-
-                    foreach (var equalScore in foundScore)
-                    {
-                        Console.WriteLine("{0}. {1} --> {2}", counter, equalScore, score.Key);
-
-                    }
-                    counter++;
-                }*/
             Console.WriteLine();
         }
 
