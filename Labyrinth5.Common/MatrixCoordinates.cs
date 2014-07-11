@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common
 {
-    internal struct MatrixCoordinates
+    public struct MatrixCoordinates
     {
         internal MatrixCoordinates(int row, int col)
             : this()

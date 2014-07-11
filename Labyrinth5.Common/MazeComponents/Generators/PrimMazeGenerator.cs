@@ -14,13 +14,6 @@
             return this.CreateMaze(rows, columns);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <seealso cref="http://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_Prim.27s_algorithm"/>
-        /// <param name="rows">Maze width, as number of rows.</param>
-        /// <param name="columns">Maze height as number of columns.</param>
-        /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
         private IMazeCell[,] CreateMaze(int rows, int columns)
         {
             var maze = this.InitializePrimMaze(rows, columns);
