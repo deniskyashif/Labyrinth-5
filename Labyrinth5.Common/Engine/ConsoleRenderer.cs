@@ -12,7 +12,7 @@
 
             for (int row = 0; row < objectImage.GetLength(0); row++)
             {
-                Console.SetCursorPosition(obj.TopLeftPosition.Row + row, obj.TopLeftPosition.Col);
+                Console.SetCursorPosition(obj.TopLeftPosition.Col, obj.TopLeftPosition.Row + row);
 
                 for (int col = 0; col < objectImage.GetLength(1); col++)
                 {

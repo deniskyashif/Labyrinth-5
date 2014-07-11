@@ -21,6 +21,7 @@
         {
             maze.Generate(20, 20);
             renderer.Render(maze);
+            Console.ReadLine();
         }
     }
 }
