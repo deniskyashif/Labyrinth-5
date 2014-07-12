@@ -3,10 +3,11 @@
     using System;
     using Labyrinth5.Common.Contracts;
 
-    public class Player:IPlayer, IRenderable 
+    public class Player:IPlayer 
     {
-        private const int PlayerStartRow = 0;
-        private const int PlayerStartCol = 0;
+        private const int PlayerStartRow = 1;
+        private const int PlayerStartCol = 1;
+        private const char symbol = '@';
 
         private int row;
         private int column;
@@ -19,7 +20,15 @@
         public Player(int startRow, int startCol)
         {
             this.Row = startRow;
-            this.Column = startCol;
+            this.Col = startCol;
+        }
+
+        public char Symbol
+        {
+            get
+            {
+                return symbol;
+            }
         }
 
         public int Row 
@@ -35,7 +44,7 @@
             } 
         }
 
-        public int Column 
+        public int Col 
         {
             get 
             { 
@@ -48,21 +57,11 @@
             } 
         }
 
-        public void Move(int dirX, int dirY)
+        public void Move(int rows, int cols)
         {
-            this.Row += dirX;
-            this.Column += dirY;
+            this.Row += rows;
+            this.Col += cols;
         }
 
-        //TODO
-        public MatrixCoordinates TopLeftPosition
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public char[,] GetImage()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

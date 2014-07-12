@@ -78,10 +78,15 @@
                     {
                         mazeImage[row, col] = ExitSymbol;
                     }
-                    else
+                    if (this.maze[row, col].IsWall)
                     {
-                        mazeImage[row, col] = this.maze[row, col].IsWall ? WallSymbol : PathSymbol;
+                        mazeImage[row, col] = WallSymbol;
                     }
+                    if (this.maze[row, col].IsExit)
+                    {
+                        mazeImage[row, col] = ExitSymbol;
+                    }
+
                 }
             }
 
