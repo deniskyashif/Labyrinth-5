@@ -5,6 +5,10 @@
     using Labyrinth5.Common.MazeComponents.Generators;
     using System;
 
+    //// <summary>
+    /// App engine point. Initializes everything needed for it to run.
+    /// Runs a while(true) loop until player is dead or game is restarted.
+    /// </summary>
     public class ConsoleEngine : IEngine
     {
         private IMazeGenerator generator;
@@ -23,6 +27,9 @@
             Console.CursorVisible = false;
         }
         
+        /// <summary>
+        /// Prints starting maze and player and starts the game loop
+        /// </summary>
         public void Run()
         {
             maze.Generate(20, 20);
@@ -50,8 +57,6 @@
                 interpreter.ExecuteCommand(player, maze, command);
                 renderer.RenderPlayer(player);
             }
-
         }
-        
     }
 }

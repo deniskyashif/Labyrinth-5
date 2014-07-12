@@ -4,6 +4,64 @@
         <name>Labyrinth5.Common</name>
     </assembly>
     <members>
+        <member name="T:Labyrinth5.Common.Engine.ConsoleRenderer">
+            <summary>
+            Used for printing anything on the console
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.WriteOnPosition(System.Int32,System.Int32,System.Char,System.ConsoleColor)">
+            <summary>
+            Moves cursor at position and displays single char.
+            Works differently from SetCursorPosition. Top left corner of the console is (0, 0).
+            </summary>
+            <param name="row"></param>
+            <param name="col"></param>
+            <param name="symbol"></param>
+            <param name="color"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.DeleteAtPosition(System.Int32,System.Int32)">
+            <summary>
+            Uses WriteOnPosition, prints a black square over position
+            </summary>
+            <param name="row"></param>
+            <param name="col"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.Render(Labyrinth5.Common.Contracts.IRenderable)">
+            <summary>
+            Prints a two dismensional char array at coordinates (0, 0) 
+            </summary>
+            <param name="obj">IRenderable object, GetImage() should return two dimensional char array</param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderPlayer(Labyrinth5.Common.Player)">
+            <summary>
+            Prints the player char at current player coordinates
+            </summary>
+            <param name="player"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderText(System.String)">
+            <summary>
+            Prints text on the next free line under the maze
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderMany(System.Collections.Generic.IEnumerable{Labyrinth5.Common.Contracts.IRenderable})">
+            <summary>
+            Renders many IRenderable objects. Not used currently.
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.Clear(Labyrinth5.Common.Contracts.IRenderable)">
+            <summary>
+            Uses DeleteAtPostion() to clear IRenderable object. Not used currently.
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.ClearAll">
+            <summary>
+            Clears the console. Duh.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Labyrinth5.Common.Engine.ConsoleEngine" -->
         <member name="M:Labyrinth5.Common.MazeComponents.Generators.BacktrackerMazeGenerator.CreateMaze(System.Int32,System.Int32)">
             <summary>
             Generates random maze using iterative Depth First Search algorithm. From a specified entry point
