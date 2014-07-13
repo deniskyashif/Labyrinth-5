@@ -14,7 +14,6 @@
         private const char PathSymbol = '\u00a0';
         private const char ExitSymbol = 'E';
 
-
         private IMazeGenerator strategy;
         private IMazeCell[,] maze;
         
