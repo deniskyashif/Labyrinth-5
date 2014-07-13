@@ -14,7 +14,6 @@
         private const char PathSymbol = '\u00a0';
         private const char ExitSymbol = 'E';
 
-        private readonly MatrixCoordinates topLeftPosition;
 
         private IMazeGenerator strategy;
         private IMazeCell[,] maze;
@@ -32,14 +31,9 @@
         public Maze(IMazeGenerator generator, int rows, int columns, int leftOffset, int topOffset)
         {
             this.strategy = generator;
-            this.topLeftPosition = new MatrixCoordinates(leftOffset, topOffset);
             this.Generate(rows, columns);
         }
 
-        public MatrixCoordinates TopLeftPosition 
-        {
-            get { return this.topLeftPosition; } 
-        }
 
         internal int Rows 
         { 
