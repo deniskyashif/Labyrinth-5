@@ -9,8 +9,8 @@
         //TODO: consider renaming scoreboard
         private OrderedMultiDictionary<int, string> data;
         private static string path = "Save/SavedScores.txt";
-        private const int SCOREBOARD_MAX_LENGHT = 10;
-        private const string EMPTY_MESSAGE = "The scoreboard is empty.";
+        private const int ScoreboardMaxLenght = 10;
+        private const string EmptyMessage = "The scoreboard is empty.";
         private static readonly Scoreboard instance = new Scoreboard();
 
         private Scoreboard()
@@ -44,14 +44,13 @@
             string scoreboard = "";
             if (this.data.Count == 0)
             {
-                scoreboard = EMPTY_MESSAGE;
-
+                scoreboard = EmptyMessage;
             }
             else
             {
                 foreach (var score in this.data)
                 {
-                    if (counter > SCOREBOARD_MAX_LENGHT)
+                    if (counter > ScoreboardMaxLenght)
                     {
                         break;
                     }
@@ -68,23 +67,23 @@
             }
             return scoreboard;
         }
-
+        
         public void PrintScore()
         {
-                string scoreboard = this.ToString();
-                if (scoreboard == EMPTY_MESSAGE)
-                {
-                    Console.WriteLine(scoreboard);
-                }
-                else
-                {
-                    string[] scroboardSplit = scoreboard.Split('/');
+            string scoreboard = this.ToString();
+            if (scoreboard == EmptyMessage)
+            {
+                Console.WriteLine(scoreboard);
+            }
+            else
+            {
+                string[] scroboardSplit = scoreboard.Split('/');
 
-                    for (int i = 0; i < scroboardSplit.Length; i++)
-                    {
-                        Console.WriteLine(scroboardSplit[i]);
-                    }
+                for (int i = 0; i < scroboardSplit.Length; i++)
+                {
+                    Console.WriteLine(scroboardSplit[i]);
                 }
+            }
 
             Console.WriteLine();
         }
@@ -111,7 +110,7 @@
             catch (FileNotFoundException)
             {
                 Console.Error.WriteLine(
-                  "Can not find 'Save/SavedScores.txt'.");
+                    "Can not find 'Save/SavedScores.txt'.");
             }
         }
 
@@ -121,7 +120,7 @@
         {
             StreamWriter writer = new StreamWriter(path);
             string scoreboard = this.ToString();
-            if (scoreboard == EMPTY_MESSAGE)
+            if (scoreboard == EmptyMessage)
             {
                 Console.WriteLine(scoreboard);
             }
@@ -137,7 +136,6 @@
                 }
             }
         }
-
 
         public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
         {

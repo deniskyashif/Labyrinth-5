@@ -1,4 +1,4 @@
-﻿namespace Labyrinth5.UI
+﻿namespace LabirynthGame
 {
     using Labyrinth5.Common.Engine;
     using System;

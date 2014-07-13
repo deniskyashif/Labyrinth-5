@@ -3,17 +3,17 @@
     using System;
     using Labyrinth5.Common.Contracts;
 
-    public class Player:IPlayer 
+    public class Player : IPlayer 
     {
+        private const char symbol = '@';
         private const int PlayerStartRow = 1;
         private const int PlayerStartCol = 1;
-        private const char symbol = '@';
 
         private int row;
-        private int column;
+        private int col;
+        private int score;
 
-        public Player()
-            : this(PlayerStartRow, PlayerStartCol)
+        public Player() : this(PlayerStartRow, PlayerStartCol)
         {
         }
 
@@ -21,6 +21,26 @@
         {
             this.Row = startRow;
             this.Col = startCol;
+            this.score = 0;
+        }
+
+        public int Score
+        {
+            get
+            {
+                return this.score;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    this.score = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Score or value can't be negative");
+                }
+            }
         }
 
         public char Symbol
@@ -41,27 +61,31 @@
             private set 
             { 
                 this.row = value; 
-            } 
+            }
         }
 
         public int Col 
         {
             get 
             { 
-                return this.column; 
+                return this.col; 
             }
 
             private set 
             { 
-                this.column = value; 
-            } 
+                this.col = value; 
+            }
         }
-
+        public void Restart()
+        {
+            this.row = PlayerStartRow;
+            this.col = PlayerStartCol;
+            this.score = 0;
+        }
         public void Move(int rows, int cols)
         {
             this.Row += rows;
             this.Col += cols;
         }
-
     }
 }

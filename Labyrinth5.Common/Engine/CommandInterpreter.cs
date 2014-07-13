@@ -8,8 +8,10 @@
     /// </summary>
     internal class CommandInterpreter
     {
-        public CommandInterpreter()
+        ConsoleRenderer renderer;
+        public CommandInterpreter(ConsoleRenderer renderer)
         {
+            this.renderer = renderer;
         }
 
         /// <summary>
@@ -64,6 +66,27 @@
             {
                 MovePlayer(player, maze, command);
             }
+            else if (command == "RESTART")
+            {
+                player.Restart();
+            }
+            else if (command == "TOP")
+            {
+                //TODO scoreboard logic here
+            }
+            else if (command == "EXIT")
+            {
+                Environment.Exit(0);
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid input!");
+                Console.WriteLine("**Press a key to continue**");
+                Console.ReadLine();
+            }
+
+
         }
 
         /// <summary>
@@ -76,6 +99,8 @@
         {
             if (IsMoveLegal(player, maze, command))
             {
+                player.Score += 1;
+
                 if (command == "A")
                 {
                     player.Move(0, -1);
@@ -93,12 +118,15 @@
                     player.Move(-1, 0);
                 }
             }
+            else
+            {
+                renderer.RenderText("Wall in the way !", "**Press a key to continue**");
+                Console.ReadKey();
+            }
         }
         /*
          * Command handlers to be implemented(obligatory):
          * - top (show ranking)
-         * - (re)start
-         * - exit
          * 
          * (non-obligatory extensions)
          * - solve maze

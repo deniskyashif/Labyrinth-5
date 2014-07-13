@@ -9,6 +9,13 @@
             Used for printing anything on the console
             </summary>
         </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="mazeRows">Used in text rendering</param>
+            <param name="mazeCols">Used in text rendering</param>
+        </member>
         <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.WriteOnPosition(System.Int32,System.Int32,System.Char,System.ConsoleColor)">
             <summary>
             Moves cursor at position and displays single char.
@@ -38,11 +45,11 @@
             </summary>
             <param name="player"></param>
         </member>
-        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderText(System.String)">
+        <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderText(System.String[])">
             <summary>
             Prints text on the next free line under the maze
             </summary>
-            <param name="text"></param>
+            <param name="text">String array. Prints every element on new line</param>
         </member>
         <member name="M:Labyrinth5.Common.Engine.ConsoleRenderer.RenderMany(System.Collections.Generic.IEnumerable{Labyrinth5.Common.Contracts.IRenderable})">
             <summary>
@@ -61,7 +68,42 @@
             Clears the console. Duh.
             </summary>
         </member>
+        <member name="T:Labyrinth5.Common.Engine.CommandInterpreter">
+            <summary>
+            Reads and handles all user input
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.IsMoveLegal(Labyrinth5.Common.Player,Labyrinth5.Common.MazeComponents.Maze,System.String)">
+            <summary>
+            Checks if direction is allowed on move command.
+            </summary>
+            <param name="player"></param>
+            <param name="maze"></param>
+            <param name="command">Player input</param>
+            <returns></returns>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.ExecuteCommand(Labyrinth5.Common.Player,Labyrinth5.Common.MazeComponents.Maze,System.String)">
+            <summary>
+            Calls the command and error methods based on command string.
+            </summary>
+            <param name="player"></param>
+            <param name="maze"></param>
+            <param name="command">Player input</param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.MovePlayer(Labyrinth5.Common.Player,Labyrinth5.Common.MazeComponents.Maze,System.String)">
+            <summary>
+            Calls player.Move based on command string.
+            </summary>
+            <param name="player"></param>
+            <param name="maze"></param>
+            <param name="command">Player input</param>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:Labyrinth5.Common.Engine.ConsoleEngine" -->
+        <member name="M:Labyrinth5.Common.Engine.ConsoleEngine.Run">
+            <summary>
+            Prints starting maze and player. Starts the game loop.
+            </summary>
+        </member>
         <member name="M:Labyrinth5.Common.MazeComponents.Generators.BacktrackerMazeGenerator.CreateMaze(System.Int32,System.Int32)">
             <summary>
             Generates random maze using iterative Depth First Search algorithm. From a specified entry point

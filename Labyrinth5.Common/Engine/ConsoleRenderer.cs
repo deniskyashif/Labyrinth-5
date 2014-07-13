@@ -10,6 +10,22 @@
     /// </summary>
     internal class ConsoleRenderer : IRenderer
     {
+        private readonly int mazeRows;
+        private readonly int mazeCols;
+        private int prevPlayerRow = 1;
+        private int prevPlayerCol = 1;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="mazeRows">Used in text rendering</param>
+        /// <param name="mazeCols">Used in text rendering</param>
+        public ConsoleRenderer(int mazeRows, int mazeCols)
+        {
+            this.mazeRows = mazeRows;
+            this.mazeCols = mazeCols;
+        }
+
         /// <summary>
         /// Moves cursor at position and displays single char.
         /// Works differently from SetCursorPosition. Top left corner of the console is (0, 0).
@@ -59,18 +75,33 @@
         /// <param name="player"></param>
         public void RenderPlayer(Player player)
         {
+            DeleteAtPosition(prevPlayerCol, prevPlayerRow);
+            prevPlayerRow = player.Row;
+            prevPlayerCol = player.Col;
             WriteOnPosition(player.Col, player.Row, player.Symbol, ConsoleColor.Red);
         }
 
         /// <summary>
         /// Prints text on the next free line under the maze
         /// </summary>
-        /// <param name="text"></param>
-        public void RenderText(string text)
-        { 
-            //TODO Fix magic numbers 21 - current maze size(20) + 1
-            Console.SetCursorPosition(0, 21);
-            Console.Write(text);
+        /// <param name="text">String array. Prints every element on new line</param>
+        public void RenderText(params string[] text)
+        {
+            ClearText();
+            for (int i = 0; i < text.Length; i++)
+            {
+                Console.SetCursorPosition(0, mazeRows + 1 + i);
+                Console.Write(text[i]);
+            }
+        }
+
+        public void ClearText()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                Console.SetCursorPosition(0, mazeRows + i);
+                Console.Write(new string(' ', Console.BufferWidth - Console.CursorLeft));
+            }
         }
 
         /// <summary>
