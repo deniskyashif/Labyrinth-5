@@ -5,34 +5,33 @@
 
     internal class Maze : IRenderable
     {
-        private const int DefaultMazeRows = 15;
-        private const int DefaultMazeColumns = 25;
         private const int DefaultLeftOffset = 0;
         private const int DefaultTopOffset = 0;
 
-        private const char WallSymbol = '\u2593';
-        private const char PathSymbol = '\u00a0';
-        private const char ExitSymbol = 'E';
+        private const char WallImage = '\u2593';
+        private const char PathImage = ' ';
+        private const char ExitImage = 'E';
 
         private IMazeGenerator strategy;
         private IMazeCell[,] maze;
-        
+        private MatrixCoordinates topLeftPosition;
+
         public Maze(IMazeGenerator generator)
-            : this(generator, DefaultMazeRows, DefaultMazeColumns) 
+            : this(generator, DefaultTopOffset, DefaultLeftOffset) 
         { 
         }
 
-        public Maze(IMazeGenerator generator, int rows, int columns)
-            : this(generator, rows, columns, DefaultLeftOffset, DefaultTopOffset)
-        {
-        }
-
-        public Maze(IMazeGenerator generator, int rows, int columns, int leftOffset, int topOffset)
+        public Maze(IMazeGenerator generator, int leftOffset, int topOffset)
         {
             this.strategy = generator;
-            this.Generate(rows, columns);
+            this.TopLeftPosition = new MatrixCoordinates(leftOffset, topOffset);
         }
 
+        public MatrixCoordinates TopLeftPosition
+        {
+            get { return this.topLeftPosition; }
+            set { this.topLeftPosition = value; }
+        }
 
         internal int Rows 
         { 
@@ -69,17 +68,19 @@
                 {
                     if (this.maze[row, col].IsExit)
                     {
-                        mazeImage[row, col] = ExitSymbol;
+                        mazeImage[row, col] = ExitImage;
                     }
-                    if (this.maze[row, col].IsWall)
+                    else
                     {
-                        mazeImage[row, col] = WallSymbol;
+                        if (this.maze[row, col].IsWall)
+                        {
+                            mazeImage[row, col] = WallImage;
+                        }
+                        else
+                        {
+                            mazeImage[row, col] = PathImage;
+                        }
                     }
-                    if (this.maze[row, col].IsExit)
-                    {
-                        mazeImage[row, col] = ExitSymbol;
-                    }
-
                 }
             }
 

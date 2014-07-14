@@ -1,136 +1,158 @@
 ﻿namespace Labyrinth5.Common.Engine
 {
+    using Labyrinth5.Common.Contracts;
+    using Labyrinth5.Common.Engine.Commands;
     using Labyrinth5.Common.MazeComponents;
+    using Labyrinth5.Common.MazeComponents.Generators;
     using System;
 
-    /// <summary>
-    /// Reads and handles all user input
-    /// </summary>
-    internal class CommandInterpreter
+    internal class CommandInterpreter : ICommandInterpreter
     {
-        ConsoleRenderer renderer;
-        public CommandInterpreter(ConsoleRenderer renderer)
+        private const int MinimumMazeSize = 10;
+        private const int MaximumMazeSize = 60;
+        private const int DefaultMazeRows = 15;
+        private const int DefaultMazeColumns = 20;
+
+        private readonly string blankLine = new string(' ', Console.WindowWidth);
+        private readonly char[] separators = new char[] { ' ' };
+        
+        private readonly IRenderer renderer = new ConsoleRenderer();
+        private readonly Player player = new Player();
+        private readonly Maze maze = new Maze(new BacktrackerMazeGenerator());
+
+        private readonly ICommand playerMoveCommand;
+        private readonly ICommand displayInstructionsCommand;
+       
+        private int cursorPositionLeft;
+        private int cursorPositionTop;
+        //TODO: Implement score calculation 
+        //TODO: Implement custom game options as command
+        //TODO: (optional) Implement maze solver command
+        
+        public CommandInterpreter()
         {
-            this.renderer = renderer;
+            this.playerMoveCommand = new PlayerMoveCommand(player);
+            this.displayInstructionsCommand = new DisplayInstructionsCommand(renderer);
         }
 
-        /// <summary>
-        /// Checks if direction is allowed on move command.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="maze"></param>
-        /// <param name="command">Player input</param>
-        /// <returns></returns>
-        private bool IsMoveLegal(Player player, Maze maze, string command)
+        public void ParseAndDispatch(string command)
         {
-            if (command == "A")
+            if (!string.IsNullOrWhiteSpace(command))
             {
-                if (maze[player.Row, player.Col - 1].IsWall)
+                var commandWords = command.ToLower().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                if (commandWords[0] == "init")
                 {
-                    return false;
+                    this.HandleInitCommand(commandWords);
+                }
+                if (commandWords[0] == "info")
+                {
+                    this.HandleInfoCommand();
+                }
+                else if ((commandWords[0] == "m" || commandWords[0] == "move") && commandWords.Length > 1)
+                {
+                    this.HandleMoveCommand(commandWords[1]);
                 }
             }
-            if (command == "S")
-            {
-                if (maze[player.Row + 1, player.Col].IsWall)
-                {
-                    return false;
-                }
-            }
-            if (command == "D")
-            {
-                if (maze[player.Row, player.Col + 1].IsWall)
-                {
-                    return false;
-                }
-            }
-            if (command == "W")
-            {
-                if (maze[player.Row - 1, player.Col].IsWall)
-                {
-                    return false;
-                }
-            }
-            return true;
+
+            renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop);
+            Console.SetCursorPosition(this.cursorPositionLeft, this.cursorPositionTop);
         }
 
-        /// <summary>
-        /// Calls the command and error methods based on command string.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="maze"></param>
-        /// <param name="command">Player input</param>
-        public void ExecuteCommand(Player player, Maze maze, string command)
+        private void HandleInitCommand(string[] commandWords)
         {
-            if (command == "A" || command == "S" || command == "D" || command == "W")
+            if (commandWords.Length == 3)
             {
-                MovePlayer(player, maze, command);
-            }
-            else if (command == "RESTART")
-            {
-                player.Restart();
-            }
-            else if (command == "TOP")
-            {
-                //TODO scoreboard logic here
-            }
-            else if (command == "EXIT")
-            {
-                Environment.Exit(0);
+                int mazeRows;
+                int mazeColumns;
 
-            }
-            else
-            {
-                Console.WriteLine("Invalid input!");
-                Console.WriteLine("**Press a key to continue**");
-                Console.ReadLine();
-            }
-
-
-        }
-
-        /// <summary>
-        /// Calls player.Move based on command string.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="maze"></param>
-        /// <param name="command">Player input</param>
-        public void MovePlayer(Player player, Maze maze, string command)
-        {
-            if (IsMoveLegal(player, maze, command))
-            {
-                player.Score += 1;
-
-                if (command == "A")
+                if (int.TryParse(commandWords[1], out mazeRows) && int.TryParse(commandWords[2], out mazeColumns))
                 {
-                    player.Move(0, -1);
-                }
-                else if (command == "S")
-                {
-                    player.Move(1, 0);
-                }
-                else if (command == "D")
-                {
-                    player.Move(0, 1);
-                }
-                else if (command == "W")
-                {
-                    player.Move(-1, 0);
+                    if (MinimumMazeSize <= mazeRows &&  mazeRows <= MaximumMazeSize
+                        && MinimumMazeSize <= mazeColumns && mazeColumns <= MaximumMazeSize)
+                    {
+                        this.SetUpGame(mazeRows, mazeColumns);
+                    }
                 }
             }
             else
             {
-                renderer.RenderText("Wall in the way !", "**Press a key to continue**");
+                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+            }
+        }
+
+        private void HandleInfoCommand()
+        {
+            this.displayInstructionsCommand.Execute();
+            Console.ReadKey();
+            this.renderer.ClearAll();
+            this.renderer.Render(maze);
+            this.renderer.Render(player);
+        }
+
+        private void HandleMoveCommand(string command)
+        {
+            this.renderer.Clear(player);
+
+            if (command == "w" || command == "up")
+            {
+                this.player.Direction = Directions.Up;
+            }
+            else if (command == "d" || command == "right")
+            {
+                this.player.Direction = Directions.Right;
+            }
+            else if (command == "s" || command == "down")
+            {
+                this.player.Direction = Directions.Down;
+            }
+            else if (command == "a" || command == "left")
+            {
+                this.player.Direction = Directions.Left;
+            }
+
+            if (this.IsPositionAvailable())
+            {
+                this.playerMoveCommand.Execute();
+            }
+
+            this.renderer.Render(player);
+
+            if (this.HasReachedTheExit())
+            {
+                //TODO: Implement proper end game method
+                renderer.RenderText("Success!", this.cursorPositionLeft, this.cursorPositionTop + 1);
                 Console.ReadKey();
+                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
             }
         }
-        /*
-         * Command handlers to be implemented(obligatory):
-         * - top (show ranking)
-         * 
-         * (non-obligatory extensions)
-         * - solve maze
-         * ...
-         * */
+
+        private void SetUpGame(int mazeRows, int mazeColumns)
+        {
+            this.maze.Generate(mazeRows, mazeColumns);
+
+            this.player.TopLeftPosition = new MatrixCoordinates(
+                this.maze.TopLeftPosition.Row + 1,
+                this.maze.TopLeftPosition.Col + 1);
+
+            this.cursorPositionLeft = 0;
+            this.cursorPositionTop = this.maze.Rows + 1;
+            
+            this.renderer.ClearAll();
+            this.renderer.Render(maze);
+            this.renderer.Render(player);
+        }
+
+        private bool IsPositionAvailable()
+        {
+            var position = this.player.TopLeftPosition + this.player.Direction;
+            return !this.maze[position.Row, position.Col].IsWall;
+        }
+
+        private bool HasReachedTheExit()
+        {
+            var position = this.player.TopLeftPosition;
+            return this.maze[position.Row, position.Col].IsExit;
+        }
     }
 }

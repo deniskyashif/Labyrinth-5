@@ -8,6 +8,8 @@
 
         void RenderMany(IEnumerable<IRenderable> collection);
 
+        void RenderText(string text, int leftOffset, int topOffset);
+
         void Clear(IRenderable obj);
 
         void ClearAll();

@@ -18,10 +18,9 @@
         {
             var maze = this.InitializePrimMaze(rows, columns);
 
-            var currentCell = maze[rows - 2, columns - 2];
+            var currentCell = maze[1, 1];
             currentCell.IsWall = false;
-            currentCell.IsExit = true;
-
+            
             var frontiers = this.GetAdjacentWallCells(maze, currentCell);
 
             IList<IMazeCell> adjacentWallCells;
@@ -44,6 +43,7 @@
                 }
             }
 
+            this.SetExit(maze);
             return maze;
         }
 
@@ -69,6 +69,22 @@
             }
 
             return neighbours;
+        }
+
+        private void SetExit(IMazeCell[,] maze)
+        {
+            int row = maze.GetLength(0) - 2;
+            int col = maze.GetLength(1) - 2;
+
+            while (true)
+            {
+                if (!maze[row, col].IsWall)
+                {
+                    maze[row, col].IsExit = true;
+                    break;
+                }
+                row--;
+            }
         }
 
         private IMazeCell[,] InitializePrimMaze(int rows, int columns)

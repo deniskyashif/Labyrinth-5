@@ -29,9 +29,8 @@
         {
             var maze = this.InitializeBacktrackerMaze(rows, columns);
             var pathSoFar = new Stack<BacktrackerCell>();
-            var currentCell = maze[rows - 2, columns - 2];
-            currentCell.IsExit = true;
-
+            var currentCell = maze[1, 1];
+            
             do
             {
                 maze[currentCell.Position.Row, currentCell.Position.Col].IsBacktracked = true;
@@ -60,6 +59,7 @@
                 }
             } while (pathSoFar.Count > 0);
 
+            this.SetExit(maze);
             return maze;
         }
 
@@ -115,6 +115,22 @@
             }
 
             return adjacentPathCells == 1;
+        }
+
+        private void SetExit(IMazeCell[,] maze)
+        {
+            int row = maze.GetLength(0) - 2;
+            int col = maze.GetLength(1) - 2;
+
+            while (true)
+            {
+                if (!maze[row, col].IsWall)
+                {
+                    maze[row, col].IsExit = true;
+                    break;
+                }
+                row--;
+            }
         }
 
         private BacktrackerCell[,] InitializeBacktrackerMaze(int rows, int columns)

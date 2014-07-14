@@ -3,89 +3,45 @@
     using System;
     using Labyrinth5.Common.Contracts;
 
-    public class Player : IPlayer 
+    public class Player: IRenderable 
     {
-        private const char symbol = '@';
-        private const int PlayerStartRow = 1;
-        private const int PlayerStartCol = 1;
+        private const int InitialPositionTop = 1;
+        private const int InitialPositionLeft = 1;
+        private const char PlayerImage = '☺';
+        
+        private MatrixCoordinates topLeftPosition;
+        private MatrixCoordinates direction;
 
-        private int row;
-        private int col;
-        private int score;
-
-        public Player() : this(PlayerStartRow, PlayerStartCol)
-        {
-        }
-
-        public Player(int startRow, int startCol)
-        {
-            this.Row = startRow;
-            this.Col = startCol;
-            this.score = 0;
-        }
-
-        public int Score
-        {
-            get
-            {
-                return this.score;
-            }
-            set
-            {
-                if (value > 0)
-                {
-                    this.score = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Score or value can't be negative");
-                }
-            }
-        }
-
-        public char Symbol
-        {
-            get
-            {
-                return symbol;
-            }
-        }
-
-        public int Row 
+        public Player() 
+            : this(InitialPositionTop, InitialPositionLeft)
         { 
-            get 
-            { 
-                return this.row; 
-            }
- 
-            private set 
-            { 
-                this.row = value; 
-            }
         }
 
-        public int Col 
+        public Player(int leftCoordinate, int topCoordinate)
         {
-            get 
-            { 
-                return this.col; 
-            }
+            this.TopLeftPosition = new MatrixCoordinates(topCoordinate, leftCoordinate);
+        }
 
-            private set 
-            { 
-                this.col = value; 
-            }
-        }
-        public void Restart()
+        public MatrixCoordinates Direction
         {
-            this.row = PlayerStartRow;
-            this.col = PlayerStartCol;
-            this.score = 0;
+            get { return this.direction; }
+            set { this.direction = value; }
         }
-        public void Move(int rows, int cols)
+
+        public MatrixCoordinates TopLeftPosition
         {
-            this.Row += rows;
-            this.Col += cols;
+            get { return this.topLeftPosition; }
+            set { this.topLeftPosition = value; }
+        }
+
+        public void Move()
+        {
+            this.TopLeftPosition += this.Direction;
+        }
+
+        public char[,] GetImage()
+        {
+            return new char[,] { { PlayerImage } };
         }
     }
 }

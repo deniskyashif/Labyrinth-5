@@ -2,6 +2,7 @@
 {
     internal interface IRenderable
     {
+        MatrixCoordinates TopLeftPosition { get; }
 
         char[,] GetImage();
     }

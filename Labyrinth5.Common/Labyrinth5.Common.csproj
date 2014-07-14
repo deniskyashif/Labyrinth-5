@@ -45,12 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IPlayer.cs" />
-    <Compile Include="Engine\ConsoleRenderer.cs" />
+    <Compile Include="Contracts\ICommand.cs" />
+    <Compile Include="Contracts\ICommandInterpreter.cs" />
+    <Compile Include="Directions.cs" />
+    <Compile Include="ConsoleRenderer.cs" />
     <Compile Include="Contracts\IRenderable.cs" />
     <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Contracts\IRenderer.cs" />
     <Compile Include="Engine\CommandInterpreter.cs" />
+    <Compile Include="Engine\Commands\DisplayInstructionsCommand.cs" />
+    <Compile Include="Engine\Commands\MovePlayerCommand.cs" />
     <Compile Include="Engine\ConsoleEngine.cs" />
     <Compile Include="MatrixCoordinates.cs" />
     <Compile Include="MazeComponents\Cells\BacktrackerCell.cs" />

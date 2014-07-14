@@ -7,7 +7,7 @@
     {
         static void Main()
         {
-            ConsoleEngine engine = new ConsoleEngine();
+            var engine = ConsoleEngine.Instance;
             engine.Run();
         }
     }
