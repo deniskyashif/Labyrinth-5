@@ -3,6 +3,9 @@
     using Labyrinth5.Common.Contracts;
     using System;
 
+    /// <summary>
+    /// Game engine. Entry point of the app.
+    /// </summary>
     public class ConsoleEngine : IEngine
     {
         private static readonly ConsoleEngine instance = new ConsoleEngine();
@@ -22,6 +25,9 @@
             }
         }
 
+        /// <summary>
+        /// Game loop. Runs until player reaches exit
+        /// </summary>
         public void Run()
         {
             string command = "init";

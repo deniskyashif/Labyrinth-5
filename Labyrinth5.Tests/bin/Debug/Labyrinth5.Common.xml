@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Labyrinth5.Common</name>
+    </assembly>
+    <members>
+        <member name="M:Labyrinth5.Common.MazeComponents.Generators.BacktrackerMazeGenerator.CreateMaze(System.Int32,System.Int32)">
+            <summary>
+            Generates random maze using iterative Depth First Search algorithm. From a specified entry point
+            in the matrix of MazeCell objects(initially all cells marked as walls), 
+            an unvisited neigbour cell is randomly chosen, if it has only one neighbour that is a path cell - 
+            that cell is made a path and pushed into the stack, otherwise the algorithms "tracks back" popping
+            cells out of the stack until it reaches one that satisfies the condition.
+            The process goes on until there are no cells left in the stack.
+            </summary>
+            <param name="rows">Maze width, as number of rows.</param>
+            <param name="columns">Maze height as number of columns.</param>
+            <returns>Maze as two dimensional array of MazeCell objects.</returns>
+        </member>
+    </members>
+</doc>

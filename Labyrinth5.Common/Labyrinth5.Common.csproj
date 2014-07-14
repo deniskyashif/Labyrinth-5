@@ -54,7 +54,7 @@
     <Compile Include="Contracts\IRenderer.cs" />
     <Compile Include="Engine\CommandInterpreter.cs" />
     <Compile Include="Engine\Commands\DisplayInstructionsCommand.cs" />
-    <Compile Include="Engine\Commands\MovePlayerCommand.cs" />
+    <Compile Include="Engine\Commands\PlayerMoveCommand.cs" />
     <Compile Include="Engine\ConsoleEngine.cs" />
     <Compile Include="MatrixCoordinates.cs" />
     <Compile Include="MazeComponents\Cells\BacktrackerCell.cs" />

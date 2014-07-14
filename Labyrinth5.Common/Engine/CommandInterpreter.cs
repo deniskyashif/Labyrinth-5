@@ -6,6 +6,9 @@
     using Labyrinth5.Common.MazeComponents.Generators;
     using System;
 
+    /// <summary>
+    /// Handles all input. Dispatches commands
+    /// </summary>
     internal class CommandInterpreter : ICommandInterpreter
     {
         private const int MinimumMazeSize = 10;
@@ -35,6 +38,10 @@
             this.displayInstructionsCommand = new DisplayInstructionsCommand(renderer);
         }
 
+        /// <summary>
+        /// Dispatches commands to command handlers
+        /// </summary>
+        /// <param name="command">User input string</param>
         public void ParseAndDispatch(string command)
         {
             if (!string.IsNullOrWhiteSpace(command))
@@ -59,6 +66,10 @@
             Console.SetCursorPosition(this.cursorPositionLeft, this.cursorPositionTop);
         }
 
+        /// <summary>
+        /// Sets up new game on user input
+        /// </summary>
+        /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements</param>
         private void HandleInitCommand(string[] commandWords)
         {
             if (commandWords.Length == 3)
@@ -81,6 +92,10 @@
             }
         }
 
+        
+        /// <summary>
+        /// Displays info. Renders the playing field again when closed.
+        /// </summary>
         private void HandleInfoCommand()
         {
             this.displayInstructionsCommand.Execute();
@@ -90,6 +105,12 @@
             this.renderer.Render(player);
         }
 
+        /// <summary>
+        /// Changes player position.
+        /// Prints current position.
+        /// Displays Game Over message on reaching the exit
+        /// </summary>
+        /// <param name="command"></param>
         private void HandleMoveCommand(string command)
         {
             this.renderer.Clear(player);
@@ -127,6 +148,11 @@
             }
         }
 
+        /// <summary>
+        /// Generates new maze. Clars console and prints maze by given rows and cols.
+        /// </summary>
+        /// <param name="mazeRows"></param>
+        /// <param name="mazeColumns"></param>
         private void SetUpGame(int mazeRows, int mazeColumns)
         {
             this.maze.Generate(mazeRows, mazeColumns);
