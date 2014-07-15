@@ -48,14 +48,31 @@
             get { return this.maze[row, col]; } 
         }
 
-        internal void SetStrategy(IMazeGenerator generator)
+        internal IMazeGenerator GenerationStrategy
         {
-            this.strategy = generator;
+            get
+            {
+                return this.strategy;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Maze generation strategy can't be null");
+                }
+
+                this.strategy = value;
+            }
         }
 
         internal void Generate(int rows, int columns) 
         {
-            this.maze = this.strategy.Generate(rows, columns);
+            if (rows <= 0 || columns <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
+            }
+
+            this.maze = this.GenerationStrategy.Generate(rows, columns);
         }
 
         public char[,] GetImage()

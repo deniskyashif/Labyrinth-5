@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    internal interface IRenderer
+    public interface IRenderer
     {
         void Render(IRenderable obj);
 

@@ -7,7 +7,7 @@
 
     internal class BacktrackerMazeGenerator : IMazeGenerator
     {
-        private static readonly Random GlobalRandomGenerator = new Random();
+        private static readonly Random globalRandomGenerator = new Random();
 
         public IMazeCell[,] Generate(int rows, int columns)
         {
@@ -40,7 +40,7 @@
 
                 if (unvisitedNeighbours.Count > 0)
                 {
-                    var nextCellIndex = GlobalRandomGenerator.Next(0, unvisitedNeighbours.Count);
+                    var nextCellIndex = globalRandomGenerator.Next(0, unvisitedNeighbours.Count);
                     var nextCell = unvisitedNeighbours[nextCellIndex];
 
                     if (this.HasOnlyOneAdjacentPathCell(maze, nextCell))

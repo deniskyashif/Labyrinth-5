@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    internal interface IMazeGenerator
+    public interface IMazeGenerator
     {
         IMazeCell[,] Generate(int rows, int columns);
     }

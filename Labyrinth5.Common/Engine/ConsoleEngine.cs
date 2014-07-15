@@ -30,7 +30,8 @@
         /// </summary>
         public void Run()
         {
-            string command = "init";
+            this.interpreter.ParseAndDispatch("init");
+            string command = "info";
 
             while (true)
             {

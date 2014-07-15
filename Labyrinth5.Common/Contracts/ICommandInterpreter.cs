@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    internal interface ICommandInterpreter
+    public interface ICommandInterpreter
     {
         void ParseAndDispatch(string command);
     }

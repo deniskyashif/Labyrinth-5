@@ -256,11 +256,11 @@
 
             if (strategyName == BacktrackerStrategySubCommand)
             {
-                this.maze.SetStrategy(new BacktrackerMazeGenerator());
+                this.maze.GenerationStrategy = new BacktrackerMazeGenerator();
             }
             else if (strategyName == PrimStrategySubCommand)
             {
-                this.maze.SetStrategy(new PrimMazeGenerator());
+                this.maze.GenerationStrategy = new PrimMazeGenerator();
             }
 
             var message = string.Format(StrategySwitchedMessage, strategyName);

@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    internal interface ICommand
+    public interface ICommand
     {
         void Execute();
     }

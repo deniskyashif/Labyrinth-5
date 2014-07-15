@@ -7,7 +7,7 @@
     
     internal class PrimMazeGenerator : IMazeGenerator
     {
-        private static Random GlobalRandomGenerator = new Random();
+        private static readonly Random globalRandomGenerator = new Random();
 
         public IMazeCell[,] Generate(int rows, int columns)
         {
@@ -28,7 +28,7 @@
 
             while (frontiers.Count > 0)
             {
-                currentCellIndex = GlobalRandomGenerator.Next(0, frontiers.Count);
+                currentCellIndex = globalRandomGenerator.Next(0, frontiers.Count);
                 currentCell = frontiers[currentCellIndex];
                 adjacentWallCells = this.GetAdjacentWallCells(maze, currentCell);
 
