@@ -38,14 +38,41 @@
             get { return this.maze.GetLength(0); }
         }
 
+<<<<<<< HEAD
         internal int Columns
         {
             get { return this.maze.GetLength(1); }
+=======
+        internal IMazeGenerator GenerationStrategy
+        {
+            get
+            {
+                return this.strategy;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Maze generation strategy can't be null");
+                }
+
+                this.strategy = value;
+            }
+>>>>>>> 4c54e0554f9ec6c21b2a24da445ba2f914df131d
         }
 
         internal IMazeCell this[int row, int col]
         {
+<<<<<<< HEAD
             get { return this.maze[row, col]; }
+=======
+            if (rows <= 0 || columns <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
+            }
+
+            this.maze = this.GenerationStrategy.Generate(rows, columns);
+>>>>>>> 4c54e0554f9ec6c21b2a24da445ba2f914df131d
         }
 
         public char[,] GetImage()

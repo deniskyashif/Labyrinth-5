@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    internal interface IMazeCell
+    public interface IMazeCell
     {
         MatrixCoordinates Position { get; }
 
