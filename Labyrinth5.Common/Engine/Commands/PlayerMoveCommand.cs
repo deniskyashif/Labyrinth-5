@@ -13,7 +13,7 @@
 
         public void Execute()
         {
-            player.Move();
+            this.player.Move();
         }
     }
 }

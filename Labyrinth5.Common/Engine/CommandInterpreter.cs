@@ -1,10 +1,10 @@
 ﻿namespace Labyrinth5.Common.Engine
 {
+    using System;
     using Labyrinth5.Common.Contracts;
     using Labyrinth5.Common.Engine.Commands;
     using Labyrinth5.Common.MazeComponents;
     using Labyrinth5.Common.MazeComponents.Generators;
-    using System;
 
     /// <summary>
     /// Handles all input. Dispatches commands
@@ -38,7 +38,6 @@
         private const string SuccessMessage = "Success! Score: {0}. Press <ENTER> to play again.";
         private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
 
-
         private readonly string blankLine = new string(' ', Console.WindowWidth);
         private readonly char[] separators = new char[] { ' ' };
         
@@ -56,8 +55,8 @@
 
         public CommandInterpreter()
         {
-            this.playerMoveCommand = new PlayerMoveCommand(player);
-            this.displayInstructionsCommand = new DisplayInstructionsCommand(renderer);
+            this.playerMoveCommand = new PlayerMoveCommand(this.player);
+            this.displayInstructionsCommand = new DisplayInstructionsCommand(this.renderer);
         }
 
         /// <summary>
@@ -68,7 +67,7 @@
         {
             if (!string.IsNullOrWhiteSpace(command))
             {
-                var commandWords = command.ToLower().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                var commandWords = command.ToLower().Split(this.separators, StringSplitOptions.RemoveEmptyEntries);
 
                 if ((commandWords[0] == MoveCommand || commandWords[0] == MoveCommandShortcut) 
                     && commandWords.Length > 1)
@@ -97,7 +96,7 @@
                 }
             }
 
-            this.renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop);
+            this.renderer.RenderText(this.blankLine, this.cursorPositionLeft, this.cursorPositionTop);
             Console.SetCursorPosition(this.cursorPositionLeft, this.cursorPositionTop);
         }
 
@@ -114,7 +113,7 @@
 
                 if (int.TryParse(commandWords[1], out mazeRows) && int.TryParse(commandWords[2], out mazeColumns))
                 {
-                    if (MinimumMazeSize <= mazeRows &&  mazeRows <= MaximumMazeSize
+                    if (MinimumMazeSize <= mazeRows && mazeRows <= MaximumMazeSize
                         && MinimumMazeSize <= mazeColumns && mazeColumns <= MaximumMazeSize)
                     {
                         this.SetUpGame(mazeRows, mazeColumns);
@@ -122,7 +121,7 @@
                 }
                 else
                 {
-                    renderer.RenderText(InvalidArguments, this.cursorPositionLeft, cursorPositionTop - 1);
+                    this.renderer.RenderText(InvalidArguments, this.cursorPositionLeft, this.cursorPositionTop - 1);
                 }
             }
             else
@@ -131,7 +130,6 @@
             }
         }
 
-        
         /// <summary>
         /// Displays info. Renders the playing field again when closed.
         /// </summary>
@@ -170,14 +168,14 @@
             if (this.IsPositionAvailable())
             {
                 this.steps++;
-                this.renderer.Clear(player);
+                this.renderer.Clear(this.player);
                 this.playerMoveCommand.Execute();
-                this.renderer.Render(player);
-                renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
+                this.renderer.Render(this.player);
+                this.renderer.RenderText(this.blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
             }
             else
             {
-                renderer.RenderText(IllegalMove, this.cursorPositionLeft, this.cursorPositionTop - 1);
+                this.renderer.RenderText(IllegalMove, this.cursorPositionLeft, this.cursorPositionTop - 1);
             }
 
             if (this.HasReachedTheExit())
@@ -224,9 +222,9 @@
 
         private void HandleGameEnded()
         {
-            var totalScore = this.maze.Rows * this.maze.Columns - this.steps;
+            var totalScore = (this.maze.Rows * this.maze.Columns) - this.steps;
 
-            renderer.RenderText(
+            this.renderer.RenderText(
                 string.Format(SuccessMessage, totalScore), 
                 this.cursorPositionLeft, 
                 this.cursorPositionTop - 1);
@@ -246,8 +244,8 @@
         private void RenderGameComponents()
         {
             this.renderer.ClearAll();
-            this.renderer.Render(maze);
-            this.renderer.Render(player);
+            this.renderer.Render(this.maze);
+            this.renderer.Render(this.player);
         }
 
         private void HandleSetCommand(string strategyName)
@@ -264,8 +262,8 @@
             }
 
             var message = string.Format(StrategySwitchedMessage, strategyName);
-            renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
-            renderer.RenderText(message, this.cursorPositionLeft, this.cursorPositionTop - 1);
+            this.renderer.RenderText(this.blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
+            this.renderer.RenderText(message, this.cursorPositionLeft, this.cursorPositionTop - 1);
         }
     }
 }

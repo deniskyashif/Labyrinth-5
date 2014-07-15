@@ -39,7 +39,7 @@
 
             int row = TopOffset;
 
-            foreach (var line in gameInstructions)
+            foreach (var line in this.gameInstructions)
             {
                 this.renderer.RenderText(line, LeftOffset, row);
                 row++;

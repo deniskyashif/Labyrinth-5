@@ -1,22 +1,25 @@
 ﻿namespace Labyrinth5.Common
 {
     using System;
-    using Wintellect.PowerCollections;
+    using System.Collections.Generic;
     using System.IO;
+    using Wintellect.PowerCollections;
+    using System.Text;
 
     public sealed class Scoreboard 
     {
-        //TODO: consider renaming scoreboard
-        private OrderedMultiDictionary<int, string> data;
-        private static string path = "Save/SavedScores.txt";
+        private const string PrintPattern = ("{0}. {1}-->{2}");
+        private const string SavePattern = ("{0}/{1}/{2}");            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
         private static readonly Scoreboard instance = new Scoreboard();
+        private static string path = "Save/SavedScores.txt";
+        private OrderedMultiDictionary<int, string> data;
 
         private Scoreboard()
         {
             this.data = new OrderedMultiDictionary<int, string>(false);
-            ReadSavedScores();
+            this.ReadSavedScores();
         }
 
         public static Scoreboard Instance
@@ -38,13 +41,17 @@
             return worstScore;
         }
 
-        public override string ToString()
+        /// <summary>
+        /// Returns a list of formated highScore
+        /// </summary>
+        /// <returns></returns>
+        public List<string> ExtractHighScore(string pattern)
         {
             int counter = 1;
-            string scoreboard = "";
+            List<string> scoreboard = new List<string>();
             if (this.data.Count == 0)
             {
-                scoreboard = EmptyMessage;
+                scoreboard.Add(EmptyMessage);
             }
             else
             {
@@ -57,38 +64,45 @@
                     else
                     {
                         var foundScore = this.data[score.Key];
-                        foreach (var equalScore in foundScore)
+                        foreach (var name in foundScore)
                         {
-                            scoreboard += ("/" + counter + ". " + equalScore + "-->" + score.Key);
+                            StringBuilder formatedScore= new StringBuilder();
+                            formatedScore.AppendFormat(pattern,counter,name,score.Key);
+                            scoreboard.Add(formatedScore.ToString());             
                         }
                     }
+
                     counter++;
                 }
             }
+
             return scoreboard;
         }
-        
+       
+        /// <summary>
+        /// Display's the current scoreboard on the Console
+        /// </summary>
         public void PrintScore()
         {
-            string scoreboard = this.ToString();
-            if (scoreboard == EmptyMessage)
+            List<string> scoreboard = this.ExtractHighScore(PrintPattern);
+            if (scoreboard[0] == EmptyMessage)
             {
-                Console.WriteLine(scoreboard);
+                Console.WriteLine(EmptyMessage);
             }
             else
             {
-                string[] scroboardSplit = scoreboard.Split('/');
-
-                for (int i = 0; i < scroboardSplit.Length; i++)
+                for (int i = 0; i < scoreboard.Count; i++)
                 {
-                    Console.WriteLine(scroboardSplit[i]);
+                    Console.WriteLine(scoreboard[i]);
                 }
             }
 
             Console.WriteLine();
         }
 
-        //TODO: writing in the file should be done in the format: score/name
+        /// <summary>
+        /// Reads previousely saved scores and appends them to the current game scoreboard data
+        /// </summary>
         public void ReadSavedScores()
         {
             try
@@ -101,9 +115,9 @@
                         string line = reader.ReadLine();
                         string[] splitData = line.Split('/');
                         int score;
-                        bool result = Int32.TryParse(splitData[0], out score);
+                        bool result = Int32.TryParse(splitData[2], out score);
                         string userName = splitData[1];
-                        UpdateScoreBoard(score, userName);
+                        this.UpdateScoreBoard(score, userName);
                     }
                 }
             }
@@ -114,33 +128,38 @@
             }
         }
 
-        //TODO: Name should be requested from the command executor.
-        //TODO: implement high score
+        /// <summary>
+        /// Saves the current game data to the designated save file.
+        /// </summary>
         public void UptadeSavedScore() 
         {
             StreamWriter writer = new StreamWriter(path);
-            string scoreboard = this.ToString();
-            if (scoreboard == EmptyMessage)
+            List<string> scoreboard = this.ExtractHighScore(SavePattern);
+            if (scoreboard[0] == EmptyMessage)
             {
-                Console.WriteLine(scoreboard);
+                Console.WriteLine(EmptyMessage);
             }
             else
             {
                 using (writer)
                 {
-                    string[] scroboardSplit = scoreboard.Split('/');
-                    for (int i = 0; i < scroboardSplit.Length; i++)
+                    for (int i = 0; i < scoreboard.Count; i++)
                     {
-                        writer.WriteLine(scroboardSplit[i]);
+                        writer.WriteLine(scoreboard[i]);
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Simultaniousely updates the ingame scoreboard and the external Save file
+        /// </summary>
+        /// <param name="currentNumberOfMoves"></param>
+        /// <param name="userName"></param>
         public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
         {
             this.data.Add(currentNumberOfMoves, userName);
-            UptadeSavedScore();
+            this.UptadeSavedScore();
         }
     }
 }

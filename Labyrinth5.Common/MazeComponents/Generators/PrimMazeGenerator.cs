@@ -1,13 +1,13 @@
 ﻿namespace Labyrinth5.Common.MazeComponents.Generators
 {
-    using Labyrinth5.Common.Contracts;
-    using Labyrinth5.Common.MazeComponents.Cells;
     using System;
     using System.Collections.Generic;
+    using Labyrinth5.Common.Contracts;
+    using Labyrinth5.Common.MazeComponents.Cells;
     
     internal class PrimMazeGenerator : IMazeGenerator
     {
-        private static Random GlobalRandomGenerator = new Random();
+        private static Random globalRandomGenerator = new Random();
 
         public IMazeCell[,] Generate(int rows, int columns)
         {
@@ -28,7 +28,7 @@
 
             while (frontiers.Count > 0)
             {
-                currentCellIndex = GlobalRandomGenerator.Next(0, frontiers.Count);
+                currentCellIndex = globalRandomGenerator.Next(0, frontiers.Count);
                 currentCell = frontiers[currentCellIndex];
                 adjacentWallCells = this.GetAdjacentWallCells(maze, currentCell);
 
@@ -55,14 +55,17 @@
             {
                 neighbours.Add(maze[cell.Position.Row - 1, cell.Position.Col]);
             }
+
             if (cell.Position.Row + 1 < maze.GetLength(0) && maze[cell.Position.Row + 1, cell.Position.Col].IsWall)
             {
                 neighbours.Add(maze[cell.Position.Row + 1, cell.Position.Col]);
             }
+
             if (cell.Position.Col - 1 >= 0 && maze[cell.Position.Row, cell.Position.Col - 1].IsWall)
             {
                 neighbours.Add(maze[cell.Position.Row, cell.Position.Col - 1]);
             }
+
             if (cell.Position.Col + 1 < maze.GetLength(1) && maze[cell.Position.Row, cell.Position.Col + 1].IsWall)
             {
                 neighbours.Add(maze[cell.Position.Row, cell.Position.Col + 1]);
@@ -83,6 +86,7 @@
                     maze[row, col].IsExit = true;
                     break;
                 }
+
                 row--;
             }
         }

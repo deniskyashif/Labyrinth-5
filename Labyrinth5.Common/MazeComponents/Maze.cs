@@ -33,29 +33,19 @@
             set { this.topLeftPosition = value; }
         }
 
-        internal int Rows 
-        { 
-            get { return this.maze.GetLength(0); } 
-        }
-
-        internal int Columns 
-        { 
-            get { return this.maze.GetLength(1); } 
-        }
-
-        internal IMazeCell this[int row, int col] 
-        { 
-            get { return this.maze[row, col]; } 
-        }
-
-        internal void SetStrategy(IMazeGenerator generator)
+        internal int Rows
         {
-            this.strategy = generator;
+            get { return this.maze.GetLength(0); }
         }
 
-        internal void Generate(int rows, int columns) 
+        internal int Columns
         {
-            this.maze = this.strategy.Generate(rows, columns);
+            get { return this.maze.GetLength(1); }
+        }
+
+        internal IMazeCell this[int row, int col]
+        {
+            get { return this.maze[row, col]; }
         }
 
         public char[,] GetImage()
@@ -85,6 +75,16 @@
             }
 
             return mazeImage;
+        }
+
+        internal void SetStrategy(IMazeGenerator generator)
+        {
+            this.strategy = generator;
+        }
+
+        internal void Generate(int rows, int columns)
+        {
+            this.maze = this.strategy.Generate(rows, columns);
         }
     }
 }

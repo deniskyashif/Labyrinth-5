@@ -3,7 +3,7 @@
     using System;
     using Labyrinth5.Common.Contracts;
 
-    public class Player: IRenderable 
+    public class Player : IRenderable 
     {
         private const int InitialPositionTop = 1;
         private const int InitialPositionLeft = 1;

@@ -1,7 +1,7 @@
 ﻿namespace Labyrinth5.Common.Engine
 {
-    using Labyrinth5.Common.Contracts;
     using System;
+    using Labyrinth5.Common.Contracts;
 
     /// <summary>
     /// Game engine. Entry point of the app.

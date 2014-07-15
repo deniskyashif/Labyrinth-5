@@ -1,8 +1,8 @@
 ﻿namespace Labyrinth5.Common
 {
-    using Labyrinth5.Common.Contracts;
     using System;
     using System.Collections.Generic;
+    using Labyrinth5.Common.Contracts;
 
     internal class ConsoleRenderer : IRenderer
     {

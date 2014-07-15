@@ -1,9 +1,9 @@
 ﻿namespace Labyrinth5.Common.MazeComponents.Generators
 {
-    using Labyrinth5.Common.Contracts;
-    using Labyrinth5.Common.MazeComponents.Cells;
     using System;
     using System.Collections.Generic;
+    using Labyrinth5.Common.Contracts;
+    using Labyrinth5.Common.MazeComponents.Cells;
 
     internal class BacktrackerMazeGenerator : IMazeGenerator
     {
@@ -57,7 +57,8 @@
                 {
                     currentCell = pathSoFar.Pop();
                 }
-            } while (pathSoFar.Count > 0);
+            } 
+            while (pathSoFar.Count > 0);
 
             this.SetExit(maze);
             return maze;
@@ -129,6 +130,7 @@
                     maze[row, col].IsExit = true;
                     break;
                 }
+
                 row--;
             }
         }

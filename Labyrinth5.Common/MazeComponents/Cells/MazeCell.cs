@@ -1,7 +1,6 @@
 ﻿namespace Labyrinth5.Common.MazeComponents.Cells
 {
     using Labyrinth5.Common.Contracts;
-    using System;
 
     internal abstract class MazeCell : IMazeCell
     {
