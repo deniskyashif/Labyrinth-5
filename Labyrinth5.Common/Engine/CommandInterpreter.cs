@@ -28,6 +28,7 @@
         private const string MoveLeftSubCommandShortcut = "a";
         private const string InitializeGameCommand = "init";
         private const string DisplayInstructionsCommand = "info";
+        private const string DisplayScoreboardCommand = "score";
         private const string EndGameCommand = "exit";
         private const string SetGenerationStrategyCommand = "set";
         private const string BacktrackerStrategySubCommand = "backtracker";
@@ -91,6 +92,10 @@
                 {
                     this.HandleExitCommand();
                 }
+                else if (commandWords[0] == DisplayScoreboardCommand)
+                {
+                    this.HandleScoreBoardCommand();
+                }
                 else
                 {
                     this.renderer.RenderText(InvalidCommand, this.cursorPositionLeft, this.cursorPositionTop - 1);
@@ -139,6 +144,11 @@
             this.displayInstructionsCommand.Execute();
             Console.ReadKey();
             this.RenderGameComponents();
+        }
+
+        private void HandleScoreBoardCommand()
+        {
+            scoreboard.PrintScore();
         }
 
         /// <summary>
@@ -221,6 +231,9 @@
             this.RenderGameComponents();
         }
 
+        /// <summary>
+        /// Gets player name, updates scoreboard and restarts game
+        /// </summary>
         private void HandleGameEnded()
         {
             var totalScore = (this.maze.Rows * this.maze.Columns) - this.steps;

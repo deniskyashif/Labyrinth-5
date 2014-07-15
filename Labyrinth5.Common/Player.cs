@@ -34,11 +34,18 @@
             set { this.topLeftPosition = value; }
         }
 
+        /// <summary>
+        /// Changes the position of the player in accordance with the current direction
+        /// </summary>
         public void Move()
         {
             this.TopLeftPosition += this.Direction;
         }
 
+        /// <summary>
+        /// Implements IRenderable
+        /// </summary>
+        /// <returns>Char representation of the player position</returns>
         public char[,] GetImage()
         {
             return new char[,] { { PlayerImage } };
