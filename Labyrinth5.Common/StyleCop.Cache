@@ -221,8 +221,8 @@
   <sourcecode name="ConsoleRenderer.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.884</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.249</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -244,8 +244,8 @@
   <sourcecode name="ICommand.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:10:19.635</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.254</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -267,8 +267,8 @@
   <sourcecode name="ICommandInterpreter.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:10:19.637</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.258</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -290,8 +290,8 @@
   <sourcecode name="IEngine.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/05 14:57:37.444</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.262</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -313,8 +313,8 @@
   <sourcecode name="IMazeCell.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/10 13:40:25.012</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.265</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -336,8 +336,8 @@
   <sourcecode name="IMazeGenerator.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/05 14:57:37.449</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.268</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -359,8 +359,8 @@
   <sourcecode name="IRenderable.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/05 14:57:37.454</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.274</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -382,8 +382,8 @@
   <sourcecode name="IRenderer.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:10:19.642</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.278</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -405,8 +405,8 @@
   <sourcecode name="Directions.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:10:19.644</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.283</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -428,8 +428,8 @@
   <sourcecode name="CommandInterpreter.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.850</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.290</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -473,8 +473,8 @@
   <sourcecode name="DisplayInstructionsCommand.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:52:22.007</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.297</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -496,8 +496,8 @@
   <sourcecode name="PlayerMoveCommand.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:52:22.016</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.301</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -519,8 +519,8 @@
   <sourcecode name="ConsoleEngine.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.823</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.307</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -548,8 +548,8 @@
   <sourcecode name="MatrixCoordinates.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:10:19.670</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.315</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -577,8 +577,8 @@
   <sourcecode name="BacktrackerCell.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/05 14:57:37.478</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.328</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -600,8 +600,8 @@
   <sourcecode name="MazeCell.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.861</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.332</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -618,13 +618,24 @@
       <StyleCop.CSharp.SpacingRules>2014/04/01 10:18:24.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
+        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
+        <line>21</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
+        <context>Adjacent elements must be separated by a blank line.</context>
+        <line>22</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="PrimCell.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/05 14:57:37.487</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.336</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -646,8 +657,8 @@
   <sourcecode name="BacktrackerMazeGenerator.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.919</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.342</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -664,13 +675,19 @@
       <StyleCop.CSharp.SpacingRules>2014/04/01 10:18:24.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="StaticReadonlyFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1311">
+        <context>Static readonly fields must start with an upper-case letter: globalRandomGenerator.</context>
+        <line>10</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="PrimMazeGenerator.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.941</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.347</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -687,13 +704,19 @@
       <StyleCop.CSharp.SpacingRules>2014/04/01 10:18:24.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="StaticReadonlyFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1311">
+        <context>Static readonly fields must start with an upper-case letter: globalRandomGenerator.</context>
+        <line>10</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="Maze.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:09:18.908</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.352</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -710,13 +733,39 @@
       <StyleCop.CSharp.SpacingRules>2014/04/01 10:18:24.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
+        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
+        <line>44</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
+        <context>Adjacent elements must be separated by a blank line.</context>
+        <line>45</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketMustBeFollowedByBlankLine" ruleCheckId="SA1513">
+        <context>Statements or elements wrapped in curly brackets must be followed by a blank line.</context>
+        <line>50</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ElementsMustBeSeparatedByBlankLine" ruleCheckId="SA1516">
+        <context>Adjacent elements must be separated by a blank line.</context>
+        <line>51</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="ElementsMustBeOrderedByAccess" ruleCheckId="SA1202">
+        <context>All internal methods must be placed after all public methods.</context>
+        <line>77</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="Player.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 14:52:21.989</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.358</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -733,13 +782,25 @@
       <StyleCop.CSharp.SpacingRules>2014/04/01 10:18:24.000</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SymbolsMustBeSpacedCorrectly" ruleCheckId="SA1003">
+        <context>The spacing around the symbol ':' is invalid.</context>
+        <line>6</line>
+        <index>118</index>
+        <endIndex>118</endIndex>
+        <startLine>6</startLine>
+        <startColumn>26</startColumn>
+        <endLine>6</endLine>
+        <endColumn>26</endColumn>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
   <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/06/24 14:12:10.021</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.365</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -761,8 +822,8 @@
   <sourcecode name="Scoreboard.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
-      <settingsFile>2014/07/15 14:52:15.725</settingsFile>
-      <sourceFile>2014/07/15 15:08:03.813</sourceFile>
+      <settingsFile>2014/07/15 18:23:17.377</settingsFile>
+      <sourceFile>2014/07/15 18:23:17.369</sourceFile>
       <parser>2014/04/01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014/04/01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>353596207</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -780,58 +841,85 @@
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
     <violations>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
-        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>92</line>
-        <index>2548</index>
-        <endIndex>2615</endIndex>
-        <startLine>92</startLine>
-        <startColumn>9</startColumn>
-        <endLine>92</endLine>
-        <endColumn>76</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
-        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>118</line>
-        <index>3499</index>
-        <endIndex>3557</endIndex>
-        <startLine>118</startLine>
-        <startColumn>9</startColumn>
-        <endLine>118</endLine>
-        <endColumn>67</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
-        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
-        <line>119</line>
-        <index>3568</index>
-        <endIndex>3595</endIndex>
-        <startLine>119</startLine>
-        <startColumn>9</startColumn>
-        <endLine>119</endLine>
-        <endColumn>36</endColumn>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.NamingRules" rule="StaticReadonlyFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1311">
-        <context>Static readonly fields must start with an upper-case letter: instance.</context>
-        <line>11</line>
+      <violation namespace="StyleCop.CSharp.OrderingRules" rule="SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives" ruleCheckId="SA1208">
+        <context>System using directives must be placed before all other using directives.</context>
+        <line>7</line>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.MaintainabilityRules" rule="StatementMustNotUseUnnecessaryParenthesis" ruleCheckId="SA1119">
         <context>The line contains unnecessary parenthesis.</context>
-        <line>61</line>
-        <index>1764</index>
-        <endIndex>1818</endIndex>
-        <startLine>61</startLine>
-        <startColumn>43</startColumn>
-        <endLine>61</endLine>
-        <endColumn>97</endColumn>
+        <line>11</line>
+        <index>266</index>
+        <endIndex>283</endIndex>
+        <startLine>11</startLine>
+        <startColumn>45</startColumn>
+        <endLine>11</endLine>
+        <endColumn>62</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.MaintainabilityRules" rule="StatementMustNotUseUnnecessaryParenthesis" ruleCheckId="SA1119">
+        <context>The line contains unnecessary parenthesis.</context>
+        <line>12</line>
+        <index>330</index>
+        <endIndex>344</endIndex>
+        <startLine>12</startLine>
+        <startColumn>44</startColumn>
+        <endLine>12</endLine>
+        <endColumn>58</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.NamingRules" rule="StaticReadonlyFieldsMustBeginWithUpperCaseLetter" ruleCheckId="SA1311">
+        <context>Static readonly fields must start with an upper-case letter: instance.</context>
+        <line>15</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SymbolsMustBeSpacedCorrectly" ruleCheckId="SA1003">
+        <context>The spacing around the symbol '=' is invalid.</context>
+        <line>69</line>
+        <index>2136</index>
+        <endIndex>2136</endIndex>
+        <startLine>69</startLine>
+        <startColumn>56</startColumn>
+        <endLine>69</endLine>
+        <endColumn>56</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="CommasMustBeSpacedCorrectly" ruleCheckId="SA1001">
+        <context>Invalid spacing around the comma.</context>
+        <line>70</line>
+        <index>2222</index>
+        <endIndex>2222</endIndex>
+        <startLine>70</startLine>
+        <startColumn>63</startColumn>
+        <endLine>70</endLine>
+        <endColumn>63</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="CommasMustBeSpacedCorrectly" ruleCheckId="SA1001">
+        <context>Invalid spacing around the comma.</context>
+        <line>70</line>
+        <index>2230</index>
+        <endIndex>2230</endIndex>
+        <startLine>70</startLine>
+        <startColumn>71</startColumn>
+        <endLine>70</endLine>
+        <endColumn>71</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="CommasMustBeSpacedCorrectly" ruleCheckId="SA1001">
+        <context>Invalid spacing around the comma.</context>
+        <line>70</line>
+        <index>2235</index>
+        <endIndex>2235</endIndex>
+        <startLine>70</startLine>
+        <startColumn>76</startColumn>
+        <endLine>70</endLine>
+        <endColumn>76</endColumn>
         <warning>False</warning>
       </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="UseBuiltInTypeAlias" ruleCheckId="SA1121">
         <context>Use the built-in type alias 'int' rather than Int32 or System.Int32.</context>
-        <line>105</line>
+        <line>118</line>
         <warning>False</warning>
       </violation>
     </violations>

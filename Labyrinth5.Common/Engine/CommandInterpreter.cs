@@ -44,6 +44,7 @@
         private readonly IRenderer renderer = new ConsoleRenderer();
         private readonly Player player = new Player();
         private readonly Maze maze = new Maze(new BacktrackerMazeGenerator());
+        private readonly Scoreboard scoreboard = Scoreboard.Instance;
 
         private readonly ICommand playerMoveCommand;
         private readonly ICommand displayInstructionsCommand;
@@ -231,7 +232,7 @@
 
             var playerName = Console.ReadLine();
 
-            //update scoreboard
+            scoreboard.UpdateScoreBoard(totalScore, playerName);
             
             this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
         }

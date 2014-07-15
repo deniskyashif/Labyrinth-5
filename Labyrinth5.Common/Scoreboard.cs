@@ -12,14 +12,21 @@
         private const string SavePattern = ("{0}/{1}/{2}");            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
+        private const string DefaultPath = "Save/SavedScores.txt";
         private static readonly Scoreboard instance = new Scoreboard();
-        private static string path = "Save/SavedScores.txt";
+        private string savePath;
         private OrderedMultiDictionary<int, string> data;
 
         private Scoreboard()
         {
             this.data = new OrderedMultiDictionary<int, string>(false);
             this.ReadSavedScores();
+            this.savePath = DefaultPath;
+        }
+
+        private Scoreboard(string path) : this() 
+        {
+            this.savePath = path;
         }
 
         public static Scoreboard Instance
@@ -107,7 +114,7 @@
         {
             try
             {
-                StreamReader reader = new StreamReader(path);
+                StreamReader reader = new StreamReader(DefaultPath);
                 using (reader)
                 {
                     while (reader.Peek() >= 0)
@@ -133,7 +140,7 @@
         /// </summary>
         public void UptadeSavedScore() 
         {
-            StreamWriter writer = new StreamWriter(path);
+            StreamWriter writer = new StreamWriter(DefaultPath);
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -154,11 +161,11 @@
         /// <summary>
         /// Simultaniousely updates the ingame scoreboard and the external Save file
         /// </summary>
-        /// <param name="currentNumberOfMoves"></param>
+        /// <param name="playerScore"></param>
         /// <param name="userName"></param>
-        public void UpdateScoreBoard(int currentNumberOfMoves, string userName)
+        public void UpdateScoreBoard(int playerScore, string userName)
         {
-            this.data.Add(currentNumberOfMoves, userName);
+            this.data.Add(playerScore, userName);
             this.UptadeSavedScore();
         }
     }
