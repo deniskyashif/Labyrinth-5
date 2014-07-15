@@ -58,12 +58,10 @@
     <Compile Include="Engine\ConsoleEngine.cs" />
     <Compile Include="MatrixCoordinates.cs" />
     <Compile Include="MazeComponents\Cells\BacktrackerCell.cs" />
-    <Compile Include="MazeComponents\Cells\KruskalCell.cs" />
     <Compile Include="MazeComponents\Cells\PrimCell.cs" />
     <Compile Include="MazeComponents\Generators\BacktrackerMazeGenerator.cs" />
     <Compile Include="Contracts\IMazeCell.cs" />
     <Compile Include="MazeComponents\Cells\MazeCell.cs" />
-    <Compile Include="MazeComponents\Generators\KruskalMazeGenerator.cs" />
     <Compile Include="MazeComponents\Maze.cs" />
     <Compile Include="Contracts\IMazeGenerator.cs" />
     <Compile Include="MazeComponents\Generators\PrimMazeGenerator.cs" />

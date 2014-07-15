@@ -16,6 +16,29 @@
         private const int DefaultMazeRows = 15;
         private const int DefaultMazeColumns = 20;
 
+        private const string MoveCommand = "move";
+        private const string MoveCommandShortcut = "m";
+        private const string MoveUpSubCommand = "up";
+        private const string MoveUpSubCommandShortcut = "w";
+        private const string MoveRightSubCommand = "right";
+        private const string MoveRightSubCommandShortcut = "d";
+        private const string MoveDownSubCommand = "down";
+        private const string MoveDownSubCommandShortcut = "s";
+        private const string MoveLeftSubCommand = "left";
+        private const string MoveLeftSubCommandShortcut = "a";
+        private const string InitializeGameCommand = "init";
+        private const string DisplayInstructionsCommand = "info";
+        private const string EndGameCommand = "exit";
+        private const string SetGenerationStrategyCommand = "set";
+        private const string BacktrackerStrategySubCommand = "backtracker";
+        private const string PrimStrategySubCommand = "prim";
+        private const string InvalidCommand = "Invalid Command";
+        private const string IllegalMove = "Illegal Move";
+        private const string InvalidArguments = "Invalid Arguments";
+        private const string SuccessMessage = "Success! Score: {0}. Press <ENTER> to play again.";
+        private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
+
+
         private readonly string blankLine = new string(' ', Console.WindowWidth);
         private readonly char[] separators = new char[] { ' ' };
         
@@ -28,10 +51,9 @@
        
         private int cursorPositionLeft;
         private int cursorPositionTop;
-        //TODO: Implement score calculation 
-        //TODO: Implement custom game options as command
-        //TODO: (optional) Implement maze solver command
-        
+        private int steps;
+        //TODO: Integrate scoreboard
+
         public CommandInterpreter()
         {
             this.playerMoveCommand = new PlayerMoveCommand(player);
@@ -48,21 +70,34 @@
             {
                 var commandWords = command.ToLower().Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-                if (commandWords[0] == "init")
-                {
-                    this.HandleInitCommand(commandWords);
-                }
-                if (commandWords[0] == "info")
-                {
-                    this.HandleInfoCommand();
-                }
-                else if ((commandWords[0] == "m" || commandWords[0] == "move") && commandWords.Length > 1)
+                if ((commandWords[0] == MoveCommand || commandWords[0] == MoveCommandShortcut) 
+                    && commandWords.Length > 1)
                 {
                     this.HandleMoveCommand(commandWords[1]);
                 }
+                else if (commandWords[0] == InitializeGameCommand)
+                {
+                    this.HandleInitCommand(commandWords);
+                }
+                else if (commandWords[0] == DisplayInstructionsCommand)
+                {
+                    this.HandleInfoCommand();
+                }
+                else if (commandWords[0] == SetGenerationStrategyCommand && commandWords.Length > 0)
+                {
+                    this.HandleSetCommand(commandWords[1]);
+                }
+                else if (commandWords[0] == EndGameCommand)
+                {
+                    this.HandleExitCommand();
+                }
+                else
+                {
+                    this.renderer.RenderText(InvalidCommand, this.cursorPositionLeft, this.cursorPositionTop - 1);
+                }
             }
 
-            renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop);
+            this.renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop);
             Console.SetCursorPosition(this.cursorPositionLeft, this.cursorPositionTop);
         }
 
@@ -85,6 +120,10 @@
                         this.SetUpGame(mazeRows, mazeColumns);
                     }
                 }
+                else
+                {
+                    renderer.RenderText(InvalidArguments, this.cursorPositionLeft, cursorPositionTop - 1);
+                }
             }
             else
             {
@@ -100,9 +139,7 @@
         {
             this.displayInstructionsCommand.Execute();
             Console.ReadKey();
-            this.renderer.ClearAll();
-            this.renderer.Render(maze);
-            this.renderer.Render(player);
+            this.RenderGameComponents();
         }
 
         /// <summary>
@@ -113,39 +150,57 @@
         /// <param name="command"></param>
         private void HandleMoveCommand(string command)
         {
-            this.renderer.Clear(player);
-
-            if (command == "w" || command == "up")
+            if (command == MoveUpSubCommand || command == MoveUpSubCommandShortcut)
             {
                 this.player.Direction = Directions.Up;
             }
-            else if (command == "d" || command == "right")
+            else if (command == MoveRightSubCommand || command == MoveRightSubCommandShortcut)
             {
                 this.player.Direction = Directions.Right;
             }
-            else if (command == "s" || command == "down")
+            else if (command == MoveDownSubCommand || command == MoveDownSubCommandShortcut)
             {
                 this.player.Direction = Directions.Down;
             }
-            else if (command == "a" || command == "left")
+            else if (command == MoveLeftSubCommand || command == MoveLeftSubCommandShortcut)
             {
                 this.player.Direction = Directions.Left;
             }
 
             if (this.IsPositionAvailable())
             {
+                this.steps++;
+                this.renderer.Clear(player);
                 this.playerMoveCommand.Execute();
+                this.renderer.Render(player);
+                renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
             }
-
-            this.renderer.Render(player);
+            else
+            {
+                renderer.RenderText(IllegalMove, this.cursorPositionLeft, this.cursorPositionTop - 1);
+            }
 
             if (this.HasReachedTheExit())
             {
-                //TODO: Implement proper end game method
-                renderer.RenderText("Success!", this.cursorPositionLeft, this.cursorPositionTop + 1);
-                Console.ReadKey();
-                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+                this.HandleGameEnded();
             }
+        }
+
+        private bool IsPositionAvailable()
+        {
+            var position = this.player.TopLeftPosition + this.player.Direction;
+            return !this.maze[position.Row, position.Col].IsWall;
+        }
+
+        private bool HasReachedTheExit()
+        {
+            var position = this.player.TopLeftPosition;
+            return this.maze[position.Row, position.Col].IsExit;
+        }
+
+        private void HandleExitCommand()
+        {
+            Environment.Exit(0);
         }
 
         /// <summary>
@@ -162,23 +217,55 @@
                 this.maze.TopLeftPosition.Col + 1);
 
             this.cursorPositionLeft = 0;
-            this.cursorPositionTop = this.maze.Rows + 1;
-            
+            this.cursorPositionTop = this.maze.Rows + 2;
+            this.steps = 0;
+            this.RenderGameComponents();
+        }
+
+        private void HandleGameEnded()
+        {
+            var totalScore = this.maze.Rows * this.maze.Columns - this.steps;
+
+            renderer.RenderText(
+                string.Format(SuccessMessage, totalScore), 
+                this.cursorPositionLeft, 
+                this.cursorPositionTop - 1);
+
+            ConsoleKeyInfo pressedKey = Console.ReadKey();
+
+            if (pressedKey.Key == ConsoleKey.Enter)
+            {
+                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+            }
+            else
+            {
+                this.HandleExitCommand();
+            }
+        }
+
+        private void RenderGameComponents()
+        {
             this.renderer.ClearAll();
             this.renderer.Render(maze);
             this.renderer.Render(player);
         }
 
-        private bool IsPositionAvailable()
+        private void HandleSetCommand(string strategyName)
         {
-            var position = this.player.TopLeftPosition + this.player.Direction;
-            return !this.maze[position.Row, position.Col].IsWall;
-        }
+            strategyName = strategyName.ToLower();
 
-        private bool HasReachedTheExit()
-        {
-            var position = this.player.TopLeftPosition;
-            return this.maze[position.Row, position.Col].IsExit;
+            if (strategyName == BacktrackerStrategySubCommand)
+            {
+                this.maze.SetStrategy(new BacktrackerMazeGenerator());
+            }
+            else if (strategyName == PrimStrategySubCommand)
+            {
+                this.maze.SetStrategy(new PrimMazeGenerator());
+            }
+
+            var message = string.Format(StrategySwitchedMessage, strategyName);
+            renderer.RenderText(blankLine, this.cursorPositionLeft, this.cursorPositionTop - 1);
+            renderer.RenderText(message, this.cursorPositionLeft, this.cursorPositionTop - 1);
         }
     }
 }
