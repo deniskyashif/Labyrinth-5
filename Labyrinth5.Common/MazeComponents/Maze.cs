@@ -38,11 +38,10 @@
             get { return this.maze.GetLength(0); }
         }
 
-<<<<<<< HEAD
         internal int Columns
         {
             get { return this.maze.GetLength(1); }
-=======
+        }
         internal IMazeGenerator GenerationStrategy
         {
             get
@@ -58,21 +57,21 @@
 
                 this.strategy = value;
             }
->>>>>>> 4c54e0554f9ec6c21b2a24da445ba2f914df131d
         }
 
         internal IMazeCell this[int row, int col]
         {
-<<<<<<< HEAD
             get { return this.maze[row, col]; }
-=======
+        }
+
+        internal void Generate(int rows, int columns)
+        {
             if (rows <= 0 || columns <= 0)
             {
                 throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
             }
 
             this.maze = this.GenerationStrategy.Generate(rows, columns);
->>>>>>> 4c54e0554f9ec6c21b2a24da445ba2f914df131d
         }
 
         public char[,] GetImage()
@@ -102,16 +101,6 @@
             }
 
             return mazeImage;
-        }
-
-        internal void SetStrategy(IMazeGenerator generator)
-        {
-            this.strategy = generator;
-        }
-
-        internal void Generate(int rows, int columns)
-        {
-            this.maze = this.strategy.Generate(rows, columns);
         }
     }
 }

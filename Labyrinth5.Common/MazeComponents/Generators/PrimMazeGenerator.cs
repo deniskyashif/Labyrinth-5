@@ -7,11 +7,7 @@
     
     internal class PrimMazeGenerator : IMazeGenerator
     {
-<<<<<<< HEAD
-        private static Random globalRandomGenerator = new Random();
-=======
         private static readonly Random globalRandomGenerator = new Random();
->>>>>>> 4c54e0554f9ec6c21b2a24da445ba2f914df131d
 
         public IMazeCell[,] Generate(int rows, int columns)
         {
