@@ -35,7 +35,7 @@
         private const string InvalidCommand = "Invalid Command";
         private const string IllegalMove = "Illegal Move";
         private const string InvalidArguments = "Invalid Arguments";
-        private const string SuccessMessage = "Success! Score: {0}. Press <ENTER> to play again.";
+        private const string SuccessMessage = "Success! Score: {0}. Enter your name: ";
         private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
 
         private readonly string blankLine = new string(' ', Console.WindowWidth);
@@ -229,16 +229,11 @@
                 this.cursorPositionLeft, 
                 this.cursorPositionTop - 1);
 
-            ConsoleKeyInfo pressedKey = Console.ReadKey();
+            var playerName = Console.ReadLine();
 
-            if (pressedKey.Key == ConsoleKey.Enter)
-            {
-                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
-            }
-            else
-            {
-                this.HandleExitCommand();
-            }
+            //update scoreboard
+            
+            this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
         }
 
         private void RenderGameComponents()
