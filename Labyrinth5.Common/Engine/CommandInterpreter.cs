@@ -49,11 +49,11 @@
 
         private readonly ICommand playerMoveCommand;
         private readonly ICommand displayInstructionsCommand;
+        private ICommand displayScoreboardCommand;
        
         private int cursorPositionLeft;
         private int cursorPositionTop;
         private int steps;
-        //TODO: Integrate scoreboard
 
         public CommandInterpreter()
         {
@@ -107,7 +107,7 @@
         }
 
         /// <summary>
-        /// Sets up new game on user input
+        /// Sets up a new game on user input
         /// </summary>
         /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements</param>
         private void HandleInitCommand(string[] commandWords)
@@ -146,9 +146,15 @@
             this.RenderGameComponents();
         }
 
+        /// <summary>
+        /// Prints the current scoreboard.
+        /// </summary>
         private void HandleScoreBoardCommand()
         {
-            scoreboard.PrintScore();
+            this.displayScoreboardCommand = new DisplayScoreboardCommand(renderer, scoreboard.GetScore());
+            this.displayScoreboardCommand.Execute();
+            Console.ReadKey();
+            this.RenderGameComponents();
         }
 
         /// <summary>
@@ -195,25 +201,36 @@
             }
         }
 
+        /// <summary>
+        /// Checks if a given maze cell is available for the player to move to.
+        /// </summary>
+        /// <returns></returns>
         private bool IsPositionAvailable()
         {
             var position = this.player.TopLeftPosition + this.player.Direction;
             return !this.maze[position.Row, position.Col].IsWall;
         }
 
+        /// <summary>
+        /// Checks if the position the player is moving to is the exit.
+        /// </summary>
+        /// <returns></returns>
         private bool HasReachedTheExit()
         {
             var position = this.player.TopLeftPosition;
             return this.maze[position.Row, position.Col].IsExit;
         }
 
+        /// <summary>
+        /// Exits the game.
+        /// </summary>
         private void HandleExitCommand()
         {
             Environment.Exit(0);
         }
 
         /// <summary>
-        /// Generates new maze. Clars console and prints maze by given rows and cols.
+        /// Generates new maze. Clears console and prints maze by given rows and cols.
         /// </summary>
         /// <param name="mazeRows"></param>
         /// <param name="mazeColumns"></param>
@@ -232,7 +249,8 @@
         }
 
         /// <summary>
-        /// Gets player name, updates scoreboard and restarts game
+        /// Gets player name and caclulates score. 
+        /// Updates scoreboard and restarts the game.
         /// </summary>
         private void HandleGameEnded()
         {
@@ -250,6 +268,9 @@
             this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
         }
 
+        /// <summary>
+        /// Renders the game environment.
+        /// </summary>
         private void RenderGameComponents()
         {
             this.renderer.ClearAll();
@@ -257,6 +278,10 @@
             this.renderer.Render(this.player);
         }
 
+        /// <summary>
+        /// Executes maze generator by input.
+        /// </summary>
+        /// <param name="strategyName"></param>
         private void HandleSetCommand(string strategyName)
         {
             strategyName = strategyName.ToLower();

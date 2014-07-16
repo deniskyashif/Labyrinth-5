@@ -6,6 +6,10 @@
 
     internal class ConsoleRenderer : IRenderer
     {
+        /// <summary>
+        /// Renders a renderable object as a char at it's position.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Render(IRenderable obj)
         {
             var objectImage = obj.GetImage();
@@ -21,6 +25,10 @@
             }
         }
 
+        /// <summary>
+        /// Renders a collection of Rendarable objects.
+        /// </summary>
+        /// <param name="collection"></param>
         public void RenderMany(IEnumerable<IRenderable> collection)
         {
             foreach (var item in collection)
@@ -29,6 +37,12 @@
             }
         }
 
+        /// <summary>
+        /// Renders The text elements of the game.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="leftOffset"></param>
+        /// <param name="topOffset"></param>
         public void RenderText(string text, int leftOffset, int topOffset)
         {
             Console.SetCursorPosition(leftOffset, topOffset);

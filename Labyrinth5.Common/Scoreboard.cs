@@ -50,22 +50,10 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Displays the current scoreboard on the Console.
         /// </summary>
-        public void PrintScore()
+        public List<string> GetScore()
         {
             List<string> scoreboard = this.ExtractHighScore(PrintPattern);
-            if (scoreboard[0] == EmptyMessage)
-            {
-                Console.WriteLine(EmptyMessage);
-            }
-            else
-            {
-                for (int i = 0; i < scoreboard.Count; i++)
-                {
-                    Console.WriteLine(scoreboard[i]);
-                }
-            }
-
-            Console.WriteLine();
+            return scoreboard;
         }
 
         /// <summary>

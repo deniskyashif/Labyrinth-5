@@ -23,6 +23,7 @@
             " - Type <set> to switch maze generation algorithm followed by:",
             "   - <backtracker> - for Iterative Backtracker algorithm.",
             "   - <prim> - for Prim's algorithm.",
+            " - Type <score> to get the scoreboard.", 
             " - Type <exit> to end game." 
         };
 
