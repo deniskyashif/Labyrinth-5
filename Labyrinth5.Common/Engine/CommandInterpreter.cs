@@ -45,7 +45,7 @@
         private readonly IRenderer renderer = new ConsoleRenderer();
         private readonly Player player = new Player();
         private readonly Maze maze = new Maze(new BacktrackerMazeGenerator());
-        private readonly Scoreboard scoreboard = Scoreboard.Instance;
+        private readonly Scoreboard scoreboard = new Scoreboard();
 
         private readonly ICommand playerMoveCommand;
         private readonly ICommand displayInstructionsCommand;

@@ -1,4 +1,12 @@
-﻿namespace Labyrinth5.Common
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//   Class processing game high score data 
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common
 {
     using System;
     using System.Collections.Generic;
@@ -6,34 +14,28 @@
     using System.Text;
     using Wintellect.PowerCollections;
 
-    public sealed class Scoreboard 
+    /// <summary>
+    ///   Class processing game high score data. 
+    /// </summary>
+    public class Scoreboard 
     {
         private const string PrintPattern = "{0}. {1}-->{2}";
         private const string SavePattern = "{0}/{1}/{2}";            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
-        private static readonly Scoreboard instance = new Scoreboard();
-        private static string defaultPath = "../../Save/SavedScores.txt";
+        private string defaultPath = "../../Save/SavedScores.txt";
         private OrderedMultiDictionary<int, string> data;
 
-        private Scoreboard()
+        public Scoreboard()
         {
             this.data = new OrderedMultiDictionary<int, string>(false);
             this.ReadSavedScores();
         }
-
-        public static Scoreboard Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-
+ 
         /// <summary>
-        /// Gets the worst score from the current game only
+        /// Gets the worst score from the current game only.
         /// </summary>
-        /// <returns>Worst score</returns>
+        /// <returns>Worst score.</returns>
         public int GetWorstScore()
         {
             int worstScore = 0;
@@ -46,7 +48,7 @@
         }
        
         /// <summary>
-        /// Displays the current scoreboard on the Console
+        /// Displays the current scoreboard on the Console.
         /// </summary>
         public void PrintScore()
         {
@@ -67,13 +69,13 @@
         }
 
         /// <summary>
-        /// Reads previousely saved scores and appends them to the current game scoreboard data
+        /// Reads previously saved scores and appends them to the current game scoreboard data.
         /// </summary>
         public void ReadSavedScores()
         {
             try
             {
-                StreamReader reader = new StreamReader(defaultPath);
+                StreamReader reader = new StreamReader(this.defaultPath);
                 using (reader)
                 {
                     while (reader.Peek() >= 0)
@@ -83,7 +85,7 @@
                         int score;
                         bool result = Int32.TryParse(splitData[2], out score);
                         string userName = splitData[1];
-                        this.UpdateScoreBoard(score, userName);
+                        this.data.Add(score, userName);
                     }
                 }
             }
@@ -99,7 +101,7 @@
         /// </summary>
         public void UptadeSavedScore() 
         {
-            StreamWriter writer = new StreamWriter(defaultPath);
+            StreamWriter writer = new StreamWriter(this.defaultPath, true);
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -118,10 +120,10 @@
         }
 
         /// <summary>
-        /// Simultaniousely updates the ingame scoreboard and the external Save file
+        /// Simultaneously updates the in-game scoreboard and the external Save file.
         /// </summary>
-        /// <param name="playerScore">The score of the last player</param>
-        /// <param name="userName"> the name of the last player</param>
+        /// <param name="playerScore">The score of the last player.</param>
+        /// <param name="userName"> The name of the last player.</param>
         public void UpdateScoreBoard(int playerScore, string userName)
         {
             this.data.Add(playerScore, userName);
@@ -129,9 +131,10 @@
         }
 
         /// <summary>
-        /// Returns a list of formated highScore
+        /// Returns a list of formatted highScore.
         /// </summary>
-        /// <returns>List of scores</returns>
+        /// <param name="pattern">Pattern for formatting the score strings.</param>
+        /// <returns>List of scores.</returns>
         private List<string> ExtractHighScore(string pattern)
         {
             int counter = 1;
