@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Labyrinth5.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Labyrinth5.Common.Engine.CommandInterpreter">
+            <summary>
+            Handles all input. Dispatches commands
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.ParseAndDispatch(System.String)">
+            <summary>
+            Dispatches commands to command handlers
+            </summary>
+            <param name="command">User input string</param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.HandleInitCommand(System.String[])">
+            <summary>
+            Sets up new game on user input
+            </summary>
+            <param name="commandWords">String array, default maze on 1 element, custom on 3 elements</param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.HandleInfoCommand">
+            <summary>
+            Displays info. Renders the playing field again when closed.
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.HandleMoveCommand(System.String)">
+            <summary>
+            Changes player position.
+            Prints current position.
+            Displays Game Over message on reaching the exit
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.CommandInterpreter.SetUpGame(System.Int32,System.Int32)">
+            <summary>
+            Generates new maze. Clars console and prints maze by given rows and cols.
+            </summary>
+            <param name="mazeRows"></param>
+            <param name="mazeColumns"></param>
+        </member>
+        <member name="T:Labyrinth5.Common.Engine.ConsoleEngine">
+            <summary>
+            Game engine. Entry point of the app.
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.Engine.ConsoleEngine.Run">
+            <summary>
+            Game loop. Runs until player reaches exit
+            </summary>
+        </member>
+        <member name="M:Labyrinth5.Common.MazeComponents.Generators.BacktrackerMazeGenerator.CreateMaze(System.Int32,System.Int32)">
+            <summary>
+            Generates random maze using iterative Depth First Search algorithm. From a specified entry point
+            in the matrix of MazeCell objects(initially all cells marked as walls), 
+            an unvisited neigbour cell is randomly chosen, if it has only one neighbour that is a path cell - 
+            that cell is made a path and pushed into the stack, otherwise the algorithms "tracks back" popping
+            cells out of the stack until it reaches one that satisfies the condition.
+            The process goes on until there are no cells left in the stack.
+            </summary>
+            <param name="rows">Maze width, as number of rows.</param>
+            <param name="columns">Maze height as number of columns.</param>
+            <returns>Maze as two dimensional array of MazeCell objects.</returns>
+        </member>
+    </members>
+</doc>

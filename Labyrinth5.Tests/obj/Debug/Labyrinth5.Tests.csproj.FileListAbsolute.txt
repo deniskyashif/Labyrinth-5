@@ -1,0 +1,10 @@
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\Labyrinth5.Tests.dll
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\Labyrinth5.Tests.pdb
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\Labyrinth5.Common.dll
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\PowerCollections.dll
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\Labyrinth5.Common.pdb
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\Labyrinth5.Common.xml
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\bin\Debug\PowerCollections.xml
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\obj\Debug\Labyrinth5.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\obj\Debug\Labyrinth5.Tests.dll
+C:\Users\Kristiyan\Documents\GitHub\Labyrinth-5\Labyrinth5.Tests\obj\Debug\Labyrinth5.Tests.pdb
