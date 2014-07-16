@@ -5,10 +5,20 @@
     using Labyrinth5.Common.Contracts;
     using Labyrinth5.Common.MazeComponents.Cells;
 
+    /// <summary>
+    /// An internal class which is used for creation of mazes(two-dimensional arrays of IMazeCell objects
+    /// using the Iterative Backtracker algorithm.
+    /// </summary>
     internal class BacktrackerMazeGenerator : IMazeGenerator
     {
         private static readonly Random globalRandomGenerator = new Random();
 
+        /// <summary>
+        /// Delegates the generation procedure and returns the result.
+        /// </summary>
+        /// <param name="rows">Maze width, as number of rows.</param>
+        /// <param name="columns">Maze height as number of columns.</param>
+        /// <returns>Maze as two dimensional array of IMazeCell objects.</returns>
         public IMazeCell[,] Generate(int rows, int columns)
         {
             return this.CreateMaze(rows, columns);
@@ -24,7 +34,7 @@
         /// </summary>
         /// <param name="rows">Maze width, as number of rows.</param>
         /// <param name="columns">Maze height as number of columns.</param>
-        /// <returns>Maze as two dimensional array of MazeCell objects.</returns>
+        /// <returns>Maze as two dimensional array of IMazeCell objects.</returns>
         private IMazeCell[,] CreateMaze(int rows, int columns)
         {
             var maze = this.InitializeBacktrackerMaze(rows, columns);
@@ -36,7 +46,7 @@
                 maze[currentCell.Position.Row, currentCell.Position.Col].IsBacktracked = true;
                 maze[currentCell.Position.Row, currentCell.Position.Col].IsWall = false;
 
-                var unvisitedNeighbours = this.GetUnvisitedNeighbours(maze, currentCell.Position.Row, currentCell.Position.Col);
+                var unvisitedNeighbours = this.GetUnvisitedNeighbours(maze, currentCell);
 
                 if (unvisitedNeighbours.Count > 0)
                 {
@@ -64,9 +74,18 @@
             return maze;
         }
 
-        private IList<BacktrackerCell> GetUnvisitedNeighbours(BacktrackerCell[,] maze, int row, int col)
+        /// <summary>
+        /// From given maze and coordinates correlating to a cell in maze,
+        /// its adjacent cells, which are not backtracked yet, are extracted an returned as a collection.
+        /// </summary>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
+        /// <param name="cell">IMazeCell object</param>
+        /// <returns>A collection of IMazeCell objects</returns>
+        private IList<BacktrackerCell> GetUnvisitedNeighbours(BacktrackerCell[,] maze, IMazeCell cell)
         {
             var unvisitedNeighbours = new List<BacktrackerCell>();
+            var row = cell.Position.Row;
+            var col = cell.Position.Col;
 
             if (row - 1 >= 1 && !maze[row - 1, col].IsBacktracked)
             {
@@ -91,6 +110,12 @@
             return unvisitedNeighbours;
         }
 
+        /// <summary>
+        /// Checks if a cell borders with exactly one path cell, having respectively the rest of its neighbours as walls.
+        /// </summary>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
+        /// <param name="cell">IMazeCell object</param>
+        /// <returns>A boolean value, depending on whether the condition is fulfilled.</returns>
         private bool HasOnlyOneAdjacentPathCell(IMazeCell[,] maze, IMazeCell cell)
         {
             int adjacentPathCells = 0;
@@ -118,6 +143,10 @@
             return adjacentPathCells == 1;
         }
 
+        /// <summary>
+        /// Traverses the last maze column and marks the first path cell found as an exit.
+        /// </summary>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
         private void SetExit(IMazeCell[,] maze)
         {
             int row = maze.GetLength(0) - 2;
@@ -135,6 +164,13 @@
             }
         }
 
+        /// <summary>
+        /// Initializes two dimensional array of PrimCell objects,
+        /// by given dimensions.
+        /// </summary>
+        /// <param name="rows">Maze width, as number of rows.</param>
+        /// <param name="columns">Maze height as number of columns.</param>
+        /// <returns>Maze as two dimensional array of IMazeCell objects.</returns>
         private BacktrackerCell[,] InitializeBacktrackerMaze(int rows, int columns)
         {
             var maze = new BacktrackerCell[rows, columns];

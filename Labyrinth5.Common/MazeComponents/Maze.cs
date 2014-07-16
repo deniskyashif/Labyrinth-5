@@ -13,7 +13,7 @@
         private const char ExitImage = 'E';
 
         private IMazeGenerator strategy;
-        private IMazeCell[,] maze;
+        private IMazeCell[,] mazeCells;
         private MatrixCoordinates topLeftPosition;
 
         public Maze(IMazeGenerator generator)
@@ -35,13 +35,14 @@
 
         internal int Rows
         {
-            get { return this.maze.GetLength(0); }
+            get { return this.mazeCells.GetLength(0); }
         }
 
         internal int Columns
         {
-            get { return this.maze.GetLength(1); }
+            get { return this.mazeCells.GetLength(1); }
         }
+
         internal IMazeGenerator GenerationStrategy
         {
             get
@@ -61,7 +62,7 @@
 
         internal IMazeCell this[int row, int col]
         {
-            get { return this.maze[row, col]; }
+            get { return this.mazeCells[row, col]; }
         }
 
         internal void Generate(int rows, int columns)
@@ -71,7 +72,7 @@
                 throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
             }
 
-            this.maze = this.GenerationStrategy.Generate(rows, columns);
+            this.mazeCells = this.GenerationStrategy.Generate(rows, columns);
         }
 
         public char[,] GetImage()
@@ -82,13 +83,13 @@
             {
                 for (int col = 0; col < this.Columns; col++)
                 {
-                    if (this.maze[row, col].IsExit)
+                    if (this.mazeCells[row, col].IsExit)
                     {
                         mazeImage[row, col] = ExitImage;
                     }
                     else
                     {
-                        if (this.maze[row, col].IsWall)
+                        if (this.mazeCells[row, col].IsWall)
                         {
                             mazeImage[row, col] = WallImage;
                         }
