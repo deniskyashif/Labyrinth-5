@@ -51,9 +51,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MazeTests\MazeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConsoleEngineTest.cs" />
-    <Compile Include="MazeComponentsTests.cs" />
+    <Compile Include="EngineTests\ConsoleEngineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth5.Common\Labyrinth5.Common.csproj">
@@ -61,6 +61,7 @@
       <Name>Labyrinth5.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
