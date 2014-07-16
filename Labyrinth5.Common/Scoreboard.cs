@@ -3,17 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Wintellect.PowerCollections;
     using System.Text;
+    using Wintellect.PowerCollections;
 
     public sealed class Scoreboard 
     {
-        private const string PrintPattern = ("{0}. {1}-->{2}");
-        private const string SavePattern = ("{0}/{1}/{2}");            
+        private const string PrintPattern = "{0}. {1}-->{2}";
+        private const string SavePattern = "{0}/{1}/{2}";            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
-        private static string DefaultPath = "Save/SavedScores.txt";
         private static readonly Scoreboard instance = new Scoreboard();
+        private static string defaultPath = "../../Save/SavedScores.txt";
         private OrderedMultiDictionary<int, string> data;
 
         private Scoreboard()
@@ -22,7 +22,6 @@
             this.ReadSavedScores();
         }
 
-    
         public static Scoreboard Instance
         {
             get
@@ -44,44 +43,6 @@
             }
 
             return worstScore;
-        }
-
-        /// <summary>
-        /// Returns a list of formated highScore
-        /// </summary>
-        /// <returns>List of scores</returns>
-        private List<string> ExtractHighScore(string pattern)
-        {
-            int counter = 1;
-            List<string> scoreboard = new List<string>();
-            if (this.data.Count == 0)
-            {
-                scoreboard.Add(EmptyMessage);
-            }
-            else
-            {
-                foreach (var score in this.data)
-                {
-                    if (counter > ScoreboardMaxLenght)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        var foundScore = this.data[score.Key];
-                        foreach (var name in foundScore)
-                        {
-                            StringBuilder formatedScore= new StringBuilder();
-                            formatedScore.AppendFormat(pattern,counter,name,score.Key);
-                            scoreboard.Add(formatedScore.ToString());             
-                        }
-                    }
-
-                    counter++;
-                }
-            }
-
-            return scoreboard;
         }
        
         /// <summary>
@@ -112,7 +73,7 @@
         {
             try
             {
-                StreamReader reader = new StreamReader(DefaultPath);
+                StreamReader reader = new StreamReader(defaultPath);
                 using (reader)
                 {
                     while (reader.Peek() >= 0)
@@ -138,7 +99,7 @@
         /// </summary>
         public void UptadeSavedScore() 
         {
-            StreamWriter writer = new StreamWriter(DefaultPath);
+            StreamWriter writer = new StreamWriter(defaultPath);
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -165,6 +126,44 @@
         {
             this.data.Add(playerScore, userName);
             this.UptadeSavedScore();
+        }
+
+        /// <summary>
+        /// Returns a list of formated highScore
+        /// </summary>
+        /// <returns>List of scores</returns>
+        private List<string> ExtractHighScore(string pattern)
+        {
+            int counter = 1;
+            List<string> scoreboard = new List<string>();
+            if (this.data.Count == 0)
+            {
+                scoreboard.Add(EmptyMessage);
+            }
+            else
+            {
+                foreach (var score in this.data)
+                {
+                    if (counter > ScoreboardMaxLenght)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        var foundScore = this.data[score.Key];
+                        foreach (var name in foundScore)
+                        {
+                            StringBuilder formatedScore = new StringBuilder();
+                            formatedScore.AppendFormat(pattern, counter, name, score.Key);
+                            scoreboard.Add(formatedScore.ToString());
+                        }
+                    }
+
+                    counter++;
+                }
+            }
+
+            return scoreboard;
         }
     }
 }
