@@ -1,8 +1,19 @@
-﻿namespace Labyrinth5.Common.MazeComponents
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//   Class processing the maze generation process. 
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.MazeComponents
 {
     using System;
     using Labyrinth5.Common.Contracts;
 
+    /// <summary>
+    ///   Class processing the maze generation process. 
+    /// </summary>
     internal class Maze : IRenderable
     {
         private const int DefaultLeftOffset = 0;
@@ -49,6 +60,7 @@
             {
                 return this.strategy;
             }
+
             set
             {
                 if (value == null)
@@ -63,16 +75,6 @@
         internal IMazeCell this[int row, int col]
         {
             get { return this.mazeCells[row, col]; }
-        }
-
-        internal void Generate(int rows, int columns)
-        {
-            if (rows <= 0 || columns <= 0)
-            {
-                throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
-            }
-
-            this.mazeCells = this.GenerationStrategy.Generate(rows, columns);
         }
 
         public char[,] GetImage()
@@ -102,6 +104,16 @@
             }
 
             return mazeImage;
+        }
+
+        internal void Generate(int rows, int columns)
+        {
+            if (rows <= 0 || columns <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Maze can't have negative dimensions.");
+            }
+
+            this.mazeCells = this.GenerationStrategy.Generate(rows, columns);
         }
     }
 }

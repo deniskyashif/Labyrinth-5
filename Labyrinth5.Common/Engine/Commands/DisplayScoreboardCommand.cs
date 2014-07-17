@@ -1,8 +1,19 @@
-﻿namespace Labyrinth5.Common.Engine.Commands
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//   Internal class handeling the call to render of the scoreboard. 
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.Engine.Commands
 {
     using System.Collections.Generic;
     using Labyrinth5.Common.Contracts;
 
+    /// <summary>
+    ///   Internal class handeling the call to render of the scoreboard.
+    /// </summary>
     internal class DisplayScoreboardCommand : ICommand
     {
         private const int TopOffset = 1;
@@ -14,24 +25,26 @@
         public DisplayScoreboardCommand(IRenderer renderer, List<string> newScores)
         {
             this.renderer = renderer;
-            GetNewScoreboard(newScores);
+            this.GetNewScoreboard(newScores);
         }
 
         public void GetNewScoreboard(List<string> newScores)
         {
-            scoreboardList = new List<string>();
+            this.scoreboardList = new List<string>();
+
             foreach (var line in newScores)
             {
-                scoreboardList.Add(line);
+                this.scoreboardList.Add(line);
             }
-            scoreboardList.Add(ReturnMessage);
+
+            this.scoreboardList.Add(ReturnMessage);
         }
 
         public void Execute()
         {
             int row = TopOffset;
 
-            foreach (var line in scoreboardList)
+            foreach (var line in this.scoreboardList)
             {
                 this.renderer.RenderText(line, LeftOffset, row);
                 row++;

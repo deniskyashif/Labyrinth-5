@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        /// Game loop. Runs until player reaches exit
+        /// Game loop. Runs until player reaches exit.
         /// </summary>
         public void Run()
         {

@@ -19,6 +19,7 @@
             {
                 return this.position;
             }
+
             set
             {
                 if (value.Row < 0 || value.Col < 0)

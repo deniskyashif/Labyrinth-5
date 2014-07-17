@@ -1,15 +1,26 @@
-﻿namespace Labyrinth5.Common
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+// Internel class Handeling the Rendering of game content on the console.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common
 {
     using System;
     using System.Collections.Generic;
     using Labyrinth5.Common.Contracts;
 
+    /// <summary>
+    /// Internal class Handeling the Rendering of game content on the console.
+    /// </summary>
     internal class ConsoleRenderer : IRenderer
     {
         /// <summary>
         /// Renders a renderable object as a char at it's position.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">Object to be rendered.</param>
         public void Render(IRenderable obj)
         {
             var objectImage = obj.GetImage();
@@ -26,9 +37,9 @@
         }
 
         /// <summary>
-        /// Renders a collection of Rendarable objects.
+        /// Renders a collection of Renderable objects.
         /// </summary>
-        /// <param name="collection"></param>
+        /// <param name="collection">Colection of objects to be rendered.</param>
         public void RenderMany(IEnumerable<IRenderable> collection)
         {
             foreach (var item in collection)
@@ -40,9 +51,9 @@
         /// <summary>
         /// Renders The text elements of the game.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="leftOffset"></param>
-        /// <param name="topOffset"></param>
+        /// <param name="text">Text to be rendered.</param>
+        /// <param name="leftOffset">Left coordinate of the text position.</param>
+        /// <param name="topOffset">Top coordinate of the text position.</param>
         public void RenderText(string text, int leftOffset, int topOffset)
         {
             Console.SetCursorPosition(leftOffset, topOffset);

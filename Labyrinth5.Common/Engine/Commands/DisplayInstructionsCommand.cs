@@ -1,7 +1,19 @@
-﻿namespace Labyrinth5.Common.Engine.Commands
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//   Internal class handeling the call to render of the game info. 
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Labyrinth5.Common.Engine.Commands
 {
     using Labyrinth5.Common.Contracts;
 
+    /// <summary>
+    /// Internal class handeling the call to render of the game info. 
+    /// </summary>
     internal class DisplayInstructionsCommand : ICommand
     {
         private const int TopOffset = 1;

@@ -3,7 +3,7 @@
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
-//   Class processing game high score data 
+//   Class processing game high score data. 
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common
@@ -63,7 +63,6 @@ namespace Labyrinth5.Common
         {
             try
             {
-                
                 using (StreamReader reader = new StreamReader(this.defaultPath))
                 {
                     while (reader.Peek() >= 0)
@@ -89,7 +88,6 @@ namespace Labyrinth5.Common
         /// </summary>
         public void UptadeSavedScore() 
         {
-           
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -98,7 +96,7 @@ namespace Labyrinth5.Common
             else
             {
                 File.WriteAllText(this.defaultPath, string.Empty);
-                using ( StreamWriter writer = new StreamWriter(this.defaultPath, true))
+                using (StreamWriter writer = new StreamWriter(this.defaultPath, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {

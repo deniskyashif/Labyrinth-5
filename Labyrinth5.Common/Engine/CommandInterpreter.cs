@@ -1,4 +1,12 @@
-﻿namespace Labyrinth5.Common.Engine
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+// Internal class that handles all input. Dispatches commands.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.Engine
 {
     using System;
     using Labyrinth5.Common.Contracts;
@@ -7,7 +15,7 @@
     using Labyrinth5.Common.MazeComponents.Generators;
 
     /// <summary>
-    /// Handles all input. Dispatches commands
+    /// Internal class that handles all input. Dispatches commands.
     /// </summary>
     internal class CommandInterpreter : ICommandInterpreter
     {
@@ -62,9 +70,9 @@
         }
 
         /// <summary>
-        /// Dispatches commands to command handlers
+        /// Dispatches commands to command handlers.
         /// </summary>
-        /// <param name="command">User input string</param>
+        /// <param name="command">User input string.</param>
         public void ParseAndDispatch(string command)
         {
             if (!string.IsNullOrWhiteSpace(command))
@@ -107,9 +115,9 @@
         }
 
         /// <summary>
-        /// Sets up a new game on user input
+        /// Sets up a new game on user input.
         /// </summary>
-        /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements</param>
+        /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements.</param>
         private void HandleInitCommand(string[] commandWords)
         {
             if (commandWords.Length == 3)
@@ -151,7 +159,7 @@
         /// </summary>
         private void HandleScoreBoardCommand()
         {
-            this.displayScoreboardCommand = new DisplayScoreboardCommand(renderer, scoreboard.GetScore());
+            this.displayScoreboardCommand = new DisplayScoreboardCommand(this.renderer, this.scoreboard.GetScore());
             this.displayScoreboardCommand.Execute();
             Console.ReadKey();
             this.RenderGameComponents();
@@ -160,7 +168,7 @@
         /// <summary>
         /// Changes player position.
         /// Prints current position.
-        /// Displays Game Over message on reaching the exit
+        /// Displays Game Over message on reaching the exit.
         /// </summary>
         /// <param name="command"></param>
         private void HandleMoveCommand(string command)
@@ -204,7 +212,7 @@
         /// <summary>
         /// Checks if a given maze cell is available for the player to move to.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A boolean variable representing the availability status of the cell.</returns>
         private bool IsPositionAvailable()
         {
             var position = this.player.TopLeftPosition + this.player.Direction;
@@ -249,7 +257,7 @@
         }
 
         /// <summary>
-        /// Gets player name and caclulates score. 
+        /// Gets player name and calculates score. 
         /// Updates scoreboard and restarts the game.
         /// </summary>
         private void HandleGameEnded()
@@ -263,7 +271,7 @@
 
             var playerName = Console.ReadLine();
 
-            scoreboard.UpdateScoreBoard(totalScore, playerName);
+            this.scoreboard.UpdateScoreBoard(totalScore, playerName);
             
             this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
         }
@@ -281,7 +289,7 @@
         /// <summary>
         /// Executes maze generator by input.
         /// </summary>
-        /// <param name="strategyName"></param>
+        /// <param name="strategyName">Requested maze generator name.</param>
         private void HandleSetCommand(string strategyName)
         {
             strategyName = strategyName.ToLower();

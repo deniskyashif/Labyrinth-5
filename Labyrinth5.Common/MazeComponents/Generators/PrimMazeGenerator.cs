@@ -1,4 +1,13 @@
-﻿namespace Labyrinth5.Common.MazeComponents.Generators
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+// An internal class which is used for creation of mazes(two-dimensional arrays of IMazeCell objects
+// using the Prim's algorithm.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.MazeComponents.Generators
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +20,7 @@
     /// </summary>
     internal class PrimMazeGenerator : IMazeGenerator
     {
-        private static readonly Random globalRandomGenerator = new Random();
+        private static readonly Random GlobalRandomGenerator = new Random();
 
         /// <summary>
         /// Delegates the generation procedure and returns the result.
@@ -30,7 +39,7 @@
         /// is made a path and its its adjacent wall cells(serving as frontiers) are added to the 
         /// the "frontiers" collection. Then while there are available frontiers, a random one is chosen and marked
         /// as current cell - if it is surrounded by walls, i.e. neighbours with no less than three wall cells - 
-        /// it is made a path and its neigbours are marked as frontiers. The process continues until there are no
+        /// it is made a path and its neighbours are marked as frontiers. The process continues until there are no
         /// more frontiers left.
         /// </summary>
         /// <param name="rows">Maze width, as number of rows.</param>
@@ -40,7 +49,7 @@
         {
             var maze = this.InitializePrimMaze(rows, columns);
 
-            var currentCell = maze[1, 1];   //any cell can be marked as entry point
+            var currentCell = maze[1, 1];
             currentCell.IsWall = false;
             
             var frontiers = this.GetAdjacentWallCells(maze, currentCell);
@@ -50,7 +59,7 @@
 
             while (frontiers.Count > 0)
             {
-                currentCellIndex = globalRandomGenerator.Next(0, frontiers.Count);
+                currentCellIndex = GlobalRandomGenerator.Next(0, frontiers.Count);
                 currentCell = frontiers[currentCellIndex];
                 adjacentWallCells = this.GetAdjacentWallCells(maze, currentCell);
 
@@ -73,9 +82,9 @@
         /// From given maze and cell, whose coordinates correlate to a cell in maze,
         /// its adjacent cells of type wall extracted an returned.
         /// </summary>
-        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
-        /// <param name="cell">IMazeCell object</param>
-        /// <returns>A collection of IMazeCell objects</returns>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
+        /// <param name="cell">IMazeCell object.</param>
+        /// <returns>A collection of IMazeCell objects.</returns>
         private List<IMazeCell> GetAdjacentWallCells(IMazeCell[,] maze, IMazeCell cell) 
         {
             var neighbours = new List<IMazeCell>();
@@ -106,7 +115,7 @@
         /// <summary>
         /// Traverses the last maze column and marks the first path cell found as an exit.
         /// </summary>
-        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
         private void SetExit(IMazeCell[,] maze)
         {
             int row = maze.GetLength(0) - 2;

@@ -1,4 +1,12 @@
-﻿namespace Labyrinth5.Common.MazeComponents.Generators
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+// An internal class which is used for creation of mazes(two-dimensional arrays of IMazeCell objects
+// using the Iterative Backtracker algorithm.// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.MazeComponents.Generators
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +19,7 @@
     /// </summary>
     internal class BacktrackerMazeGenerator : IMazeGenerator
     {
-        private static readonly Random globalRandomGenerator = new Random();
+        private static readonly Random GlobalRandomGenerator = new Random();
 
         /// <summary>
         /// Delegates the generation procedure and returns the result.
@@ -50,7 +58,7 @@
 
                 if (unvisitedNeighbours.Count > 0)
                 {
-                    var nextCellIndex = globalRandomGenerator.Next(0, unvisitedNeighbours.Count);
+                    var nextCellIndex = GlobalRandomGenerator.Next(0, unvisitedNeighbours.Count);
                     var nextCell = unvisitedNeighbours[nextCellIndex];
 
                     if (this.HasOnlyOneAdjacentPathCell(maze, nextCell))
@@ -78,9 +86,9 @@
         /// From given maze and coordinates correlating to a cell in maze,
         /// its adjacent cells, which are not backtracked yet, are extracted an returned as a collection.
         /// </summary>
-        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
-        /// <param name="cell">IMazeCell object</param>
-        /// <returns>A collection of IMazeCell objects</returns>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
+        /// <param name="cell">IMazeCell object.</param>
+        /// <returns>A collection of IMazeCell objects.</returns>
         private IList<BacktrackerCell> GetUnvisitedNeighbours(BacktrackerCell[,] maze, IMazeCell cell)
         {
             var unvisitedNeighbours = new List<BacktrackerCell>();
@@ -113,8 +121,8 @@
         /// <summary>
         /// Checks if a cell borders with exactly one path cell, having respectively the rest of its neighbours as walls.
         /// </summary>
-        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
-        /// <param name="cell">IMazeCell object</param>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
+        /// <param name="cell">IMazeCell object.</param>
         /// <returns>A boolean value, depending on whether the condition is fulfilled.</returns>
         private bool HasOnlyOneAdjacentPathCell(IMazeCell[,] maze, IMazeCell cell)
         {
@@ -146,7 +154,7 @@
         /// <summary>
         /// Traverses the last maze column and marks the first path cell found as an exit.
         /// </summary>
-        /// <param name="maze">Maze as two dimensional array of IMazeCell objects</param>
+        /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
         private void SetExit(IMazeCell[,] maze)
         {
             int row = maze.GetLength(0) - 2;

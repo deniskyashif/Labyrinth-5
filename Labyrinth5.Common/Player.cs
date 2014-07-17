@@ -35,7 +35,7 @@
         }
 
         /// <summary>
-        /// Changes the position of the player in accordance with the current direction
+        /// Changes the position of the player in accordance with the current direction.
         /// </summary>
         public void Move()
         {
@@ -43,9 +43,9 @@
         }
 
         /// <summary>
-        /// Implements IRenderable
+        /// Implements IRenderable.
         /// </summary>
-        /// <returns>Char representation of the player position</returns>
+        /// <returns>Char representation of the player position.</returns>
         public char[,] GetImage()
         {
             return new char[,] { { PlayerImage } };
