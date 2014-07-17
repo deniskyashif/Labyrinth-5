@@ -14,7 +14,7 @@ namespace Labyrinth5.Common
     public struct MatrixCoordinates
     {
         /// <summary>
-        /// Internal constructor.
+        /// Initializes a new instance of the <see cref="MatrixCoordinates"/> struct.
         /// </summary>
         /// <param name="row">Row coordinate.</param>
         /// <param name="col">Col coordinate.</param>
@@ -26,14 +26,12 @@ namespace Labyrinth5.Common
         }
 
         /// <summary>
-        /// Gets Row coordinate.
-        /// Sets Row coordinate.
+        /// Gets or sets Row coordinate.
         /// </summary>
         internal int Row { get; set; }
 
         /// <summary>
-        /// Gets Col coordinate.
-        /// Sets Col coordinate.
+        /// Gets or sets Col coordinate.
         /// </summary>
         internal int Col { get; set; }
 
@@ -42,7 +40,7 @@ namespace Labyrinth5.Common
         /// </summary>
         /// <param name="a">First set of coordinates.</param>
         /// <param name="b">Second set of coordinates.</param>
-        /// <returns></returns>
+        /// <returns>Sum of the two MatrixCoordinates.</returns>
         public static MatrixCoordinates operator +(MatrixCoordinates a, MatrixCoordinates b)
         {
             return new MatrixCoordinates(a.Row + b.Row, a.Col + b.Col);
@@ -53,7 +51,7 @@ namespace Labyrinth5.Common
         /// </summary>
         /// <param name="a">First set of coordinates.</param>
         /// <param name="b">Second set of coordinates.</param>
-        /// <returns></returns>
+        /// <returns>Difference of the two MatrixCoordinates.</returns>
         public static MatrixCoordinates operator -(MatrixCoordinates a, MatrixCoordinates b)
         {
             return new MatrixCoordinates(a.Row - b.Row, a.Col - b.Col);
@@ -63,8 +61,8 @@ namespace Labyrinth5.Common
         /// Overrides Equals method.
         /// Validates if input is instance of MatrixCoordinates. 
         /// </summary>
-        /// <param name="obj">Object</param>
-        /// <returns></returns>
+        /// <param name="obj">An Object for comparison.</param>
+        /// <returns>Indicates weather two objects are equal.</returns>
         public override bool Equals(object obj)
         {
             var objAsMatrixCoordinates = (MatrixCoordinates)obj;
@@ -76,7 +74,7 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Overrides GetHashCode.
         /// </summary>
-        /// <returns>HashCode</returns>
+        /// <returns>MatrixCoordinates HashCode.</returns>
         public override int GetHashCode()
         {
             return this.Row.GetHashCode() ^ this.Col.GetHashCode();

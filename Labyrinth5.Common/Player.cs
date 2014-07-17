@@ -42,7 +42,7 @@ namespace Labyrinth5.Common
         private MatrixCoordinates direction;
 
         /// <summary>
-        /// Default Constructor without input.
+        /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
         public Player() 
             : this(InitialPositionTop, InitialPositionLeft)
@@ -50,7 +50,8 @@ namespace Labyrinth5.Common
         }
 
         /// <summary>
-        /// Constructor. Sets a custom player positiom.
+        /// Initializes a new instance of the<see cref="Player"/> class.
+        /// Sets a custom player position.
         /// </summary>
         /// <param name="leftCoordinate">Player left coordinate.</param>
         /// <param name="topCoordinate">Player top coordinate.</param>
@@ -60,8 +61,7 @@ namespace Labyrinth5.Common
         }
 
         /// <summary>
-        /// Gets move direction.
-        /// Sets move direction.
+        /// Gets or sets move direction.
         /// </summary>
         public MatrixCoordinates Direction
         {
@@ -70,8 +70,7 @@ namespace Labyrinth5.Common
         }
 
         /// <summary>
-        /// Gets current position.
-        /// Sets current position.
+        /// Gets or sets current position.
         /// </summary>
         public MatrixCoordinates TopLeftPosition
         {

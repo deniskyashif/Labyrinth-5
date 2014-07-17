@@ -21,9 +21,9 @@ namespace Labyrinth5.Common.Engine.Commands
         private Player player;
 
         /// <summary>
-        /// Constructor. Gets player and asigns it to the Player field.
+        /// Initializes a new instance of the <see cref="PlayerMoveCommand"/> class.
         /// </summary>
-        /// <param name="player">Player</param>
+        /// <param name="player">An instance of Player class.</param>
         public PlayerMoveCommand(Player player)
         {
             this.player = player;

@@ -55,7 +55,7 @@ namespace Labyrinth5.Common.Engine.Commands
         private IRenderer renderer;
 
         /// <summary>
-        /// Constructor. Initiates the renderer.
+        /// Initializes a new instance of the<see cref="DisplayInstructionsCommand"/> class.
         /// </summary>
         /// <param name="renderer">Renderer class instance.</param>
         public DisplayInstructionsCommand(IRenderer renderer)

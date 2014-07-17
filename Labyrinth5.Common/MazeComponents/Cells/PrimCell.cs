@@ -14,6 +14,7 @@ namespace Labyrinth5.Common.MazeComponents.Cells
     internal class PrimCell : MazeCell
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="PrimCell"/> class.
         /// Constructor inherited from MazeCell class.
         /// </summary>
         /// <param name="row">Row position.</param>

@@ -42,7 +42,7 @@ namespace Labyrinth5.Common.MazeComponents
         private const char ExitImage = 'E';
 
         /// <summary>
-        /// The algoritm for generating the maze.
+        /// The algorithm for generating the maze.
         /// </summary>
         private IMazeGenerator strategy;
 
@@ -57,7 +57,7 @@ namespace Labyrinth5.Common.MazeComponents
         private MatrixCoordinates topLeftPosition;
 
         /// <summary>
-        /// Default constructor without input for repositioning of the maze.
+        /// Initializes a new instance of the<see cref="Maze"/> class.
         /// </summary>
         /// <param name="generator">Maze Generator algorithm.</param>
         public Maze(IMazeGenerator generator)
@@ -66,12 +66,12 @@ namespace Labyrinth5.Common.MazeComponents
         }
 
         /// <summary>
-        /// Constructor.
+        /// Initializes a new instance of the<see cref="Maze"/> class.
         /// Sets a position of the maze by input.
         /// </summary>
         /// <param name="generator">Maze Generator algorithm.</param>
-        /// <param name="leftOffset">new left coordinate.</param>
-        /// <param name="topOffset">new top coordinate</param>
+        /// <param name="leftOffset">New left coordinate.</param>
+        /// <param name="topOffset">New top coordinate.</param>
         public Maze(IMazeGenerator generator, int leftOffset, int topOffset)
         {
             this.strategy = generator;
@@ -79,8 +79,7 @@ namespace Labyrinth5.Common.MazeComponents
         }
 
         /// <summary>
-        /// Gets the position for rendering.
-        /// Sets the position for rendering.
+        /// Gets or sets the position for rendering.
         /// </summary>
         public MatrixCoordinates TopLeftPosition
         {
@@ -105,8 +104,7 @@ namespace Labyrinth5.Common.MazeComponents
         }
 
         /// <summary>
-        /// Gets the maze generetor algorithm.
-        /// Sets the maze generator algorithm.
+        /// Gets or sets the maze generator algorithm.
         /// Validates the input.
         /// </summary>
         internal IMazeGenerator GenerationStrategy
@@ -132,7 +130,7 @@ namespace Labyrinth5.Common.MazeComponents
         /// </summary>
         /// <param name="row"> Row coordinate.</param>
         /// <param name="col"> Col coordinate.</param>
-        /// <returns></returns>
+        /// <returns>Maze cell position.</returns>
         internal IMazeCell this[int row, int col]
         {
             get { return this.mazeCells[row, col]; }
@@ -141,7 +139,7 @@ namespace Labyrinth5.Common.MazeComponents
         /// <summary>
         /// Implements IRenderable.
         /// </summary>
-        /// <returns>Char matrix representation of the maze components</returns>
+        /// <returns>Char matrix representation of the maze components.</returns>
         public char[,] GetImage()
         {
             var mazeImage = new char[this.Rows, this.Columns];

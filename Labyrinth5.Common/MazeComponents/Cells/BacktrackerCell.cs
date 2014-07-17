@@ -14,7 +14,7 @@ namespace Labyrinth5.Common.MazeComponents.Cells
     internal class BacktrackerCell : MazeCell
     {
         /// <summary>
-        /// Constructor inherited from MazeCell class.
+        /// Initializes a new instance of the<see cref="BacktrackerCell"/> class.
         /// </summary>
         /// <param name="row">Row position.</param>
         /// <param name="col">Col position.</param>
@@ -24,7 +24,7 @@ namespace Labyrinth5.Common.MazeComponents.Cells
         }
 
         /// <summary>
-        /// Holds information on the Backtracked status of the cell.
+        /// Gets or sets a value indicating whether a maze cell is a Backtracked.
         /// </summary>
         internal bool IsBacktracked { get; set; }
     }

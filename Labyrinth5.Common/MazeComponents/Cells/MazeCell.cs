@@ -22,7 +22,7 @@ namespace Labyrinth5.Common.MazeComponents.Cells
         private MatrixCoordinates position; 
 
         /// <summary>
-        /// Constructor.Sets the position of the cell.
+        /// Initializes a new instance of the<see cref="MazeCell"/> class.
         /// </summary>
         /// <param name="row">Row position.</param>
         /// <param name="col">Col position.</param>
@@ -33,8 +33,8 @@ namespace Labyrinth5.Common.MazeComponents.Cells
         }
 
         /// <summary>
-        /// Gets the position.
-        /// Sets the position by input and validates it.
+        /// Gets or sets the position.
+        /// Validates the input.
         /// </summary>
         public MatrixCoordinates Position 
         {
@@ -55,12 +55,12 @@ namespace Labyrinth5.Common.MazeComponents.Cells
         }
 
         /// <summary>
-        /// Holds the information on the availability of the cell for a player to move to it.
+        /// Gets or sets a value indicating whether a maze cell is a wall.
         /// </summary>
         public bool IsWall { get; set; }
         
         /// <summary>
-        /// Holds the information whether the cell is the exit or not.
+        /// Gets or sets a value indicating whether a maze cell is a Exit.
         /// </summary>
         public bool IsExit { get; set; }
     }

@@ -16,18 +16,46 @@ namespace Labyrinth5.Common.Engine.Commands
     /// </summary>
     internal class DisplayScoreboardCommand : ICommand
     {
+        /// <summary>
+        /// Top coordinate of the render starting position.
+        /// </summary>
         private const int TopOffset = 1;
+
+        /// <summary>
+        /// Left coordinate of the render starting position.
+        /// </summary>
         private const int LeftOffset = 0;
+
+        /// <summary>
+        /// Return Message.
+        /// </summary>
         private const string ReturnMessage = "Press Any Key to Return";
+
+        /// <summary>
+        /// Renderer instance.
+        /// </summary>
         private IRenderer renderer;
+
+        /// <summary>
+        /// List of scores.
+        /// </summary>
         private List<string> scoreboardList;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DisplayScoreboardCommand"/> class.
+        /// </summary>
+        /// <param name="renderer">Renderer instance.</param>
+        /// <param name="newScores">List of scores.</param>
         public DisplayScoreboardCommand(IRenderer renderer, List<string> newScores)
         {
             this.renderer = renderer;
             this.GetNewScoreboard(newScores);
         }
 
+        /// <summary>
+        /// Copies a list of scores from input to the private field scoreboardList.
+        /// </summary>
+        /// <param name="newScores">List of scores.</param>
         public void GetNewScoreboard(List<string> newScores)
         {
             this.scoreboardList = new List<string>();
@@ -40,6 +68,9 @@ namespace Labyrinth5.Common.Engine.Commands
             this.scoreboardList.Add(ReturnMessage);
         }
 
+        /// <summary>
+        /// Executes the Rendering of the Scoreboard.
+        /// </summary>
         public void Execute()
         {
             int row = TopOffset;

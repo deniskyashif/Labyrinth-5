@@ -9,7 +9,7 @@
 namespace Labyrinth5.Common.Contracts
 {
     /// <summary>
-    /// Defines an ICommand interface.
+    /// Defines ICommand interface.
     /// </summary>
     public interface ICommand
     {

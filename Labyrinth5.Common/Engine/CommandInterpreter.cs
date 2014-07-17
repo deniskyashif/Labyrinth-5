@@ -35,7 +35,7 @@ namespace Labyrinth5.Common.Engine
         private const int DefaultMazeRows = 15;
 
         /// <summary>
-        /// Default number of colls.
+        /// Default number of cols.
         /// </summary>
         private const int DefaultMazeColumns = 20;
 
@@ -90,7 +90,7 @@ namespace Labyrinth5.Common.Engine
         private const string MoveLeftSubCommandShortcut = "a";
 
         /// <summary>
-        /// Initialaze game command string.
+        /// Initialize game command string.
         /// </summary>
         private const string InitializeGameCommand = "init";
 
@@ -100,7 +100,7 @@ namespace Labyrinth5.Common.Engine
         private const string DisplayInstructionsCommand = "info";
 
         /// <summary>
-        /// Initialaze game command string.
+        /// Initialize game command string.
         /// </summary>
         private const string DisplayScoreboardCommand = "score";
 
@@ -130,7 +130,7 @@ namespace Labyrinth5.Common.Engine
         private const string InvalidCommand = "Invalid Command";
 
         /// <summary>
-        /// Illigal move command string.
+        /// Illegal move command string.
         /// </summary>
         private const string IllegalMove = "Illegal Move";
 
@@ -145,7 +145,7 @@ namespace Labyrinth5.Common.Engine
         private const string SuccessMessage = "Success! Score: {0}. Enter your name: ";
 
         /// <summary>
-        /// Alghorithm choice message command.
+        /// Algorithm choice message command.
         /// </summary>
         private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
 
@@ -155,7 +155,7 @@ namespace Labyrinth5.Common.Engine
         private readonly string blankLine = new string(' ', Console.WindowWidth);
 
         /// <summary>
-        /// Seperators for game elements.
+        /// Separators for game elements.
         /// </summary>
         private readonly char[] separators = new char[] { ' ' };
         
@@ -210,7 +210,7 @@ namespace Labyrinth5.Common.Engine
         private int steps;
 
         /// <summary>
-        /// Constructor.
+        /// Initializes a new instance of the<see cref="CommandInterpreter"/> class.
         /// Initializes  the local instance of PlayerMoveCommand.
         /// Initializes the local instance of DisplayInstructionsCommand.
         /// </summary>
@@ -321,7 +321,7 @@ namespace Labyrinth5.Common.Engine
         /// Prints current position.
         /// Displays Game Over message on reaching the exit.
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">Name of command.</param>
         private void HandleMoveCommand(string command)
         {
             if (command == MoveUpSubCommand || command == MoveUpSubCommandShortcut)
@@ -373,7 +373,7 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Checks if the position the player is moving to is the exit.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Player  HasReachedTheExit status.</returns>
         private bool HasReachedTheExit()
         {
             var position = this.player.TopLeftPosition;
@@ -391,8 +391,8 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Generates new maze. Clears console and prints maze by given rows and cols.
         /// </summary>
-        /// <param name="mazeRows"></param>
-        /// <param name="mazeColumns"></param>
+        /// <param name="mazeRows">Number of rows.</param>
+        /// <param name="mazeColumns">Number of cols.</param>
         private void SetUpGame(int mazeRows, int mazeColumns)
         {
             this.maze.Generate(mazeRows, mazeColumns);

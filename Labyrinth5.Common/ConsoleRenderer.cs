@@ -39,7 +39,7 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Renders a collection of Renderable objects.
         /// </summary>
-        /// <param name="collection">Colection of objects to be rendered.</param>
+        /// <param name="collection">Collection of objects to be rendered.</param>
         public void RenderMany(IEnumerable<IRenderable> collection)
         {
             foreach (var item in collection)
@@ -63,7 +63,7 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Clears a rendered object from the console.
         /// </summary>
-        /// <param name="obj">object to be cleared.</param>
+        /// <param name="obj">Object to be cleared.</param>
         public void Clear(IRenderable obj)
         {
             var objectImage = obj.GetImage();
