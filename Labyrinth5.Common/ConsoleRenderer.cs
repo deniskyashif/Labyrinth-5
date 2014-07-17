@@ -60,6 +60,10 @@ namespace Labyrinth5.Common
             Console.Write(text);
         }
 
+        /// <summary>
+        /// Clears a rendered object from the console.
+        /// </summary>
+        /// <param name="obj">object to be cleared.</param>
         public void Clear(IRenderable obj)
         {
             var objectImage = obj.GetImage();
@@ -75,6 +79,9 @@ namespace Labyrinth5.Common
             }
         }
 
+        /// <summary>
+        /// Clears all rendered content from the console.
+        /// </summary>
         public void ClearAll()
         {
             Console.Clear();

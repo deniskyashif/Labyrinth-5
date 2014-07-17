@@ -1,7 +1,23 @@
-﻿namespace Labyrinth5.Common
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MatrixCoordinates.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//  Struct that holds coordinates for the maze matrix.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common
 {
+    /// <summary>
+    /// Struct that holds coordinates for the maze matrix.
+    /// </summary>
     public struct MatrixCoordinates
     {
+        /// <summary>
+        /// Internal constructor.
+        /// </summary>
+        /// <param name="row">Row coordinate.</param>
+        /// <param name="col">Col coordinate.</param>
         internal MatrixCoordinates(int row, int col)
             : this()
         {
@@ -9,19 +25,46 @@
             this.Col = col;
         }
 
+        /// <summary>
+        /// Gets Row coordinate.
+        /// Sets Row coordinate.
+        /// </summary>
         internal int Row { get; set; }
+
+        /// <summary>
+        /// Gets Col coordinate.
+        /// Sets Col coordinate.
+        /// </summary>
         internal int Col { get; set; }
 
+        /// <summary>
+        /// Overrates + operator.
+        /// </summary>
+        /// <param name="a">First set of coordinates.</param>
+        /// <param name="b">Second set of coordinates.</param>
+        /// <returns></returns>
         public static MatrixCoordinates operator +(MatrixCoordinates a, MatrixCoordinates b)
         {
             return new MatrixCoordinates(a.Row + b.Row, a.Col + b.Col);
         }
 
+        /// <summary>
+        /// Overrates - operator.
+        /// </summary>
+        /// <param name="a">First set of coordinates.</param>
+        /// <param name="b">Second set of coordinates.</param>
+        /// <returns></returns>
         public static MatrixCoordinates operator -(MatrixCoordinates a, MatrixCoordinates b)
         {
             return new MatrixCoordinates(a.Row - b.Row, a.Col - b.Col);
         }
 
+        /// <summary>
+        /// Overrides Equals method.
+        /// Validates if input is instance of MatrixCoordinates. 
+        /// </summary>
+        /// <param name="obj">Object</param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             var objAsMatrixCoordinates = (MatrixCoordinates)obj;
@@ -30,11 +73,19 @@
                 && objAsMatrixCoordinates.Col == this.Col;
         }
 
+        /// <summary>
+        /// Overrides GetHashCode.
+        /// </summary>
+        /// <returns>HashCode</returns>
         public override int GetHashCode()
         {
             return this.Row.GetHashCode() ^ this.Col.GetHashCode();
         }
 
+        /// <summary>
+        /// Overrides ToString.
+        /// </summary>
+        /// <returns>Coordinates to string.</returns>
         public override string ToString()
         {
             return string.Format("({0}, {1})", this.Row, this.Col);

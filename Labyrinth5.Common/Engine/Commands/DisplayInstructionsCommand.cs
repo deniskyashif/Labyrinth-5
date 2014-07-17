@@ -16,9 +16,19 @@ namespace Labyrinth5.Common.Engine.Commands
     /// </summary>
     internal class DisplayInstructionsCommand : ICommand
     {
+        /// <summary>
+        /// Game Info Render position top coordinate.
+        /// </summary>
         private const int TopOffset = 1;
+
+        /// <summary>
+        /// Game Info Render position left coordinate.
+        /// </summary>
         private const int LeftOffset = 0;
 
+        /// <summary>
+        /// Game Instructions text.
+        /// </summary>
         private readonly string[] gameInstructions = new string[]
         {
             new string('-', 25),
@@ -39,13 +49,24 @@ namespace Labyrinth5.Common.Engine.Commands
             " - Type <exit> to end game." 
         };
 
+        /// <summary>
+        /// Renderer class instance for executing the rendering of the info.
+        /// </summary>
         private IRenderer renderer;
 
+        /// <summary>
+        /// Constructor. Initiates the renderer.
+        /// </summary>
+        /// <param name="renderer">Renderer class instance.</param>
         public DisplayInstructionsCommand(IRenderer renderer)
         {
             this.renderer = renderer;
         }
 
+        /// <summary>
+        /// Implementation of the ICommand interface.
+        /// Executes the rendering of the game info.
+        /// </summary>
         public void Execute()
         {
             this.renderer.ClearAll();

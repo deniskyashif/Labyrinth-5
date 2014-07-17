@@ -20,6 +20,7 @@ namespace Labyrinth5.Common.MazeComponents
         /// Default left coordinate of the maze.
         /// </summary>
         private const int DefaultLeftOffset = 0;
+
         /// <summary>
         /// Default top coordinate of the maze.
         /// </summary>
@@ -34,6 +35,7 @@ namespace Labyrinth5.Common.MazeComponents
         /// Char representing the path cells when the maze is rendered.
         /// </summary>
         private const char PathImage = ' ';
+
         /// <summary>
         /// Char representing the exit cell when the maze is rendered.
         /// </summary>
