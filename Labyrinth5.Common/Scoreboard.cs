@@ -17,13 +17,13 @@ namespace Labyrinth5.Common
     /// <summary>
     ///   Class processing game high score data. 
     /// </summary>
-    public class Scoreboard 
+    public class Scoreboard
     {
         private const string PrintPattern = "{0}. {1}-->{2}";
         private const string SavePattern = "{0}/{1}/{2}";            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
-        private string defaultPath = "../../Save/SavedScores.txt";
+        private string defaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
         private OrderedMultiDictionary<int, string> data;
 
         public Scoreboard()
@@ -63,8 +63,8 @@ namespace Labyrinth5.Common
         {
             try
             {
-                StreamReader reader = new StreamReader(this.defaultPath);
-                using (reader)
+                
+                using (StreamReader reader = new StreamReader(this.defaultPath))
                 {
                     while (reader.Peek() >= 0)
                     {
@@ -89,7 +89,7 @@ namespace Labyrinth5.Common
         /// </summary>
         public void UptadeSavedScore() 
         {
-            StreamWriter writer = new StreamWriter(this.defaultPath, true);
+           
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -97,7 +97,8 @@ namespace Labyrinth5.Common
             }
             else
             {
-                using (writer)
+                File.WriteAllText(this.defaultPath, string.Empty);
+                using ( StreamWriter writer = new StreamWriter(this.defaultPath, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {
@@ -133,7 +134,7 @@ namespace Labyrinth5.Common
             }
             else
             {
-                foreach (var score in this.data)
+                foreach (var score in this.data.Reversed())
                 {
                     if (counter > ScoreboardMaxLenght)
                     {
