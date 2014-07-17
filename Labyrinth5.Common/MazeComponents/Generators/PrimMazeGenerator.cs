@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="PrimMazeGenerator.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
@@ -38,8 +38,8 @@ namespace Labyrinth5.Common.MazeComponents.Generators
         /// in the matrix of MazeCell objects(initially all cells marked as walls), 
         /// is made a path and its its adjacent wall cells(serving as frontiers) are added to the 
         /// the "frontiers" collection. Then while there are available frontiers, a random one is chosen and marked
-        /// as current cell - if it is surrounded by walls, i.e. neighbours with no less than three wall cells - 
-        /// it is made a path and its neighbours are marked as frontiers. The process continues until there are no
+        /// as current cell - if it is surrounded by walls, i.e. neighbors with no less than three wall cells - 
+        /// it is made a path and its neighbors are marked as frontiers. The process continues until there are no
         /// more frontiers left.
         /// </summary>
         /// <param name="rows">Maze width, as number of rows.</param>

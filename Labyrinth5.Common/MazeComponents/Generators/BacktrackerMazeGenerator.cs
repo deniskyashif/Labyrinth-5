@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="BacktrackerMazeGenerator.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
@@ -35,7 +35,7 @@ namespace Labyrinth5.Common.MazeComponents.Generators
         /// <summary>
         /// Generates random maze using iterative Depth First Search algorithm. From a specified entry point
         /// in the matrix of MazeCell objects(initially all cells marked as walls), 
-        /// an unvisited neigbour cell is randomly chosen, if it has only one neighbour that is a path cell - 
+        /// an unvisited neighbor cell is randomly chosen, if it has only one neighbor that is a path cell - 
         /// that cell is made a path and pushed into the stack, otherwise the algorithms "tracks back" popping
         /// cells out of the stack until it reaches one that satisfies the condition.
         /// The process goes on until there are no cells left in the stack.
@@ -119,7 +119,7 @@ namespace Labyrinth5.Common.MazeComponents.Generators
         }
 
         /// <summary>
-        /// Checks if a cell borders with exactly one path cell, having respectively the rest of its neighbours as walls.
+        /// Checks if a cell borders with exactly one path cell, having respectively the rest of its neighbors as walls.
         /// </summary>
         /// <param name="maze">Maze as two dimensional array of IMazeCell objects.</param>
         /// <param name="cell">IMazeCell object.</param>

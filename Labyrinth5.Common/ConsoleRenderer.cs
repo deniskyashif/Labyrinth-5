@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="ConsoleRenderer.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
-// Internel class Handeling the Rendering of game content on the console.
+// Internel class Handling the Rendering of game content on the console.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common
@@ -13,7 +13,7 @@ namespace Labyrinth5.Common
     using Labyrinth5.Common.Contracts;
 
     /// <summary>
-    /// Internal class Handeling the Rendering of game content on the console.
+    /// Internal class Handling the Rendering of game content on the console.
     /// </summary>
     internal class ConsoleRenderer : IRenderer
     {

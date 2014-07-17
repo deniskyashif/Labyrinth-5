@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="Maze.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
@@ -16,44 +16,97 @@ namespace Labyrinth5.Common.MazeComponents
     /// </summary>
     internal class Maze : IRenderable
     {
+        /// <summary>
+        /// Default left coordinate of the maze.
+        /// </summary>
         private const int DefaultLeftOffset = 0;
+        /// <summary>
+        /// Default top coordinate of the maze.
+        /// </summary>
         private const int DefaultTopOffset = 0;
 
+        /// <summary>
+        /// Char representing the wall cells when the maze is rendered.
+        /// </summary>
         private const char WallImage = '\u2593';
+
+        /// <summary>
+        /// Char representing the path cells when the maze is rendered.
+        /// </summary>
         private const char PathImage = ' ';
+        /// <summary>
+        /// Char representing the exit cell when the maze is rendered.
+        /// </summary>
         private const char ExitImage = 'E';
 
+        /// <summary>
+        /// The algoritm for generating the maze.
+        /// </summary>
         private IMazeGenerator strategy;
+
+        /// <summary>
+        /// Matrix of MazeCell object. 
+        /// </summary>
         private IMazeCell[,] mazeCells;
+
+        /// <summary>
+        /// Holds the position of the maze for rendering.
+        /// </summary>
         private MatrixCoordinates topLeftPosition;
 
+        /// <summary>
+        /// Default constructor without input for repositioning of the maze.
+        /// </summary>
+        /// <param name="generator">Maze Generator algorithm.</param>
         public Maze(IMazeGenerator generator)
             : this(generator, DefaultTopOffset, DefaultLeftOffset) 
         { 
         }
 
+        /// <summary>
+        /// Constructor.
+        /// Sets a position of the maze by input.
+        /// </summary>
+        /// <param name="generator">Maze Generator algorithm.</param>
+        /// <param name="leftOffset">new left coordinate.</param>
+        /// <param name="topOffset">new top coordinate</param>
         public Maze(IMazeGenerator generator, int leftOffset, int topOffset)
         {
             this.strategy = generator;
             this.TopLeftPosition = new MatrixCoordinates(leftOffset, topOffset);
         }
 
+        /// <summary>
+        /// Gets the position for rendering.
+        /// Sets the position for rendering.
+        /// </summary>
         public MatrixCoordinates TopLeftPosition
         {
             get { return this.topLeftPosition; }
             set { this.topLeftPosition = value; }
         }
 
+        /// <summary>
+        /// Gets the number of rows of the maze matrix.
+        /// </summary>
         internal int Rows
         {
             get { return this.mazeCells.GetLength(0); }
         }
 
+        /// <summary>
+        /// Gets the number of cols of the maze matrix.
+        /// </summary>
         internal int Columns
         {
             get { return this.mazeCells.GetLength(1); }
         }
 
+        /// <summary>
+        /// Gets the maze generetor algorithm.
+        /// Sets the maze generator algorithm.
+        /// Validates the input.
+        /// </summary>
         internal IMazeGenerator GenerationStrategy
         {
             get
@@ -72,11 +125,21 @@ namespace Labyrinth5.Common.MazeComponents
             }
         }
 
+        /// <summary>
+        /// Gets maze cell coordinates.
+        /// </summary>
+        /// <param name="row"> Row coordinate.</param>
+        /// <param name="col"> Col coordinate.</param>
+        /// <returns></returns>
         internal IMazeCell this[int row, int col]
         {
             get { return this.mazeCells[row, col]; }
         }
 
+        /// <summary>
+        /// Implements IRenderable.
+        /// </summary>
+        /// <returns>Char matrix representation of the maze components</returns>
         public char[,] GetImage()
         {
             var mazeImage = new char[this.Rows, this.Columns];
@@ -106,6 +169,12 @@ namespace Labyrinth5.Common.MazeComponents
             return mazeImage;
         }
 
+        /// <summary>
+        /// Generates the maze by the maze generator algorithm.
+        /// Validates the input.
+        /// </summary>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="columns">Number of cols.</param>
         internal void Generate(int rows, int columns)
         {
             if (rows <= 0 || columns <= 0)

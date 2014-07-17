@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="CommandInterpreter.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
@@ -19,6 +19,9 @@ namespace Labyrinth5.Common.Engine
     /// </summary>
     internal class CommandInterpreter : ICommandInterpreter
     {
+        /// <summary>
+        /// Minimum size of a generated maze.
+        /// </summary>
         private const int MinimumMazeSize = 10;
         private const int MaximumMazeSize = 60;
         private const int DefaultMazeRows = 15;

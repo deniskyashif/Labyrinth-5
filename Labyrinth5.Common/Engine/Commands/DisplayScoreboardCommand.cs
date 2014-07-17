@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="DisplayScoreboardCommand.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
-//   Internal class handeling the call to render of the scoreboard. 
+//   Internal class Handling the call to render of the scoreboard. 
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common.Engine.Commands
@@ -12,7 +12,7 @@ namespace Labyrinth5.Common.Engine.Commands
     using Labyrinth5.Common.Contracts;
 
     /// <summary>
-    ///   Internal class handeling the call to render of the scoreboard.
+    ///   Internal class Handling the call to render of the scoreboard.
     /// </summary>
     internal class DisplayScoreboardCommand : ICommand
     {
