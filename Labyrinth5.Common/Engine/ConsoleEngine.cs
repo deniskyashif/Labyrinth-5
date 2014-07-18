@@ -8,7 +8,7 @@
     /// </summary>
     public class ConsoleEngine : IEngine
     {
-        private static readonly ConsoleEngine instance = new ConsoleEngine();
+        private static readonly ConsoleEngine engineInstance = new ConsoleEngine();
 
         private readonly ICommandInterpreter interpreter;
 
@@ -21,7 +21,7 @@
         {
             get
             {
-                return instance;
+                return engineInstance;
             }
         }
 
@@ -30,8 +30,7 @@
         /// </summary>
         public void Run()
         {
-            this.interpreter.ParseAndDispatch("init");
-            string command = "info";
+            var command = "info";
 
             while (true)
             {

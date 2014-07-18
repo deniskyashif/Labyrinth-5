@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    public interface IEngine
+    internal interface IEngine
     {
         void Run();
     }

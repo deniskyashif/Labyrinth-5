@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth5.Common.Contracts
 {
-    public interface IRenderable
+    internal interface IRenderable
     {
         MatrixCoordinates TopLeftPosition { get; set; }
 

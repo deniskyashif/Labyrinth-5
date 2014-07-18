@@ -2,16 +2,16 @@
 {
     internal static class Directions
     {
-        public static readonly MatrixCoordinates Up =
+        internal static readonly MatrixCoordinates Up =
             new MatrixCoordinates(-1, 0);
 
-        public static readonly MatrixCoordinates Right =
+        internal static readonly MatrixCoordinates Right =
             new MatrixCoordinates(0, 1);
 
-        public static readonly MatrixCoordinates Down =
+        internal static readonly MatrixCoordinates Down =
             new MatrixCoordinates(1, 0);
 
-        public static readonly MatrixCoordinates Left =
+        internal static readonly MatrixCoordinates Left =
             new MatrixCoordinates(0, -1);
     }
 }

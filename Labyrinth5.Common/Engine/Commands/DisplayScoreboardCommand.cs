@@ -29,6 +29,8 @@
 
         public void Execute()
         {
+            this.renderer.ClearAll();
+
             int row = TopOffset;
 
             foreach (var line in scoreboardList)

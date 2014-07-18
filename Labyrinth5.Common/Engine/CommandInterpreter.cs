@@ -49,6 +49,8 @@
 
         private readonly ICommand playerMoveCommand;
         private readonly ICommand displayInstructionsCommand;
+        private readonly ICommand setToBacktrackerCommand;
+        private readonly ICommand setToPrimCommand;
         private ICommand displayScoreboardCommand;
        
         private int cursorPositionLeft;
@@ -59,13 +61,17 @@
         {
             this.playerMoveCommand = new PlayerMoveCommand(this.player);
             this.displayInstructionsCommand = new DisplayInstructionsCommand(this.renderer);
+            this.setToBacktrackerCommand = new SetBacktrackerCommand(this.maze);
+            this.setToPrimCommand = new SetPrimCommand(this.maze);
+
+            this.ResetGameVariables(DefaultMazeRows, DefaultMazeColumns);
         }
 
         /// <summary>
         /// Dispatches commands to command handlers
         /// </summary>
         /// <param name="command">User input string</param>
-        public void ParseAndDispatch(string command)
+        public virtual void ParseAndDispatch(string command)
         {
             if (!string.IsNullOrWhiteSpace(command))
             {
@@ -84,6 +90,10 @@
                 {
                     this.HandleInfoCommand();
                 }
+                else if (commandWords[0] == DisplayScoreboardCommand)
+                {
+                    this.HandleScoreCommand();
+                }
                 else if (commandWords[0] == SetGenerationStrategyCommand && commandWords.Length > 0)
                 {
                     this.HandleSetCommand(commandWords[1]);
@@ -91,10 +101,6 @@
                 else if (commandWords[0] == EndGameCommand)
                 {
                     this.HandleExitCommand();
-                }
-                else if (commandWords[0] == DisplayScoreboardCommand)
-                {
-                    this.HandleScoreBoardCommand();
                 }
                 else
                 {
@@ -122,7 +128,7 @@
                     if (MinimumMazeSize <= mazeRows && mazeRows <= MaximumMazeSize
                         && MinimumMazeSize <= mazeColumns && mazeColumns <= MaximumMazeSize)
                     {
-                        this.SetUpGame(mazeRows, mazeColumns);
+                        this.ResetGameVariables(mazeRows, mazeColumns);
                     }
                 }
                 else
@@ -132,8 +138,10 @@
             }
             else
             {
-                this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+                this.ResetGameVariables();
             }
+
+            this.RenderGameComponents();
         }
 
         /// <summary>
@@ -149,11 +157,13 @@
         /// <summary>
         /// Prints the current scoreboard.
         /// </summary>
-        private void HandleScoreBoardCommand()
+        private void HandleScoreCommand()
         {
-            this.displayScoreboardCommand = new DisplayScoreboardCommand(renderer, scoreboard.GetScore());
+            this.displayScoreboardCommand = new DisplayScoreboardCommand(this.renderer, this.scoreboard.GetScore());
             this.displayScoreboardCommand.Execute();
+
             Console.ReadKey();
+
             this.RenderGameComponents();
         }
 
@@ -234,7 +244,7 @@
         /// </summary>
         /// <param name="mazeRows"></param>
         /// <param name="mazeColumns"></param>
-        private void SetUpGame(int mazeRows, int mazeColumns)
+        private void ResetGameVariables(int mazeRows = DefaultMazeRows, int mazeColumns = DefaultMazeColumns)
         {
             this.maze.Generate(mazeRows, mazeColumns);
 
@@ -245,7 +255,6 @@
             this.cursorPositionLeft = 0;
             this.cursorPositionTop = this.maze.Rows + 2;
             this.steps = 0;
-            this.RenderGameComponents();
         }
 
         /// <summary>
@@ -262,10 +271,9 @@
                 this.cursorPositionTop - 1);
 
             var playerName = Console.ReadLine();
+            this.scoreboard.UpdateScoreBoard(totalScore, playerName);
 
-            scoreboard.UpdateScoreBoard(totalScore, playerName);
-            
-            this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+            this.ResetGameVariables(DefaultMazeRows, DefaultMazeColumns);
         }
 
         /// <summary>
@@ -288,11 +296,11 @@
 
             if (strategyName == BacktrackerStrategySubCommand)
             {
-                this.maze.GenerationStrategy = new BacktrackerMazeGenerator();
+                this.setToBacktrackerCommand.Execute();
             }
             else if (strategyName == PrimStrategySubCommand)
             {
-                this.maze.GenerationStrategy = new PrimMazeGenerator();
+                this.setToPrimCommand.Execute();
             }
 
             var message = string.Format(StrategySwitchedMessage, strategyName);

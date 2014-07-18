@@ -56,6 +56,8 @@
     <Compile Include="Engine\Commands\DisplayInstructionsCommand.cs" />
     <Compile Include="Engine\Commands\DisplayScoreboardCommand.cs" />
     <Compile Include="Engine\Commands\PlayerMoveCommand.cs" />
+    <Compile Include="Engine\Commands\SetBacktrackerCommand.cs" />
+    <Compile Include="Engine\Commands\SetPrimCommand.cs" />
     <Compile Include="Engine\ConsoleEngine.cs" />
     <Compile Include="MatrixCoordinates.cs" />
     <Compile Include="MazeComponents\Cells\BacktrackerCell.cs" />
@@ -70,7 +72,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scoreboard.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Save\SavedScores.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

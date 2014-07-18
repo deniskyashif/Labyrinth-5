@@ -24,14 +24,28 @@
 
         public MatrixCoordinates Direction
         {
-            get { return this.direction; }
-            set { this.direction = value; }
+            get 
+            { 
+                return this.direction; 
+            }
+
+            set 
+            { 
+                this.direction = value; 
+            }
         }
 
         public MatrixCoordinates TopLeftPosition
         {
-            get { return this.topLeftPosition; }
-            set { this.topLeftPosition = value; }
+            get 
+            { 
+                return this.topLeftPosition; 
+            }
+
+            set 
+            { 
+                this.topLeftPosition = value; 
+            }
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Labyrinth5.Common
         private const string SavePattern = "{0}/{1}/{2}";            
         private const int ScoreboardMaxLenght = 10;
         private const string EmptyMessage = "The scoreboard is empty.";
-        private string defaultPath = "../../Save/SavedScores.txt";
+        private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
         private OrderedMultiDictionary<int, string> data;
 
         public Scoreboard()
@@ -63,7 +63,7 @@ namespace Labyrinth5.Common
         {
             try
             {
-                StreamReader reader = new StreamReader(this.defaultPath);
+                StreamReader reader = new StreamReader(DefaultPath);
                 using (reader)
                 {
                     while (reader.Peek() >= 0)
@@ -89,7 +89,7 @@ namespace Labyrinth5.Common
         /// </summary>
         public void UptadeSavedScore() 
         {
-            StreamWriter writer = new StreamWriter(this.defaultPath, true);
+            StreamWriter writer = new StreamWriter(DefaultPath, true);
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
