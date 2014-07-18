@@ -1,4 +1,12 @@
-﻿namespace Labyrinth5.Common.Engine
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CommandInterpreter.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+// Internal class that handles all input. Dispatches commands.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.Engine
 {
     using System;
     using Labyrinth5.Common.Contracts;
@@ -7,56 +15,210 @@
     using Labyrinth5.Common.MazeComponents.Generators;
 
     /// <summary>
-    /// Handles all input. Dispatches commands
+    /// Internal class that handles all input. Dispatches commands.
     /// </summary>
     internal class CommandInterpreter : ICommandInterpreter
     {
+        /// <summary>
+        /// Minimum size of a generated maze.
+        /// </summary>
         private const int MinimumMazeSize = 10;
+
+        /// <summary>
+        /// Maximum size of a generated maze.
+        /// </summary>
         private const int MaximumMazeSize = 60;
+
+        /// <summary>
+        /// Default number of rows.
+        /// </summary>
         private const int DefaultMazeRows = 15;
+
+        /// <summary>
+        /// Default number of cols.
+        /// </summary>
         private const int DefaultMazeColumns = 20;
 
+        /// <summary>
+        /// Move command string.
+        /// </summary>        
         private const string MoveCommand = "move";
+
+        /// <summary>
+        /// Move command string short.
+        /// </summary>    
         private const string MoveCommandShortcut = "m";
+
+        /// <summary>
+        /// Up command string.
+        /// </summary>
         private const string MoveUpSubCommand = "up";
+
+        /// <summary>
+        /// Up command string short.
+        /// </summary>
         private const string MoveUpSubCommandShortcut = "w";
+
+        /// <summary>
+        /// Right command string.
+        /// </summary>
         private const string MoveRightSubCommand = "right";
+
+        /// <summary>
+        /// Right command string short.
+        /// </summary>
         private const string MoveRightSubCommandShortcut = "d";
+
+        /// <summary>
+        /// Down command string.
+        /// </summary>
         private const string MoveDownSubCommand = "down";
+
+        /// <summary>
+        /// Down command string short.
+        /// </summary>
         private const string MoveDownSubCommandShortcut = "s";
+
+        /// <summary>
+        /// Left command string.
+        /// </summary>
         private const string MoveLeftSubCommand = "left";
+
+        /// <summary>
+        /// Left command string short.
+        /// </summary>
         private const string MoveLeftSubCommandShortcut = "a";
+
+        /// <summary>
+        /// Initialize game command string.
+        /// </summary>
         private const string InitializeGameCommand = "init";
+
+        /// <summary>
+        /// Display info command string.
+        /// </summary>
         private const string DisplayInstructionsCommand = "info";
+
+        /// <summary>
+        /// Initialize game command string.
+        /// </summary>
         private const string DisplayScoreboardCommand = "score";
+
+        /// <summary>
+        /// End game command string.
+        /// </summary>
         private const string EndGameCommand = "exit";
+
+        /// <summary>
+        /// Set game maze generator algorithm command string.
+        /// </summary>
         private const string SetGenerationStrategyCommand = "set";
+
+        /// <summary>
+        /// Backtracker algorithm command string.
+        /// </summary>
         private const string BacktrackerStrategySubCommand = "backtracker";
+
+        /// <summary>
+        /// Prim algorithm command string.
+        /// </summary>
         private const string PrimStrategySubCommand = "prim";
+
+        /// <summary>
+        /// Invalid command string.
+        /// </summary>
         private const string InvalidCommand = "Invalid Command";
+
+        /// <summary>
+        /// Illegal move command string.
+        /// </summary>
         private const string IllegalMove = "Illegal Move";
+
+        /// <summary>
+        /// Invalid Arguments command string.
+        /// </summary>
         private const string InvalidArguments = "Invalid Arguments";
+
+        /// <summary>
+        /// Success message command string.
+        /// </summary>
         private const string SuccessMessage = "Success! Score: {0}. Enter your name: ";
+
+        /// <summary>
+        /// Algorithm choice message command.
+        /// </summary>
         private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
 
+        /// <summary>
+        /// Blank line.
+        /// </summary>
         private readonly string blankLine = new string(' ', Console.WindowWidth);
+
+        /// <summary>
+        /// Separators for game elements.
+        /// </summary>
         private readonly char[] separators = new char[] { ' ' };
         
+        /// <summary>
+        /// Game  console renderer.
+        /// </summary>
         private readonly IRenderer renderer = new ConsoleRenderer();
+
+        /// <summary>
+        /// Game player.
+        /// </summary>
         private readonly Player player = new Player();
+
+        /// <summary>
+        /// Game Maze.
+        /// </summary>
         private readonly Maze maze = new Maze(new BacktrackerMazeGenerator());
+
+        /// <summary>
+        /// Game Scoreboard.
+        /// </summary>
         private readonly Scoreboard scoreboard = new Scoreboard();
 
+        /// <summary>
+        /// Player move command instance.
+        /// </summary>
         private readonly ICommand playerMoveCommand;
+
+        /// <summary>
+        /// Display Info command instance.
+        /// </summary>
         private readonly ICommand displayInstructionsCommand;
+<<<<<<< HEAD
         private readonly ICommand setToBacktrackerCommand;
         private readonly ICommand setToPrimCommand;
+=======
+
+        /// <summary>
+        /// Display Scoreboard command Instance.
+        /// </summary>
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         private ICommand displayScoreboardCommand;
        
+        /// <summary>
+        /// Cursor  left coordinate..
+        /// </summary>
         private int cursorPositionLeft;
+
+        /// <summary>
+        /// Cursor  top coordinate..
+        /// </summary>
         private int cursorPositionTop;
+
+        /// <summary>
+        /// Steps taken during a game.
+        /// </summary>
         private int steps;
 
+        /// <summary>
+        /// Initializes a new instance of the<see cref="CommandInterpreter"/> class.
+        /// Initializes  the local instance of PlayerMoveCommand.
+        /// Initializes the local instance of DisplayInstructionsCommand.
+        /// </summary>
         public CommandInterpreter()
         {
             this.playerMoveCommand = new PlayerMoveCommand(this.player);
@@ -68,10 +230,15 @@
         }
 
         /// <summary>
-        /// Dispatches commands to command handlers
+        /// Dispatches commands to command handlers.
         /// </summary>
+<<<<<<< HEAD
         /// <param name="command">User input string</param>
         public virtual void ParseAndDispatch(string command)
+=======
+        /// <param name="command">User input string.</param>
+        public void ParseAndDispatch(string command)
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         {
             if (!string.IsNullOrWhiteSpace(command))
             {
@@ -113,9 +280,9 @@
         }
 
         /// <summary>
-        /// Sets up a new game on user input
+        /// Sets up a new game on user input.
         /// </summary>
-        /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements</param>
+        /// <param name="commandWords">String array, default maze on 1 element, custom on 3 elements.</param>
         private void HandleInitCommand(string[] commandWords)
         {
             if (commandWords.Length == 3)
@@ -170,9 +337,9 @@
         /// <summary>
         /// Changes player position.
         /// Prints current position.
-        /// Displays Game Over message on reaching the exit
+        /// Displays Game Over message on reaching the exit.
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="command">Name of command.</param>
         private void HandleMoveCommand(string command)
         {
             if (command == MoveUpSubCommand || command == MoveUpSubCommandShortcut)
@@ -214,7 +381,7 @@
         /// <summary>
         /// Checks if a given maze cell is available for the player to move to.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A boolean variable representing the availability status of the cell.</returns>
         private bool IsPositionAvailable()
         {
             var position = this.player.TopLeftPosition + this.player.Direction;
@@ -224,7 +391,7 @@
         /// <summary>
         /// Checks if the position the player is moving to is the exit.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Player  HasReachedTheExit status.</returns>
         private bool HasReachedTheExit()
         {
             var position = this.player.TopLeftPosition;
@@ -242,9 +409,15 @@
         /// <summary>
         /// Generates new maze. Clears console and prints maze by given rows and cols.
         /// </summary>
+<<<<<<< HEAD
         /// <param name="mazeRows"></param>
         /// <param name="mazeColumns"></param>
         private void ResetGameVariables(int mazeRows = DefaultMazeRows, int mazeColumns = DefaultMazeColumns)
+=======
+        /// <param name="mazeRows">Number of rows.</param>
+        /// <param name="mazeColumns">Number of cols.</param>
+        private void SetUpGame(int mazeRows, int mazeColumns)
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         {
             this.maze.Generate(mazeRows, mazeColumns);
 
@@ -258,7 +431,7 @@
         }
 
         /// <summary>
-        /// Gets player name and caclulates score. 
+        /// Gets player name and calculates score. 
         /// Updates scoreboard and restarts the game.
         /// </summary>
         private void HandleGameEnded()
@@ -273,7 +446,13 @@
             var playerName = Console.ReadLine();
             this.scoreboard.UpdateScoreBoard(totalScore, playerName);
 
+<<<<<<< HEAD
             this.ResetGameVariables(DefaultMazeRows, DefaultMazeColumns);
+=======
+            this.scoreboard.UpdateScoreBoard(totalScore, playerName);
+            
+            this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         }
 
         /// <summary>
@@ -289,7 +468,7 @@
         /// <summary>
         /// Executes maze generator by input.
         /// </summary>
-        /// <param name="strategyName"></param>
+        /// <param name="strategyName">Requested maze generator name.</param>
         private void HandleSetCommand(string strategyName)
         {
             strategyName = strategyName.ToLower();

@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="Save\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 1/Iskra/215
 1/test/82
 2/Iskra/215
 1/test/76
 2/test/82
 3/Iskra/215
+=======
+1/Pastet/251
+2/PPP/239
+3/Iskra/229
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e

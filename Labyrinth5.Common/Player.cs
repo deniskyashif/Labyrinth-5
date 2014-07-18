@@ -1,27 +1,68 @@
-﻿namespace Labyrinth5.Common
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Player.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//  Internal class- process the game player. Holds player render information.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common
 {
     using System;
     using Labyrinth5.Common.Contracts;
 
+    /// <summary>
+    /// Internal class- process the game player. Holds player render information.
+    /// </summary>
     internal class Player : IRenderable 
     {
+        /// <summary>
+        /// Player Initial position top coordinate.
+        /// </summary>
         private const int InitialPositionTop = 1;
+
+        /// <summary>
+        /// Player Initial position left coordinate.
+        /// </summary>
         private const int InitialPositionLeft = 1;
+
+        /// <summary>
+        /// Player char representation.
+        /// </summary>
         private const char PlayerImage = '☺';
         
+        /// <summary>
+        /// Player current render coordinates.
+        /// </summary>
         private MatrixCoordinates topLeftPosition;
+
+        /// <summary>
+        /// Player move direction.
+        /// </summary>
         private MatrixCoordinates direction;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Player"/> class.
+        /// </summary>
         public Player() 
             : this(InitialPositionTop, InitialPositionLeft)
         { 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the<see cref="Player"/> class.
+        /// Sets a custom player position.
+        /// </summary>
+        /// <param name="leftCoordinate">Player left coordinate.</param>
+        /// <param name="topCoordinate">Player top coordinate.</param>
         public Player(int leftCoordinate, int topCoordinate)
         {
             this.TopLeftPosition = new MatrixCoordinates(topCoordinate, leftCoordinate);
         }
 
+        /// <summary>
+        /// Gets or sets move direction.
+        /// </summary>
         public MatrixCoordinates Direction
         {
             get 
@@ -35,6 +76,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets current position.
+        /// </summary>
         public MatrixCoordinates TopLeftPosition
         {
             get 
@@ -49,7 +93,7 @@
         }
 
         /// <summary>
-        /// Changes the position of the player in accordance with the current direction
+        /// Changes the position of the player in accordance with the current direction.
         /// </summary>
         public void Move()
         {
@@ -57,9 +101,9 @@
         }
 
         /// <summary>
-        /// Implements IRenderable
+        /// Implements IRenderable.
         /// </summary>
-        /// <returns>Char representation of the player position</returns>
+        /// <returns>Char representation of the player position.</returns>
         public char[,] GetImage()
         {
             return new char[,] { { PlayerImage } };

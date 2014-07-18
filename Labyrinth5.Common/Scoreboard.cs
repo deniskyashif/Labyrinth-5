@@ -3,7 +3,7 @@
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
-//   Class processing game high score data 
+//   Class processing game high score data. 
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common
@@ -17,18 +17,49 @@ namespace Labyrinth5.Common
     /// <summary>
     ///   Class processing game high score data. 
     /// </summary>
-    public class Scoreboard 
+    public class Scoreboard
     {
+        /// <summary>
+        /// Pattern for printing the scoreboard lines.
+        /// </summary>
         private const string PrintPattern = "{0}. {1}-->{2}";
-        private const string SavePattern = "{0}/{1}/{2}";            
+
+        /// <summary>
+        /// Pattern for saving scoreboard lines.
+        /// </summary>
+        private const string SavePattern = "{0}/{1}/{2}";
+        
+        /// <summary>
+        /// Max length of saved scores.
+        /// </summary>
         private const int ScoreboardMaxLenght = 10;
+
+        /// <summary>
+        /// Scoreboard is empty message.
+        /// </summary>
         private const string EmptyMessage = "The scoreboard is empty.";
+<<<<<<< HEAD
         private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
         private OrderedMultiDictionary<int, string> data;
+=======
+        
+        /// <summary>
+        /// Path the scoreboard seve.
+        /// </summary>
+        private string defaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
 
+        /// <summary>
+        /// Ordered dictionary holding data value pair: score name.
+        /// </summary>
+        private OrderedMultiDictionary<int, string> scoreboardData;
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+
+        /// <summary>
+        /// Initializes a new instance of the<see cref="Scoreboard"/> class.
+        /// </summary>
         public Scoreboard()
         {
-            this.data = new OrderedMultiDictionary<int, string>(false);
+            this.scoreboardData = new OrderedMultiDictionary<int, string>(false);
             this.ReadSavedScores();
         }
  
@@ -39,7 +70,7 @@ namespace Labyrinth5.Common
         public int GetWorstScore()
         {
             int worstScore = 0;
-            foreach (var score in this.data.Keys)
+            foreach (var score in this.scoreboardData.Keys)
             {
                 worstScore = score;
             }
@@ -48,8 +79,9 @@ namespace Labyrinth5.Common
         }
        
         /// <summary>
-        /// Displays the current scoreboard on the Console.
+        /// Gets a string list of the current scoreboard.
         /// </summary>
+        /// <returns>List of the current scoreboard.</returns>
         public List<string> GetScore()
         {
             List<string> scoreboard = this.ExtractHighScore(PrintPattern);
@@ -63,8 +95,12 @@ namespace Labyrinth5.Common
         {
             try
             {
+<<<<<<< HEAD
                 StreamReader reader = new StreamReader(DefaultPath);
                 using (reader)
+=======
+                using (StreamReader reader = new StreamReader(this.defaultPath))
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
                 {
                     while (reader.Peek() >= 0)
                     {
@@ -73,7 +109,7 @@ namespace Labyrinth5.Common
                         int score;
                         bool result = Int32.TryParse(splitData[2], out score);
                         string userName = splitData[1];
-                        this.data.Add(score, userName);
+                        this.scoreboardData.Add(score, userName);
                     }
                 }
             }
@@ -89,7 +125,10 @@ namespace Labyrinth5.Common
         /// </summary>
         public void UptadeSavedScore() 
         {
+<<<<<<< HEAD
             StreamWriter writer = new StreamWriter(DefaultPath, true);
+=======
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
             if (scoreboard[0] == EmptyMessage)
             {
@@ -97,7 +136,8 @@ namespace Labyrinth5.Common
             }
             else
             {
-                using (writer)
+                File.WriteAllText(this.defaultPath, string.Empty);
+                using (StreamWriter writer = new StreamWriter(this.defaultPath, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {
@@ -114,7 +154,7 @@ namespace Labyrinth5.Common
         /// <param name="userName"> The name of the last player.</param>
         public void UpdateScoreBoard(int playerScore, string userName)
         {
-            this.data.Add(playerScore, userName);
+            this.scoreboardData.Add(playerScore, userName);
             this.UptadeSavedScore();
         }
 
@@ -127,13 +167,13 @@ namespace Labyrinth5.Common
         {
             int counter = 1;
             List<string> scoreboard = new List<string>();
-            if (this.data.Count == 0)
+            if (this.scoreboardData.Count == 0)
             {
                 scoreboard.Add(EmptyMessage);
             }
             else
             {
-                foreach (var score in this.data)
+                foreach (var score in this.scoreboardData.Reversed())
                 {
                     if (counter > ScoreboardMaxLenght)
                     {
@@ -141,7 +181,7 @@ namespace Labyrinth5.Common
                     }
                     else
                     {
-                        var foundScore = this.data[score.Key];
+                        var foundScore = this.scoreboardData[score.Key];
                         foreach (var name in foundScore)
                         {
                             StringBuilder formatedScore = new StringBuilder();

@@ -1,4 +1,12 @@
-﻿namespace Labyrinth5.Common.Engine
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConsoleEngine.cs" company="Team-Labyrint5">
+//   Telerik Academy 2014
+// </copyright>
+// <summary>
+//  Game engine. Entry point of the app.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Labyrinth5.Common.Engine
 {
     using System;
     using Labyrinth5.Common.Contracts;
@@ -8,15 +16,32 @@
     /// </summary>
     public class ConsoleEngine : IEngine
     {
+<<<<<<< HEAD
         private static readonly ConsoleEngine engineInstance = new ConsoleEngine();
+=======
+        /// <summary>
+        /// Internal instance of the ConsoleEngine.
+        /// </summary>
+        private static readonly ConsoleEngine instance = new ConsoleEngine();
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
 
+        /// <summary>
+        /// CommandInterpreter instance.
+        /// </summary>
         private readonly ICommandInterpreter interpreter;
 
+        /// <summary>
+        ///  Prevents a default instance of the <see cref="ConsoleEngine"/> class from being created.
+        /// </summary>
         private ConsoleEngine()
         {
             this.interpreter = new CommandInterpreter();
         }
 
+        /// <summary>
+        /// Gets an instance of ConsoleEngine.
+        /// </summary>
+        /// <value>Console Engine.</value>
         public static ConsoleEngine Instance
         {
             get
@@ -26,7 +51,7 @@
         }
 
         /// <summary>
-        /// Game loop. Runs until player reaches exit
+        /// Game loop. Runs until player reaches exit.
         /// </summary>
         public void Run()
         {

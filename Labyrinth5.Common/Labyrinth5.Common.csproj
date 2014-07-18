@@ -73,7 +73,11 @@
     <Compile Include="Scoreboard.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Save\SavedScores.txt" />
+=======
+    <Folder Include="Save\" />
+>>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
