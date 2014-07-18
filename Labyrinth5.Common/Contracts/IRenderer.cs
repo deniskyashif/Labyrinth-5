@@ -10,14 +10,10 @@ namespace Labyrinth5.Common.Contracts
 {
     using System.Collections.Generic;
 
-<<<<<<< HEAD
-    internal interface IRenderer
-=======
     /// <summary>
     /// Defines an IRenderer interface.
     /// </summary>
-    public interface IRenderer
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+    internal interface IRenderer
     {
         /// <summary>
         /// Renders renderable object.

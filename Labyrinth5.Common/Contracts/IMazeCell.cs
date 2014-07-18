@@ -8,14 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common.Contracts
 {
-<<<<<<< HEAD
-    internal interface IMazeCell
-=======
     /// <summary>
     /// Defines an IMazeCell interface.
     /// </summary>
-    public interface IMazeCell
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+    internal interface IMazeCell
     {
         /// <summary>
         /// Gets maze cell position.

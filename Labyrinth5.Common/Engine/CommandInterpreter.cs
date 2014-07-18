@@ -188,15 +188,14 @@ namespace Labyrinth5.Common.Engine
         /// Display Info command instance.
         /// </summary>
         private readonly ICommand displayInstructionsCommand;
-<<<<<<< HEAD
         private readonly ICommand setToBacktrackerCommand;
         private readonly ICommand setToPrimCommand;
-=======
+
 
         /// <summary>
         /// Display Scoreboard command Instance.
         /// </summary>
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+
         private ICommand displayScoreboardCommand;
        
         /// <summary>
@@ -232,13 +231,8 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Dispatches commands to command handlers.
         /// </summary>
-<<<<<<< HEAD
-        /// <param name="command">User input string</param>
-        public virtual void ParseAndDispatch(string command)
-=======
         /// <param name="command">User input string.</param>
         public void ParseAndDispatch(string command)
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         {
             if (!string.IsNullOrWhiteSpace(command))
             {
@@ -409,15 +403,10 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Generates new maze. Clears console and prints maze by given rows and cols.
         /// </summary>
-<<<<<<< HEAD
+
         /// <param name="mazeRows"></param>
         /// <param name="mazeColumns"></param>
         private void ResetGameVariables(int mazeRows = DefaultMazeRows, int mazeColumns = DefaultMazeColumns)
-=======
-        /// <param name="mazeRows">Number of rows.</param>
-        /// <param name="mazeColumns">Number of cols.</param>
-        private void SetUpGame(int mazeRows, int mazeColumns)
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         {
             this.maze.Generate(mazeRows, mazeColumns);
 
@@ -446,13 +435,9 @@ namespace Labyrinth5.Common.Engine
             var playerName = Console.ReadLine();
             this.scoreboard.UpdateScoreBoard(totalScore, playerName);
 
-<<<<<<< HEAD
             this.ResetGameVariables(DefaultMazeRows, DefaultMazeColumns);
-=======
+
             this.scoreboard.UpdateScoreBoard(totalScore, playerName);
-            
-            this.SetUpGame(DefaultMazeRows, DefaultMazeColumns);
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
         }
 
         /// <summary>

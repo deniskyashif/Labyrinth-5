@@ -8,14 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common.Contracts
 {
-<<<<<<< HEAD
-    internal interface ICommand
-=======
     /// <summary>
     /// Defines ICommand interface.
     /// </summary>
-    public interface ICommand
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+    internal interface ICommand
     {
         /// <summary>
         /// Executes the Command.

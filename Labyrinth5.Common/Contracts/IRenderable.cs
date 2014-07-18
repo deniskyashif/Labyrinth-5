@@ -8,14 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Labyrinth5.Common.Contracts
 {
-<<<<<<< HEAD
-    internal interface IRenderable
-=======
     /// <summary>
     /// Defines an IRenderable interface. 
     /// </summary>
-    public interface IRenderable
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+    internal interface IRenderable
     {
         /// <summary>
         /// Gets or sets position for rendering.

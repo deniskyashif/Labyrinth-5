@@ -16,14 +16,12 @@ namespace Labyrinth5.Common.Engine
     /// </summary>
     public class ConsoleEngine : IEngine
     {
-<<<<<<< HEAD
         private static readonly ConsoleEngine engineInstance = new ConsoleEngine();
-=======
+
         /// <summary>
         /// Internal instance of the ConsoleEngine.
         /// </summary>
         private static readonly ConsoleEngine instance = new ConsoleEngine();
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
 
         /// <summary>
         /// CommandInterpreter instance.

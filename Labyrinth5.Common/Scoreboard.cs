@@ -38,21 +38,16 @@ namespace Labyrinth5.Common
         /// Scoreboard is empty message.
         /// </summary>
         private const string EmptyMessage = "The scoreboard is empty.";
-<<<<<<< HEAD
-        private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
-        private OrderedMultiDictionary<int, string> data;
-=======
-        
+
         /// <summary>
         /// Path the scoreboard seve.
         /// </summary>
-        private string defaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
-
+        private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
+        
         /// <summary>
         /// Ordered dictionary holding data value pair: score name.
         /// </summary>
         private OrderedMultiDictionary<int, string> scoreboardData;
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
 
         /// <summary>
         /// Initializes a new instance of the<see cref="Scoreboard"/> class.
@@ -95,12 +90,7 @@ namespace Labyrinth5.Common
         {
             try
             {
-<<<<<<< HEAD
-                StreamReader reader = new StreamReader(DefaultPath);
-                using (reader)
-=======
-                using (StreamReader reader = new StreamReader(this.defaultPath))
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
+                using (StreamReader reader = new StreamReader(DefaultPath))
                 {
                     while (reader.Peek() >= 0)
                     {
@@ -125,19 +115,16 @@ namespace Labyrinth5.Common
         /// </summary>
         public void UptadeSavedScore() 
         {
-<<<<<<< HEAD
-            StreamWriter writer = new StreamWriter(DefaultPath, true);
-=======
->>>>>>> 9cb912cd66b1a44b4cfde2bec4adc5a9d1c36a4e
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
+
             if (scoreboard[0] == EmptyMessage)
             {
                 Console.WriteLine(EmptyMessage);
             }
             else
             {
-                File.WriteAllText(this.defaultPath, string.Empty);
-                using (StreamWriter writer = new StreamWriter(this.defaultPath, true))
+                File.WriteAllText(DefaultPath, string.Empty);
+                using (StreamWriter writer = new StreamWriter(DefaultPath, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {
