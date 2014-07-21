@@ -1,0 +1,10 @@
+1/Player19/2000
+2/Player18/1900
+3/Player17/1800
+4/Player16/1700
+5/Player15/1600
+6/Player14/1500
+7/Player13/1400
+8/Player12/1300
+9/Player11/1200
+10/Player10/1100

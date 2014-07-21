@@ -55,6 +55,7 @@
     <Compile Include="MazeTests\MazeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EngineTests\ConsoleEngineTest.cs" />
+    <Compile Include="ScoreboardTests\ScoreBoardTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth5.Common\Labyrinth5.Common.csproj">

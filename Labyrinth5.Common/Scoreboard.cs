@@ -28,7 +28,7 @@ namespace Labyrinth5.Common
         /// Pattern for saving scoreboard lines.
         /// </summary>
         private const string SavePattern = "{0}/{1}/{2}";
-        
+
         /// <summary>
         /// Max length of saved scores.
         /// </summary>
@@ -43,7 +43,7 @@ namespace Labyrinth5.Common
         /// Path the scoreboard seve.
         /// </summary>
         private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
-        
+
         /// <summary>
         /// Ordered dictionary holding data value pair: score name.
         /// </summary>
@@ -55,9 +55,9 @@ namespace Labyrinth5.Common
         public Scoreboard()
         {
             this.scoreboardData = new OrderedMultiDictionary<int, string>(false);
-            this.ReadSavedScores();
+            this.ReadSavedScores(DefaultPath);
         }
- 
+
         /// <summary>
         /// Gets the worst score from the current game only.
         /// </summary>
@@ -72,7 +72,7 @@ namespace Labyrinth5.Common
 
             return worstScore;
         }
-       
+
         /// <summary>
         /// Gets a string list of the current scoreboard.
         /// </summary>
@@ -86,11 +86,11 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Reads previously saved scores and appends them to the current game scoreboard data.
         /// </summary>
-        public void ReadSavedScores()
+        public void ReadSavedScores(string path)
         {
             try
             {
-                using (StreamReader reader = new StreamReader(DefaultPath))
+                using (StreamReader reader = new StreamReader(path))
                 {
                     while (reader.Peek() >= 0)
                     {
@@ -113,7 +113,7 @@ namespace Labyrinth5.Common
         /// <summary>
         /// Saves the current game data to the designated save file.
         /// </summary>
-        public void UptadeSavedScore() 
+        public void UptadeSavedScore(string path)
         {
             List<string> scoreboard = this.ExtractHighScore(SavePattern);
 
@@ -123,8 +123,8 @@ namespace Labyrinth5.Common
             }
             else
             {
-                File.WriteAllText(DefaultPath, string.Empty);
-                using (StreamWriter writer = new StreamWriter(DefaultPath, true))
+                File.WriteAllText(path, string.Empty);
+                using (StreamWriter writer = new StreamWriter(path, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {
@@ -139,10 +139,10 @@ namespace Labyrinth5.Common
         /// </summary>
         /// <param name="playerScore">The score of the last player.</param>
         /// <param name="userName"> The name of the last player.</param>
-        public void UpdateScoreBoard(int playerScore, string userName)
+        public void UpdateScoreBoard(int playerScore, string userName, string path = DefaultPath)
         {
             this.scoreboardData.Add(playerScore, userName);
-            this.UptadeSavedScore();
+            this.UptadeSavedScore(path);
         }
 
         /// <summary>
