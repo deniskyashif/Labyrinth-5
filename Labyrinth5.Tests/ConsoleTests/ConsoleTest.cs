@@ -34,9 +34,9 @@
                     //NOTE: doesn't split correctly
                     var outputLines = consoleOutput.Split(new[]{" "}, StringSplitOptions.RemoveEmptyEntries);
 
-                    string expected = "Illegal move";
-                    var outputLineIndex = outputLines.Length - 1;
-                    string result = outputLines[outputLineIndex];
+                    string expected = "Illegal Move";
+                    var outputLineIndex = outputLines.Length - 2;
+                    string result = outputLines[outputLineIndex] + " " + outputLines[outputLineIndex + 1];
                     Assert.AreEqual<string>(expected, result);
                 }
             }
