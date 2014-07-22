@@ -51,7 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConsoleTests\ConsoleTest.cs" />
+    <Compile Include="EngineTests\CommandInterpreterTests.cs" />
     <Compile Include="MatrixTests\MatrixTests.cs" />
     <Compile Include="MazeTests\MazeTests.cs" />
     <Compile Include="MazeTests\PrimMazeCellTest.cs" />
