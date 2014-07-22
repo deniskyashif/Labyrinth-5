@@ -53,9 +53,9 @@ namespace Labyrinth5.Common.Engine
         /// </summary>
         public void Run()
         {
-            var command = "info";
-
-            while (true)
+            var command = "init";
+            
+            while (command != "end")
             {
                 this.interpreter.ParseAndDispatch(command);
                 command = Console.ReadLine();
