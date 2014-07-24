@@ -16,6 +16,9 @@ namespace Labyrinth5.Common.Engine
     /// </summary>
     public class ConsoleEngine : IEngine
     {
+        /// <summary>
+        /// The single instance of the ConsoleEngine class.
+        /// </summary>
         private static readonly ConsoleEngine engineInstance = new ConsoleEngine();
 
         /// <summary>
@@ -53,9 +56,9 @@ namespace Labyrinth5.Common.Engine
         /// </summary>
         public void Run()
         {
-            var command = "init";
-            
-            while (command != "end")
+            var command = "info";
+
+            while (true)
             {
                 this.interpreter.ParseAndDispatch(command);
                 command = Console.ReadLine();

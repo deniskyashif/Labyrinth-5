@@ -4,6 +4,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth5.Common.Engine;
     using System.IO;
+    using System.Windows.Forms;
 
     [TestClass]
     public class CommandInterpreterTests
@@ -11,67 +12,36 @@
         [TestMethod]
         public void CheckForInvalidMoveCommand()
         {
-            
-            string inputCommands = string.Format("{0}move up{0}end", Environment.NewLine);
-
             using (StringWriter stringWriter = new StringWriter())
             {
                 Console.SetOut(stringWriter);
 
-                using (StringReader stringReader = new StringReader(inputCommands))
-                {
-                    //code needed to run the command
-                    var engine = ConsoleEngine.Instance;
+                var interpreter = new CommandInterpreter();
+                interpreter.ParseAndDispatch("init");
+                interpreter.ParseAndDispatch("move left");
 
-                    Console.SetIn(stringReader);
-                    engine.Run();
+                string consoleOutput = stringWriter.ToString();
+                string expected = "Illegal Move";
 
-                    string consoleOutput = stringWriter.ToString();
-                    string expected = "Illegal Move";
-                    var indexOfCommand = consoleOutput.IndexOf(expected);
-                    bool doesExist = false;
-
-                    if(indexOfCommand >=0) {
-                        doesExist = true;
-                    }
-
-                    Assert.AreEqual(true, doesExist);
-                    
-                }
+                Assert.IsTrue(consoleOutput.IndexOf(expected) > -1);
             }
         }
 
         [TestMethod]
         public void CheckSetBacktrackerAlgorithmCommand()
         {
-
-            string inputCommands = string.Format("{0}set backtracker{0}end", Environment.NewLine);
-
             using (StringWriter stringWriter = new StringWriter())
             {
                 Console.SetOut(stringWriter);
 
-                using (StringReader stringReader = new StringReader(inputCommands))
-                {
-                    //code needed to run the command
-                    var engine = ConsoleEngine.Instance;
+                var interpreter = new CommandInterpreter();
+                interpreter.ParseAndDispatch("init");
+                interpreter.ParseAndDispatch("set backtracker");
 
-                    Console.SetIn(stringReader);
-                    engine.Run();
+                string consoleOutput = stringWriter.ToString();
+                string expected = "Generation algorithm set to : backtracker";
 
-                    string consoleOutput = stringWriter.ToString();
-                    string expected = "Generation algorithm set to : backtracker";
-                    var indexOfCommand = consoleOutput.IndexOf(expected);
-                    bool doesExist = false;
-
-                    if (indexOfCommand >= 0)
-                    {
-                        doesExist = true;
-                    }
-
-                    Assert.AreEqual(true, doesExist);
-
-                }
+                Assert.IsTrue(consoleOutput.IndexOf(expected) > -1);
             }
         }
 
@@ -79,67 +49,35 @@
         public void CheckSetPrimAlgorithmCommand()
         {
 
-            string inputCommands = string.Format("{0}set prim{0}end", Environment.NewLine);
-
             using (StringWriter stringWriter = new StringWriter())
             {
                 Console.SetOut(stringWriter);
 
-                using (StringReader stringReader = new StringReader(inputCommands))
-                {
-                    //code needed to run the command
-                    var engine = ConsoleEngine.Instance;
+                var interpreter = new CommandInterpreter();
+                interpreter.ParseAndDispatch("init");
+                interpreter.ParseAndDispatch("set prim");
 
-                    Console.SetIn(stringReader);
-                    engine.Run();
+                string consoleOutput = stringWriter.ToString();
+                string expected = "Generation algorithm set to : prim";
 
-                    string consoleOutput = stringWriter.ToString();
-                    string expected = "Generation algorithm set to : prim";
-                    var indexOfCommand = consoleOutput.IndexOf(expected);
-                    bool doesExist = false;
-
-                    if (indexOfCommand >= 0)
-                    {
-                        doesExist = true;
-                    }
-
-                    Assert.AreEqual(true, doesExist);
-
-                }
+                Assert.IsTrue(consoleOutput.IndexOf(expected) > -1);
             }
         }
 
         [TestMethod]
         public void CheckForInvalidCommand()
         {
-
-            string inputCommands = string.Format("{0}fdsgrecxv{0}end", Environment.NewLine);
-
             using (StringWriter stringWriter = new StringWriter())
             {
                 Console.SetOut(stringWriter);
 
-                using (StringReader stringReader = new StringReader(inputCommands))
-                {
-                    //code needed to run the command
-                    var engine = ConsoleEngine.Instance;
+                var interpreter = new CommandInterpreter();
+                interpreter.ParseAndDispatch("x");
+                
+                string consoleOutput = stringWriter.ToString();
+                string expected = "Invalid Command";
 
-                    Console.SetIn(stringReader);
-                    engine.Run();
-
-                    string consoleOutput = stringWriter.ToString();
-                    string expected = "Invalid Command";
-                    var indexOfCommand = consoleOutput.IndexOf(expected);
-                    bool doesExist = false;
-
-                    if (indexOfCommand >= 0)
-                    {
-                        doesExist = true;
-                    }
-
-                    Assert.AreEqual(true, doesExist);
-
-                }
+                Assert.IsTrue(consoleOutput.IndexOf(expected) > -1);
             }
         }
     }

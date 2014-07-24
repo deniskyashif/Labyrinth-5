@@ -150,6 +150,11 @@ namespace Labyrinth5.Common.Engine
         private const string StrategySwitchedMessage = "Generation algorithm set to : {0}";
 
         /// <summary>
+        /// Path to the file, which keeps the high scores.
+        /// </summary>
+        private const string ScoreboardFilePath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
+
+        /// <summary>
         /// Blank line.
         /// </summary>
         private readonly string blankLine = new string(' ', Console.WindowWidth);
@@ -157,8 +162,8 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Separators for game elements.
         /// </summary>
-        private readonly char[] separators = new char[] { ' ' };
-        
+        private readonly char[] separators = new char[] { ' ', '/', ',', '-', ';' };
+
         /// <summary>
         /// Game  console renderer.
         /// </summary>
@@ -177,7 +182,7 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Game Scoreboard.
         /// </summary>
-        private readonly Scoreboard scoreboard = new Scoreboard();
+        private readonly ScoreboardManager scoreboard = new ScoreboardManager(ScoreboardFilePath, separators: new[] { '/' });
 
         /// <summary>
         /// Player move command instance.
@@ -188,16 +193,22 @@ namespace Labyrinth5.Common.Engine
         /// Display Info command instance.
         /// </summary>
         private readonly ICommand displayInstructionsCommand;
-        private readonly ICommand setToBacktrackerCommand;
-        private readonly ICommand setToPrimCommand;
 
+        /// <summary>
+        /// Set to generation algorithm to Backtracker command instance.
+        /// </summary>
+        private readonly ICommand setToBacktrackerCommand;
+
+        /// <summary>
+        /// Set generation algorithm to Prim command instance.
+        /// </summary>
+        private readonly ICommand setToPrimCommand;
 
         /// <summary>
         /// Display Scoreboard command Instance.
         /// </summary>
+        private readonly ICommand displayScoreboardCommand;
 
-        private ICommand displayScoreboardCommand;
-       
         /// <summary>
         /// Cursor  left coordinate..
         /// </summary>
@@ -222,9 +233,10 @@ namespace Labyrinth5.Common.Engine
         {
             this.playerMoveCommand = new PlayerMoveCommand(this.player);
             this.displayInstructionsCommand = new DisplayInstructionsCommand(this.renderer);
+            this.displayScoreboardCommand = new DisplayScoreboardCommand(this.renderer, this.scoreboard);
             this.setToBacktrackerCommand = new SetBacktrackerCommand(this.maze);
             this.setToPrimCommand = new SetPrimCommand(this.maze);
-
+            
             this.ResetGameVariables(DefaultMazeRows, DefaultMazeColumns);
         }
 
@@ -238,7 +250,7 @@ namespace Labyrinth5.Common.Engine
             {
                 var commandWords = command.ToLower().Split(this.separators, StringSplitOptions.RemoveEmptyEntries);
 
-                if ((commandWords[0] == MoveCommand || commandWords[0] == MoveCommandShortcut) 
+                if ((commandWords[0] == MoveCommand || commandWords[0] == MoveCommandShortcut)
                     && commandWords.Length > 1)
                 {
                     this.HandleMoveCommand(commandWords[1]);
@@ -320,11 +332,9 @@ namespace Labyrinth5.Common.Engine
         /// </summary>
         private void HandleScoreCommand()
         {
-            this.displayScoreboardCommand = new DisplayScoreboardCommand(this.renderer, this.scoreboard.GetScore());
             this.displayScoreboardCommand.Execute();
 
             Console.ReadKey();
-
             this.RenderGameComponents();
         }
 
@@ -403,9 +413,8 @@ namespace Labyrinth5.Common.Engine
         /// <summary>
         /// Generates new maze. Clears console and prints maze by given rows and cols.
         /// </summary>
-
-        /// <param name="mazeRows"></param>
-        /// <param name="mazeColumns"></param>
+        /// <param name="mazeRows">The rows of the maze to be generated.</param>
+        /// <param name="mazeColumns">The columns of the maze to be generated.</param>
         private void ResetGameVariables(int mazeRows = DefaultMazeRows, int mazeColumns = DefaultMazeColumns)
         {
             this.maze.Generate(mazeRows, mazeColumns);
@@ -428,8 +437,8 @@ namespace Labyrinth5.Common.Engine
             var totalScore = (this.maze.Rows * this.maze.Columns) - this.steps;
 
             this.renderer.RenderText(
-                string.Format(SuccessMessage, totalScore), 
-                this.cursorPositionLeft, 
+                string.Format(SuccessMessage, totalScore),
+                this.cursorPositionLeft,
                 this.cursorPositionTop - 1);
 
             var playerName = Console.ReadLine();

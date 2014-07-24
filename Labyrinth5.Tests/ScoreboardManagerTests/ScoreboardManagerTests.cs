@@ -8,7 +8,7 @@
     using System.Text;
 
     [TestClass]
-    public class ScoreBoardTests
+    public class ScoreboardManagerTests
     {
         [TestMethod]
         public void TestGetScoreMethodForMaximumListCount()
@@ -16,13 +16,13 @@
             // arrange
             string testSavedScoresPath = "../../../Labyrinth5.Common/Save/testSavedScores.txt";
 
-            var scoreBoard = new Scoreboard();
+            var scoreBoard = new ScoreboardManager(testSavedScoresPath, new []{'/'});
             FillTestedScoreBoard(scoreBoard, testSavedScoresPath);
 
             var expectedMaxScoreListCount = 10;
 
             // action
-            var result = scoreBoard.GetScore().Count;
+            var result = scoreBoard.GetScoresList().Count;
 
             // assert
             Assert.AreEqual(expectedMaxScoreListCount, result, "GetScore() returns more than 10 results.");
@@ -35,13 +35,13 @@
 
             string testSavedScoresPath = "../../../Labyrinth5.Common/Save/testSavedScores.txt";
 
-            var scoreBoard = new Scoreboard();
+            var scoreBoard = new ScoreboardManager(testSavedScoresPath, new[]{'/'});
             FillTestedScoreBoard(scoreBoard, testSavedScoresPath);
 
             var expectedSaveScoreData = FillExpectedSaveScoreList();
 
             // action
-            var result = scoreBoard.GetScore();
+            var result = scoreBoard.GetScoresList();
 
             // assert
             CollectionAssert.AreEqual(expectedSaveScoreData, result, "Ranking is not correct!");
@@ -52,18 +52,18 @@
         public void TestForInvalidScoreBoardDirectoryPath()
         {
             // arrange
-            var scoreBoard = new Scoreboard();
             var invalidFilePath = "../invalidDirectoryLocation/IdoNotKnowWhere/someInvalidFile.txt";
-            scoreBoard.ReadSavedScores(invalidFilePath);
+            var scoreBoard = new ScoreboardManager(invalidFilePath, new[]{'/'});
+            scoreBoard.ReadSavedScores();
         }
 
-        private void FillTestedScoreBoard(Scoreboard obj, string path)
+        private void FillTestedScoreBoard(ScoreboardManager obj, string path)
         {
             for (int i = 0; i < 20; i++)
             {
                 string currentPlayer = "Player" + i;
                 int currentPlayerScore = (i + 1) * 100;
-                obj.UpdateScoreBoard(currentPlayerScore, currentPlayer, path);
+                obj.UpdateScoreBoard(currentPlayerScore, currentPlayer);
             }
         }
 

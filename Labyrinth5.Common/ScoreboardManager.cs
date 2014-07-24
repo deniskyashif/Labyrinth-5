@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Scoreboard.cs" company="Team-Labyrint5">
+// <copyright file="ScoreboardManager.cs" company="Team-Labyrint5">
 //   Telerik Academy 2014
 // </copyright>
 // <summary>
@@ -17,7 +17,7 @@ namespace Labyrinth5.Common
     /// <summary>
     ///   Class processing game high score data. 
     /// </summary>
-    public class Scoreboard
+    public class ScoreboardManager
     {
         /// <summary>
         /// Pattern for printing the scoreboard lines.
@@ -40,9 +40,14 @@ namespace Labyrinth5.Common
         private const string EmptyMessage = "The scoreboard is empty.";
 
         /// <summary>
-        /// Path the scoreboard seve.
+        /// Path to the file with the scoreboard entries.
         /// </summary>
-        private const string DefaultPath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
+        private string filePath = "../../../Labyrinth5.Common/Save/SavedScores.txt";
+
+        /// <summary>
+        /// Array of char separators used for splitting semantically the content of a text.
+        /// </summary>
+        private char[] separators;
 
         /// <summary>
         /// Ordered dictionary holding data value pair: score name.
@@ -50,12 +55,17 @@ namespace Labyrinth5.Common
         private OrderedMultiDictionary<int, string> scoreboardData;
 
         /// <summary>
-        /// Initializes a new instance of the<see cref="Scoreboard"/> class.
+        /// Initializes a new instance of the<see cref="ScoreboardManager"/> class.
         /// </summary>
-        public Scoreboard()
+        /// <param name="filePath">The path to the file where the ranking is stored.</param>
+        /// <param name="separators">Array of separators using which the file is separated to
+        /// semantically relevant segments.</param>
+        public ScoreboardManager(string filePath, char[] separators)
         {
+            this.filePath = filePath;
+            this.separators = separators;
             this.scoreboardData = new OrderedMultiDictionary<int, string>(false);
-            this.ReadSavedScores(DefaultPath);
+            this.ReadSavedScores();
         }
 
         /// <summary>
@@ -77,27 +87,27 @@ namespace Labyrinth5.Common
         /// Gets a string list of the current scoreboard.
         /// </summary>
         /// <returns>List of the current scoreboard.</returns>
-        public List<string> GetScore()
+        public List<string> GetScoresList()
         {
-            List<string> scoreboard = this.ExtractHighScore(PrintPattern);
+            List<string> scoreboard = this.ExtractHighScores(PrintPattern);
             return scoreboard;
         }
 
         /// <summary>
         /// Reads previously saved scores and appends them to the current game scoreboard data.
         /// </summary>
-        public void ReadSavedScores(string path)
+        public void ReadSavedScores()
         {
             try
             {
-                using (StreamReader reader = new StreamReader(path))
+                using (StreamReader reader = new StreamReader(this.filePath))
                 {
                     while (reader.Peek() >= 0)
                     {
                         string line = reader.ReadLine();
-                        string[] splitData = line.Split('/');
+                        string[] splitData = line.Split(this.separators);
                         int score;
-                        bool result = Int32.TryParse(splitData[2], out score);
+                        bool result = int.TryParse(splitData[2], out score);
                         string userName = splitData[1];
                         this.scoreboardData.Add(score, userName);
                     }
@@ -106,16 +116,16 @@ namespace Labyrinth5.Common
             catch (FileNotFoundException)
             {
                 Console.Error.WriteLine(
-                    "Can not find 'Save/SavedScores.txt'.");
+                    "Can not find the specified file.");
             }
         }
 
         /// <summary>
         /// Saves the current game data to the designated save file.
         /// </summary>
-        public void UptadeSavedScore(string path)
+        public void UptadeSavedScore()
         {
-            List<string> scoreboard = this.ExtractHighScore(SavePattern);
+            List<string> scoreboard = this.ExtractHighScores(SavePattern);
 
             if (scoreboard[0] == EmptyMessage)
             {
@@ -123,8 +133,9 @@ namespace Labyrinth5.Common
             }
             else
             {
-                File.WriteAllText(path, string.Empty);
-                using (StreamWriter writer = new StreamWriter(path, true))
+                File.WriteAllText(this.filePath, string.Empty);
+
+                using (StreamWriter writer = new StreamWriter(this.filePath, true))
                 {
                     for (int i = 0; i < scoreboard.Count; i++)
                     {
@@ -139,21 +150,22 @@ namespace Labyrinth5.Common
         /// </summary>
         /// <param name="playerScore">The score of the last player.</param>
         /// <param name="userName"> The name of the last player.</param>
-        public void UpdateScoreBoard(int playerScore, string userName, string path = DefaultPath)
+        public void UpdateScoreBoard(int playerScore, string userName)
         {
             this.scoreboardData.Add(playerScore, userName);
-            this.UptadeSavedScore(path);
+            this.UptadeSavedScore();
         }
 
         /// <summary>
-        /// Returns a list of formatted highScore.
+        /// Returns a list of formatted highScores.
         /// </summary>
         /// <param name="pattern">Pattern for formatting the score strings.</param>
         /// <returns>List of scores.</returns>
-        private List<string> ExtractHighScore(string pattern)
+        private List<string> ExtractHighScores(string pattern)
         {
             int counter = 1;
             List<string> scoreboard = new List<string>();
+
             if (this.scoreboardData.Count == 0)
             {
                 scoreboard.Add(EmptyMessage);

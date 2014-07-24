@@ -39,33 +39,17 @@ namespace Labyrinth5.Common.Engine.Commands
         /// <summary>
         /// List of scores.
         /// </summary>
-        private List<string> scoreboardList;
+        private ScoreboardManager manager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DisplayScoreboardCommand"/> class.
         /// </summary>
         /// <param name="renderer">Renderer instance.</param>
-        /// <param name="newScores">List of scores.</param>
-        public DisplayScoreboardCommand(IRenderer renderer, List<string> newScores)
+        /// <param name="manager">ScoreboardManager instance.</param>
+        public DisplayScoreboardCommand(IRenderer renderer, ScoreboardManager manager)
         {
             this.renderer = renderer;
-            this.GetNewScoreboard(newScores);
-        }
-
-        /// <summary>
-        /// Copies a list of scores from input to the private field scoreboardList.
-        /// </summary>
-        /// <param name="newScores">List of scores.</param>
-        public void GetNewScoreboard(List<string> newScores)
-        {
-            this.scoreboardList = new List<string>();
-
-            foreach (var line in newScores)
-            {
-                this.scoreboardList.Add(line);
-            }
-
-            this.scoreboardList.Add(ReturnMessage);
+            this.manager = manager;
         }
 
         /// <summary>
@@ -76,8 +60,9 @@ namespace Labyrinth5.Common.Engine.Commands
             this.renderer.ClearAll();
 
             int row = TopOffset;
+            var scoresList = this.manager.GetScoresList();
 
-            foreach (var line in this.scoreboardList)
+            foreach (var line in scoresList)
             {
                 this.renderer.RenderText(line, LeftOffset, row);
                 row++;
