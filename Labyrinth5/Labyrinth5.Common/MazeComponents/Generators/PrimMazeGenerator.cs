@@ -21,7 +21,7 @@ namespace Labyrinth5.Common.MazeComponents.Generators
     internal class PrimMazeGenerator : IMazeGenerator
     {
         /// <summary>
-        /// A Random instance.
+        /// A Random class instance.
         /// </summary>
         private static readonly Random GlobalRandomGenerator = new Random();
 

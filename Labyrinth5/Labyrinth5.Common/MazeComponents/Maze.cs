@@ -83,8 +83,15 @@ namespace Labyrinth5.Common.MazeComponents
         /// </summary>
         public MatrixCoordinates TopLeftPosition
         {
-            get { return this.topLeftPosition; }
-            set { this.topLeftPosition = value; }
+            get 
+            { 
+                return this.topLeftPosition; 
+            }
+            
+            set 
+            { 
+                this.topLeftPosition = value; 
+            }
         }
 
         /// <summary>
@@ -92,7 +99,10 @@ namespace Labyrinth5.Common.MazeComponents
         /// </summary>
         internal int Rows
         {
-            get { return this.mazeCells.GetLength(0); }
+            get 
+            { 
+                return this.mazeCells.GetLength(0); 
+            }
         }
 
         /// <summary>
@@ -100,7 +110,10 @@ namespace Labyrinth5.Common.MazeComponents
         /// </summary>
         internal int Columns
         {
-            get { return this.mazeCells.GetLength(1); }
+            get 
+            { 
+                return this.mazeCells.GetLength(1); 
+            }
         }
 
         /// <summary>
@@ -133,7 +146,10 @@ namespace Labyrinth5.Common.MazeComponents
         /// <returns>Maze cell position.</returns>
         internal IMazeCell this[int row, int col]
         {
-            get { return this.mazeCells[row, col]; }
+            get 
+            { 
+                return this.mazeCells[row, col]; 
+            }
         }
 
         /// <summary>

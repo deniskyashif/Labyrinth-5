@@ -75,6 +75,7 @@ namespace Labyrinth5.Common
         public int GetWorstScore()
         {
             int worstScore = 0;
+
             foreach (var score in this.scoreboardData.Keys)
             {
                 worstScore = score;
