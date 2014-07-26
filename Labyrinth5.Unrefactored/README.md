@@ -1,1 +1,1 @@
-##Initial, unrefactored code of Labyrinth-5 console application.
+###Initial, unrefactored code of Labyrinth-5 console application.
